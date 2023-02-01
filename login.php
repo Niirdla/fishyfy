@@ -36,11 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         	
         	<form action="" method="post">
 					<label>
-						<span>USERNAME</span>
+						<span>Email<span style="color: red;">*</span></span>
 						<input name="email" type="text"/>
 					</label>
                     <label>
-						<span>Password</span>
+						<span>Password<span style="color: red;">*</span></span>
 						<input name="pass" type="password"/>
 					</label>
                     <div><button class="submit" name="login">Sign In</button></div>
@@ -70,7 +70,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
+	$phoneNumber = $_POST['phone'];
+	$password = $_POST['pass'];
+	if(strlen ($password) < 8){
+		echo "Error: Password must be at least 8 characters long.";
+	}elseif(strlen ($phoneNumber) < 11 && strlen ($phoneNumber) >11){
+		echo "Error: Phone number must atleast 11 characters long.";
+	}else{
     $customerReg = $cmr->customerRegistration($_POST);
+	}
 }
 
 ?>          
@@ -85,43 +93,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
     		<h2>Sign Up</h2>
     		<form method="post">
 			<label for= name>
-			<span>Name</span>
+			<span>Name<span style="color: red;">*</span></span>
 			<input type="text" name="name">
 			</label>
 			
 			<label for= address>
-			<span>Address</span>
+			<span>Address<span style="color: red;">*</span></span>
 			<input type="text" name="address">
 			</label>
 
 			<label for= email>
-			<span>Email</span>
+			<span>Email<span style="color: red;">*</span></span>
 			<input type="text" name="email">
 			</label>
 
 							<label for= city>
-			<span>City</span>
+			<span>City<span style="color: red;">*</span></span>
 			<input type="text" name="city">
 			</label>
 							
 	
 			<label for= zip>
-			<span>ZIP</span>
+			<span>ZIP<span style="color: red;">*</span></span>
 			<input type="text" name="zip">
 			</label>
 			
 			<label for= phone>
-			<span>Phone</span>
-			<input type="text" name="phone">
+			<span>Phone number<span style="color: red;">*</span></span>
+			<input type="number" name="phone">
 			</label>
 
 			<label for= pass>
-			<span>Password</span>
+			<span>Password (atleast 8 characters long)<span style="color: red;">*</span></span>
 			<input type="password" name="pass">
 			</label>
 
 			<label for= pass>
-			<span>Confirm Password</span>
+			<span>Confirm Password<span style="color: red;">*</span></span>
 			<input type="password" name="pass">
 			</label>
 			<button class="submit" name="register">Create Account</button>
