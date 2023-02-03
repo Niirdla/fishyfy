@@ -54,13 +54,7 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 </head>
 <body>
 	
-	<!--PreLoader-->
-    <div class="loader">
-        <div class="loader-inner">
-            <div class="circle"></div>
-        </div>
-    </div>
-    <!--PreLoader Ends-->
+
 	
 	<!-- header -->
 	<div class="top-header-area" id="sticker">

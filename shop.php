@@ -39,14 +39,6 @@
 </head>
 <body>
 	
-	<!--PreLoader-->
-    <div class="loader">
-        <div class="loader-inner">
-            <div class="circle"></div>
-        </div>
-    </div>
-    <!--PreLoader Ends-->
-	
 	
 	<!-- breadcrumb-section -->
 	<div class="breadcrumb-section breadcrumb-bg">

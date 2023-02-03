@@ -72,13 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['wlist'])) {
 </head>
 <body>
 	
-	<!--PreLoader-->
-<div class="loader">
-        <div class="loader-inner">
-            <div class="circle"></div>
-        </div>
-    </div>
-    <!--PreLoader Ends-->
+
 	
 <!-- header -->
 <div class="top-header-area" id="sticker">

@@ -85,13 +85,7 @@ if (isset($_GET['cid'])) {
 
 
  ?>
-<!--PreLoader-->
-<div class="loader">
-        <div class="loader-inner">
-            <div class="circle"></div>
-        </div>
-    </div>
-    <!--PreLoader Ends-->
+
 	
 <!-- header -->
 <div class="top-header-area" id="sticker">
