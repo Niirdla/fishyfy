@@ -37,11 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         	<form action="" method="post">
 					<label>
 						<span>Email<span style="color: red;">*</span></span>
-						<input name="email" type="text"/>
+						<input name="email" placeholder ="Enter your email" type="text"/>
 					</label>
                     <label>
 						<span>Password<span style="color: red;">*</span></span>
-						<input name="pass" type="password"/>
+						<input name="pass" placeholder = "Enter your password" type="password"/>
 					</label>
                     <div><button class="submit" name="login">Sign In</button></div>
 					<div class="link forget-pass text-left"><a href="forgot-password.php">Forgot password?</a></div>
@@ -94,43 +94,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
     		<form method="post">
 			<label for= name>
 			<span>Name<span style="color: red;">*</span></span>
-			<input type="text" name="name">
+			<input type="text" placeholder= "Enter your full name"name="name">
 			</label>
 			
 			<label for= address>
 			<span>Address<span style="color: red;">*</span></span>
-			<input type="text" name="address">
+			<input type="text" placeholder ="House #, Street, Baranggay"name="address">
 			</label>
 
 			<label for= email>
 			<span>Email<span style="color: red;">*</span></span>
-			<input type="text" name="email">
+			<input type="text" placeholder= "e.g. juandelacruz@gmail.com" name="email">
 			</label>
 
 							<label for= city>
 			<span>City<span style="color: red;">*</span></span>
-			<input type="text" name="city">
+			<input type="text" placeholder ="e.g. Manila" name="city">
 			</label>
 							
 	
 			<label for= zip>
 			<span>ZIP<span style="color: red;">*</span></span>
-			<input type="text" name="zip">
+			<input type="text" placeholder = "Enter your zip code"name="zip">
 			</label>
 			
 			<label for= phone>
 			<span>Phone number<span style="color: red;">*</span></span>
-			<input type="number" name="phone">
+			<input type="tel" id= "phoneNumber" maxlength ="13" placeholder="0910-249-4012" name="phone">
 			</label>
 
 			<label for= pass>
-			<span>Password (atleast 8 characters long)<span style="color: red;">*</span></span>
-			<input type="password" name="pass">
+			<span>Password<span style="color: red;">*</span></span>
+			<input type="password" placeholder = "Password atleast 8 characters" name="pass">
 			</label>
 
 			<label for= pass>
 			<span>Confirm Password<span style="color: red;">*</span></span>
-			<input type="password" name="pass">
+			<input type="password" placeholder = "Reenter password" name="pass">
 			</label>
 			<button class="submit" name="register">Create Account</button>
 			</form>
@@ -142,3 +142,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
  <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
+
+
+<script>
+  const phoneNumber = document.getElementById("phoneNumber");
+  phoneNumber.addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, "");
+    this.value = this.value.replace(/(\d{4})(\d{3})(\d{4})/, "$1-$2-$3");
+  });
+</script>

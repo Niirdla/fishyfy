@@ -48,8 +48,9 @@ if ($name == "" || $address == "" || $city == "" || $zip == "" || $phone == "" |
   }else{
 	$code = rand(999999, 111111);
     $status = "notverified";
+	$role = "Customer";
 
-	$query = "INSERT INTO tbl_customer(name,address,city,zip,phone,email,pass,code,status) VALUES('$name','$address','$city','$zip','$phone','$email','$pass','$code','$status')";
+	$query = "INSERT INTO tbl_customer(name,address,city,zip,phone,email,pass,code,status,role) VALUES('$name','$address','$city','$zip','$phone','$email','$pass','$code','$status','$role')";
 	$data_check = mysqli_query($con, $query);
 	if($data_check){
 		$subject = "Email Verification Code";
@@ -136,14 +137,19 @@ $msg = "<span class='error'>Fields must not be empty !</span>";
 }
 $query = "SELECT * FROM tbl_customer WHERE email = '$email' AND pass = '$pass'";
 $result = $this->db->select($query);
-if ($result != false) {
+$role = mysqli_fetch_assoc($result)['role'];
+
+if ($result != false && $role === 'Admin') {
+	header("Location: admin/dashboard.php");
+	exit;
+  } elseif ($result != false && $role === 'Customer') {
 	$value = $result->fetch_assoc();
 	Session::set("cuslogin",true);
 	Session::set("cmrId",$value['id']);
 	Session::set("cmrName",$value['name']);
 	header("Location:index_2.php");
-
-}else{
+	exit;
+  }else{
 	$msg = "<span class='error'>Email or Password not matched !</span>";
 				return $msg;
 }
