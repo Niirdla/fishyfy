@@ -1,15 +1,33 @@
 <?php include 'inc/header.php';?>
-<?php include 'inc/sidebar.php';?>
+<?php include 'inc/header_2.php';?>
+<?php include 'includes/format.php'; ?>
 
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <?php include 'includes/navbar.php'; ?>
+  <?php include 'includes/menubar.php'; ?>
+
+
+
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Order Reports
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Reports</li>
+      </ol>
+    </section>
 
 <html>
   <head>
 
 </head>
 <body>
-        <div class="grid_10">
-            <div class="box round first grid">
-                <h2> Order</h2>
                 <div class="block">               
           <div class="row justify-content-center">
             <div class="col-md-12">
@@ -112,9 +130,7 @@
         </div>
         </div>
                </div>
-            </div>
-        </div>
-        
+   
         <script>
 function tablePrint(){  
     var display_setting="toolbar=no,location=no,directories=no,menubar=no,";  
@@ -142,3 +158,4 @@ function tablePrint(){
 </body>
 </html>               
 <?php include 'inc/footer.php';?>
+<?php include 'includes/scripts.php'; ?>

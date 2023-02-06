@@ -1,11 +1,29 @@
 ﻿<?php include 'inc/header.php';?>
 <?php include 'inc/header_2.php';?>
-<?php include 'inc/format.php';?>
-<?php include 'inc/sidebar.php';?>
-
+<?php include 'includes/format.php'; ?>
 <?php 
 $con = mysqli_connect('localhost', 'root', '', 'db_shop');
 ?>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <?php include 'includes/navbar.php'; ?>
+  <?php include 'includes/menubar.php'; ?>
+
+
+
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Dashboard
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,10 +37,6 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body>
-
-        <div class="grid_10">
-            <div class="box round first grid">
-                <h2> Dashboard</h2>
                 <div class="block"> 
                     
                 <section class="content">
@@ -140,10 +154,7 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
 </div>
       </section>
       <!-- right col -->
-      </div>      
-
-            </div>
-        </div>
+     
 
         <script>
   // === include 'setup' then 'config' above ===
@@ -194,4 +205,6 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
 </script>
 </body>
 </html>
+<?php include 'includes/scripts.php'; ?>
+
 <?php include 'inc/footer.php';?>

@@ -1,6 +1,6 @@
 ﻿<?php include 'inc/header.php';?>
-<?php include 'inc/sidebar.php';?>
-
+<?php include 'inc/header_2.php';?>
+<?php include 'includes/format.php'; ?>
 <?php 
 $filepath = realpath(dirname(__FILE__));
 include_once ($filepath.'/../classess/Cart.php');
@@ -20,9 +20,25 @@ if (isset($_GET['delproid'])) {
 
 }
  ?>
-        <div class="grid_10">
-            <div class="box round first grid">
-                <h2>Inbox</h2>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <?php include 'includes/navbar.php'; ?>
+  <?php include 'includes/menubar.php'; ?>
+
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Orders
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Orders</li>
+      </ol>
+    </section>
                 <?php 
                 if (isset($shift)) {
                 	echo $shift;
@@ -80,8 +96,7 @@ if (isset($_GET['delproid'])) {
 					</tbody>
 				</table>
                </div>
-            </div>
-        </div>
+           
 <script type="text/javascript">
     $(document).ready(function () {
         setupLeftMenu();
@@ -91,3 +106,5 @@ if (isset($_GET['delproid'])) {
     });
 </script>
 <?php include 'inc/footer.php';?>
+
+<?php include 'includes/scripts.php'; ?>

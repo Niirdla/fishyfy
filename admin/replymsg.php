@@ -1,6 +1,6 @@
-<?php include 'inc/header.php'; ?>
-<?php include 'inc/sidebar.php'; ?>
-
+<?php include 'inc/header.php';?>
+<?php include 'inc/header_2.php';?>
+<?php include 'includes/format.php'; ?>
 
 <?php
 if (!isset($_GET['msgid']) || $_GET['msgid'] == NULL) {
@@ -15,11 +15,31 @@ if (!isset($_GET['msgid']) || $_GET['msgid'] == NULL) {
 
  ?>
 
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
 
-        <div class="grid_10">
-        
-            <div class="box round first grid">
-                <h2>View Message</h2>
+  <?php include 'includes/navbar.php'; ?>
+  <?php include 'includes/menubar.php'; ?>
+
+
+
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Messages
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Messages</li>
+      </ol>
+    </section>
+
+
+
+
+      
 <?php 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -117,8 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     </form>
                 </div>
-            </div>
-        </div>
+       
 
 
  <!-- Load TinyMCE -->
@@ -136,6 +155,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
  <!-- Load TinyMCE -->
 
  <?php include 'inc/footer.php'; ?>
-
+ <?php include 'includes/scripts.php'; ?>
 
 

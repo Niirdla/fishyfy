@@ -1,10 +1,8 @@
-<?php include 'inc/header.php'; ?>
-<?php include 'inc/sidebar.php'; ?>
+<?php include 'inc/header.php';?>
+<?php include 'inc/header_2.php';?>
+<?php include 'includes/format.php'; ?>
 
 
-        <div class="grid_10">
-            <div class="box round first grid">
-                <h2>Inbox</h2>
 
 <?php 
 if (isset($_GET['seenid'])) {
@@ -29,6 +27,27 @@ if ($updated_row) {
 }
 
 ?>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <?php include 'includes/navbar.php'; ?>
+  <?php include 'includes/menubar.php'; ?>
+
+
+
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Dashboard
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
                 <div class="block">        
                     <table class="data display datatable" id="example">
 					<thead>
@@ -162,6 +181,6 @@ if (isset($_GET['delid'])) {
     });
   </script>
 
-  
+<?php include 'includes/scripts.php'; ?>
 
  <?php include 'inc/footer.php'; ?>

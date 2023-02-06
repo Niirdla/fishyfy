@@ -13,9 +13,46 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
  $insertOrder = $ct->orderProduct($cmrId);
  $delData = $ct->delCustomerCart();
  header("Location:orderdetails.php");
+
+ $con = mysqli_connect("localhost","root","","db_shop");
+ $sql = "SELECT tbl_customer.*,tbl_order.* from tbl_customer, tbl_order where tbl_customer.id = tbl_order.cmrId ORDER BY tbl_order.id DESC LIMIT 1";
+ $result = mysqli_query($con, $sql);
+ if (mysqli_num_rows($result) > 0) {
+	 $row = mysqli_fetch_assoc($result);
+	 $to = $row['email'];
+    $subject = "Order Details";
+
+	$message = "Order ID: " . $row['id'] . "\n" .
+					"Order Date: " . $row['date'] . "\n" .
+
+                         "Customer Name: " . $row['name'] . "\n" .
+                         "Email: " . $row['email'] . "\n" .
+                         "Item: " . $row['productName'] . "\n" .
+                         "Quantity: " . $row['quantity'] . "\n" .
+                         "Total Cost: ₱" . $row['price'] . "\n";
+
+
+  $headers = "From: amberspirit16@gmail.com";
+   
+
+  if (mail($to, $subject, $message, $headers)) {
+	echo "<script>
+	alert('Check Your Email Inbox for the details');		
+</script>";
+   
+  } else {
+    echo "Failed to send email. Please try again later.";
+  }
+} else {
+	echo "No recent order found.";
+}
 }
   ?>
 
+<?php 
+if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
+
+	}?>
 <!DOCTYPE php>
 <php lang="en">
 <head>
@@ -350,7 +387,9 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 								</tr>
 							</tbody>
 						</table>
+					
 						<a href="?orderid=Order" class="boxed-btn">Place Order</a>
+		
 					</div>
 				</div>
 			</div>

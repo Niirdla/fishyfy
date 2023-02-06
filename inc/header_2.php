@@ -80,7 +80,7 @@ function myFunction() {
 if (isset($_GET['cid'])) {
 	$cmrId = Session::get("cmrId");
 	$delData = $ct->delCustomerCart();
-	Session::destroy();
+	Session::destroy2();
 }
 
 
@@ -107,7 +107,7 @@ if (isset($_GET['cid'])) {
 								<li class="current-list-item"><a href="#">Home</a>
 									<ul class="sub-menu">
 										<li><a href="index.php">Static Home</a></li>
-										<li><a href="index_2.php">Slider Home</a></li>
+										<li style = "text-align: center;"><a href="index_2.php">Slider Home</a></li>
 									</ul>
 								</li>
 								<li><a href="about.php">About</a></li>
@@ -118,14 +118,14 @@ if (isset($_GET['cid'])) {
 										<li><a href="payment.php">Check Out</a></li>
 										<li><a href="contacts.php">Contact</a></li>
 										<li><a href="news.php">News</a></li>
-										<li><a href="shop.php">Shop</a></li>
+										<li style = "text-align: center;"><a href="shop.php">Shop</a></li>
                     
 									</ul>
 								</li>
-								<li><a href="blog.php">Catalogue</a>
+								<li><a href="catalogue.php">Catalogue</a>
 									<ul class="sub-menu">
 										<li><a href="news.php">News</a></li>
-										<li><a href="single-news.php">Single News</a></li>
+										<li style = "text-align: center;"><a href="single-news.php">Single News</a></li>
 									</ul>
 								</li>
 								<li><a href="contacts.php">Contact</a></li>
@@ -134,7 +134,7 @@ if (isset($_GET['cid'])) {
 										<li><a href="shop.php">Shop</a></li>
 										<li><a href="checkout.php">Check Out</a></li>
 										<li><a href="single-product.php">Single Product</a></li>
-										<li><a href="cart.php">Cart</a></li>
+										<li style = "text-align: center;"><a href="cart.php">Cart</a></li>
 									</ul>
 								</li>
 								<li>

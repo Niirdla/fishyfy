@@ -1,7 +1,13 @@
 ﻿<?php include 'inc/header.php';?>
-<?php include 'inc/sidebar.php';?>
+<?php include 'inc/header_2.php';?>
+<?php include 'includes/format.php'; ?>
 <?php include '../classess/Product.php';?>
 
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+<?php include 'includes/navbar.php'; ?>
+<?php include 'includes/menubar.php'; ?>
 
 <?php
 $pd = new Product();
@@ -11,9 +17,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 }
 
 ?>
-<div class="grid_10">
-    <div class="box round first grid">
-        <h2>Add New Catalogue</h2>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Add catalogue pictures
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Add catalogue pictures</li>
+      </ol>
+    </section>
+
         <div class="block"> 
 
         <?php
@@ -24,11 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         ?>              
          <form action="" method="post" enctype="multipart/form-data">
             <table class="form">
-            <tr>
+            <tr >
                     <td>
                         <label>Name</label>
                     </td>
-                    <td>
+                    <td >
                         <input type="text" name="fishName" placeholder="Enter Fish Name..." class="medium" />
                     </td>
                 </tr>
@@ -66,6 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         </div>
     </div>
 </div>
+    </div>
+    </div>
 <!-- Load TinyMCE -->
 <script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -79,4 +97,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 <!-- Load TinyMCE -->
 <?php include 'inc/footer.php';?>
 
-
+<?php include 'includes/scripts.php'; ?>

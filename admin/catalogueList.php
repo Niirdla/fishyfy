@@ -1,5 +1,6 @@
 ﻿<?php include 'inc/header.php';?>
-<?php include 'inc/sidebar.php';?>
+<?php include 'inc/header_2.php';?>
+<?php include 'includes/format.php'; ?>
 <?php include '../classess/Product.php';?>
 <?php include_once '../helpers/Formate.php';?>
 
@@ -16,9 +17,27 @@ if (isset($_GET['delpro'])) {
 }
 ?>
 
-<div class="grid_10">
-    <div class="box round first grid">
-        <h2>Post List</h2>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <?php include 'includes/navbar.php'; ?>
+  <?php include 'includes/menubar.php'; ?>
+
+
+
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Catalogue pictures list
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Catalogue pictures list</li>
+      </ol>
+    </section>
+
         <div class="block"> 
 
 
@@ -73,8 +92,7 @@ if (isset($_GET['delpro'])) {
 		</table>
 
        </div>
-    </div>
-</div>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -84,3 +102,4 @@ if (isset($_GET['delpro'])) {
     });
 </script>
 <?php include 'inc/footer.php';?>
+<?php include 'includes/scripts.php'; ?>

@@ -1,5 +1,6 @@
 <?php include 'inc/header.php';?>
-<?php include 'inc/sidebar.php';?>
+<?php include 'inc/header_2.php';?>
+<?php include 'includes/format.php'; ?>
 <?php include '../classess/Customer.php';?>
 <?php include_once '../helpers/Formate.php';?>
 
@@ -10,25 +11,44 @@ $fm = new Format();
 ?>
 
 <?php
-if (isset($_GET['getCustomer'])) {
-	$id = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['getCustomer']);
-	$getCustomer = $pd->getCustomerData($id);
+if (isset($_GET['delUser'])) {
+	$id = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['delUser']);
+	$delUser = $pd->delUserById($id);
 }
 ?>
 
-<div class="grid_10">
-    <div class="box round first grid">
-        <h2>Users List</h2>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <?php include 'includes/navbar.php'; ?>
+  <?php include 'includes/menubar.php'; ?>
+
+
+
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Users list
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Users list</li>
+      </ol>
+    </section>
+
+
         <div class="block"> 
+		<?php 
+
+if (isset($delUser)) {
+	echo $delUser;
+}
+
+?> 
 
 
-              <?php 
-
-                	if (isset($getCustomer)) {
-                		echo $getCustomer;
-                	}
-
-                	?> 
             <table class="data display datatable" id="example">
 			<thead>
 				<tr>
@@ -36,10 +56,11 @@ if (isset($_GET['getCustomer'])) {
 					<th>Name</th>
 					<th>Address</th>
 					<th>City</th>
-					<th>Country</th>
 					<th>ZIP Code</th>
 					<th>Phone</th>
 					<th>Email</th>
+					<th>Role</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -57,11 +78,11 @@ if (isset($_GET['getCustomer'])) {
 					<td><?php echo $result['name'] ;?></td>
 					<td><?php echo $result['address'] ;?></td>
 					<td><?php echo $result['city'] ;?></td>
-					<td><?php echo $result['country'] ;?></td>
 					<td><?php echo $result['zip'] ;?></td>
           			<td><?php echo $result['phone'] ;?></td>
           			<td><?php echo $result['email'] ;?></td>
-					
+					<td><?php echo $result['role'] ;?></td>
+					<td><a href="userEdit.php?userid=<?php echo $result['id'];?>">Edit</a> || <a onclick="return confirm('Are you sure to delete!')" href="?delUser=<?php echo $result['id'];?>">Delete</a></td>
 				</tr>
 
 
@@ -71,8 +92,7 @@ if (isset($_GET['getCustomer'])) {
 		</table>
 
        </div>
-    </div>
-</div>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -82,4 +102,4 @@ if (isset($_GET['getCustomer'])) {
     });
 </script>
 <?php include 'inc/footer.php';?>
-<?php include 'inc/footer.php';?>
+<?php include 'includes/scripts.php'; ?>

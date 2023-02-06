@@ -62,7 +62,8 @@ $fm = new Format();
 
 </head>
 <body>
-    <div class="container_12">
+
+<div class="container_12">
         <div class="grid_12 header-repeat">
             <div id="branding">
                 <div class="floatleft logo">
@@ -72,7 +73,10 @@ $fm = new Format();
 					<h1>Fishyfy</h1>
 					<p>AAC Aquatics</p>
 				</div>
-                <div class="floatright">
+
+    
+
+    <div class="floatright">
                     
 
 <?php
@@ -91,24 +95,7 @@ Session::destroy();
                         <ul class="inline-ul floatleft">
                             <li>Hello <?php echo Session::get('adminName'); ?>
                             <ul class="submenu">
-                            <li ><a href="message.php"><span>Message
-
-
-<?php 
- $query = "select * from tbl_contact where status='0' order by id desc";
-  $msg = $db->select($query);
-
-  if ($msg) {
-     $count = mysqli_num_rows($msg);
-     echo "(".$count.")";
-  } else{
-
-     echo "(0)";
-  }
- ?>
-
-
-         </span></a></li></li>
+                
                             <li><a href="?action=logout">Logout</a></li>
                         </ul>
                     </div>
@@ -119,33 +106,5 @@ Session::destroy();
         </div>
         <div class="clear">
         </div>
-       <!-- <div class="grid_12">
-            <ul class="nav main">
-                <li class="ic-dashboard"><a href="dashboard.php"><span>Dashboard</span></a> </li>
-                 <li class="ic-form-style"><a href=""><span>User Profile</span></a></li>
-				 <li class="ic-typography"><a href="changepassword.php"><span>Change Password</span></a></li> 
-				<li class="ic-grid-tables"><a href="inbox.php"><span>Inbox</span></a></li>
-                <li class="ic-grid-tables"><a href="message.php"><span>Message
 
-
-       <?php 
-        $query = "select * from tbl_contact where status='0' order by id desc";
-         $msg = $db->select($query);
-
-         if ($msg) {
-            $count = mysqli_num_rows($msg);
-            echo "(".$count.")";
-         } else{
-
-            echo "(0)";
-         }
-        ?>
-
-
-                </span></a></li>
-                <li class="ic-charts"><a href="../" target="_blank"><span>Visit Website</span></a></li>
-            </ul>
-        </div>
-        <div class="clear">
-        </div>-->
-    
+</header>
