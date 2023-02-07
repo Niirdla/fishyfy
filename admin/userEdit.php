@@ -8,7 +8,7 @@
 
 if (!isset($_GET['userid']) || $_GET['userid'] == NULL) {
    
-   echo "<script>window.location='catalogueList.php';</script>";
+   echo "<script>window.location='userlist.php';</script>";
    
 } else {
 

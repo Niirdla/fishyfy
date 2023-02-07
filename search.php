@@ -1,4 +1,4 @@
-<?php include 'inc/header_2.php';?>
+<?php include 'inc/header_3.php';?>
 
 
 <?php 
@@ -52,7 +52,85 @@ $search = $search;
 
 </head>
 <body>
+	<!-- header -->
+	<div class="top-header-area" id="sticker">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 text-center">
+					<div class="main-menu-wrap">
+						<!-- logo -->
+						<div class="site-logo">
+							<a href="index.php">
+								<img src="assets/img/aacaquaticslogo.png" alt="">
+							</a>
+						</div>
+						<!-- logo -->
 
+						<!-- menu start -->
+						<nav class="main-menu">
+							<ul>
+								<li class="current-list-item"><a href="#">Home</a>
+									<ul class="sub-menu">
+										<li><a href="index.php">Static Home</a></li>
+										<li style = "text-align: center;"><a href="index_2.php">Slider Home</a></li>
+									</ul>
+								</li>
+								<li><a href="about.php">About</a></li>
+								<li><a href="#">Pages</a>
+									<ul class="sub-menu">
+										<li><a href="about.php">About</a></li>
+										<li><a href="cart.php">Cart</a></li>
+										<li><a href="payment.php">Check Out</a></li>
+										<li><a href="contacts.php">Contact</a></li>
+										<li><a href="news.php">News</a></li>
+										<li style = "text-align: center;"><a href="shop.php">Shop</a></li>
+                    
+									</ul>
+								</li>
+								<li><a href="catalogue.php">Catalogue</a>
+									<ul class="sub-menu">
+										<li><a href="news.php">News</a></li>
+										<li style = "text-align: center;"><a href="single-news.php">Single News</a></li>
+									</ul>
+								</li>
+								<li><a href="contacts.php">Contact</a></li>
+								<li><a href="shop.php">Shop</a>
+									<ul class="sub-menu">
+										<li><a href="shop.php">Shop</a></li>
+										<li><a href="checkout.php">Check Out</a></li>
+										<li><a href="single-product.php">Single Product</a></li>
+										<li style = "text-align: center;"><a href="cart.php">Cart</a></li>
+									</ul>
+								</li>
+								<li>
+									<div class="header-icons">
+										<a class="shopping-cart" href="cart.php"><i class="fas fa-shopping-cart"></i></a>
+										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+										<a class="user-profile" href="profile.php"><i class='far fa-user-circle' style='font-size:18px'></i></a>
+										<ul class="sub-menu">
+											<li><a href="profile.php">My Account</a></li>
+											<li><a href="orderdetails.php">My Orders</a></li>
+										</ul>
+										
+										<a class="sign-out" href="?cid=<?php Session::get('cmrId') ?>"><i class='fas fa-sign-out-alt' style='font-size:18px;color:white'></i></a>
+										
+									</div>
+								</li>
+
+						
+								
+								
+							</ul>
+						</nav>
+						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+						<div class="mobile-menu"></div>
+						<!-- menu end -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end header -->		   
 
 	<!-- search area -->
 	<div class="search-area">

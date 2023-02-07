@@ -326,9 +326,24 @@ public function catalogueInsert($data,$file){
 
 	$fishName = $this->fm->validation($data['fishName']);
 	$type = $this->fm->validation($data['type']);
+	$description = $this->fm->validation($data['Description']);
+	$family = $this->fm->validation($data['family']);
+	$diet = $this->fm->validation($data['diet']);
+	$care = $this->fm->validation($data['care']);
+	$breed = $this->fm->validation($data['breed']);
+	$life = $this->fm->validation($data['life']);
+	$tank = $this->fm->validation($data['tank']);
 
 	$fishName = mysqli_real_escape_string($this->db->link, $data['fishName']);
 	$type = mysqli_real_escape_string($this->db->link, $data['type']);
+	$description = mysqli_real_escape_string($this->db->link, $data['Description']);
+	$family = mysqli_real_escape_string($this->db->link, $data['family']);
+	$diet = mysqli_real_escape_string($this->db->link, $data['diet']);
+	$care = mysqli_real_escape_string($this->db->link, $data['care']);
+	$breed = mysqli_real_escape_string($this->db->link, $data['breed']);
+	$life = mysqli_real_escape_string($this->db->link, $data['life']);
+	$tank = mysqli_real_escape_string($this->db->link, $data['tank']);
+
 
 	
 
@@ -342,7 +357,7 @@ public function catalogueInsert($data,$file){
 		$unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
 		$uploaded_image = "uploads/".$unique_image;
 	
-	if ($fishName == "" || $file_name == "" || $type == "") {
+	if ($fishName == "" || $file_name == "" || $type == ""|| $Description == "" || $family == ""|| $diet == "" || $care == ""|| $breed == "" || $life == ""|| $tank == "" ) {
 		
 		$msg = "<span class='error'>Fields must not be empty !</span>";
 		return $msg;
@@ -356,7 +371,7 @@ public function catalogueInsert($data,$file){
 	}else{
 	
 		 move_uploaded_file($file_temp, $uploaded_image);
-		 $query = "INSERT INTO tbl_catalogue(fishName,images,type) VALUES('$fishName','$uploaded_image','$type') ";
+		 $query = "INSERT INTO tbl_catalogue(fishName,images,type,family,diet,care,breed,life,tank,Description) VALUES('$fishName','$uploaded_image','$type','$family','$diet','$care','$breed','$life','$tank','$description') ";
 	
 		 $inserted_row = $this->db->insert($query);
 				if ($inserted_row) {
@@ -374,9 +389,24 @@ public function catalogueInsert($data,$file){
 
 				$fishName = $this->fm->validation($data['fishName']);
 				$type = $this->fm->validation($data['type']);
+				$description = $this->fm->validation($data['Description']);
+				$family = $this->fm->validation($data['family']);
+				$diet = $this->fm->validation($data['diet']);
+				$care = $this->fm->validation($data['care']);
+				$breed = $this->fm->validation($data['breed']);
+				$life = $this->fm->validation($data['life']);
+				$tank = $this->fm->validation($data['tank']);
+				
 				
 				$fishName = mysqli_real_escape_string($this->db->link, $data['fishName']);
 				$type = mysqli_real_escape_string($this->db->link, $data['type']);
+				$description = mysqli_real_escape_string($this->db->link, $data['Description']);
+				$family = mysqli_real_escape_string($this->db->link, $data['family']);
+				$diet = mysqli_real_escape_string($this->db->link, $data['diet']);
+				$care = mysqli_real_escape_string($this->db->link, $data['care']);
+				$breed = mysqli_real_escape_string($this->db->link, $data['breed']);
+				$life = mysqli_real_escape_string($this->db->link, $data['life']);
+				$tank = mysqli_real_escape_string($this->db->link, $data['tank']);
 				
 				
 				
@@ -390,7 +420,7 @@ public function catalogueInsert($data,$file){
 					$unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
 					$uploaded_image = "uploads/".$unique_image;
 				
-				if ($fishName == "" || $type == "") {
+				if ($fishName == "" || $type == ""|| $Description == "" || $family == ""|| $diet == "" || $care == ""|| $breed == "" || $life == ""|| $tank == "") {
 					
 					$msg = "<span class='error'>Fields must not be empty !</span>";
 					return $msg;
@@ -420,6 +450,13 @@ public function catalogueInsert($data,$file){
 					 fishName = '$fishName',
 					 images   = '$uploaded_image',
 					 type        = '$type'
+					 Description        = '$Description'
+					 family = '$family'
+					 diet = '$diet'
+					 care = '$care'
+					 breed = '$breed'
+					 life = '$life'
+					 tank = '$tank'
 					 WHERE id = '$id'";
 				
 					 $updatedted_row = $this->db->update($query);
@@ -438,6 +475,13 @@ public function catalogueInsert($data,$file){
 					fishName = '$fishName',
 					images   = '$uploaded_image',
 					type        = '$type'
+					Description        = '$Description'
+					family = '$family'
+					 diet = '$diet'
+					 care = '$care'
+					 breed = '$breed'
+					 life = '$life'
+					 tank = '$tank'
 					WHERE id = '$id'";
 				
 					 $updatedted_row = $this->db->update($query);
@@ -520,7 +564,13 @@ public function catalogueInsert($data,$file){
 							return $result;
 						
 						}
-						
+						public function getSingleCatalogue($id){
+
+							$query = "SELECT c.*
+						FROM tbl_catalogue as c WHERE c.id = '$id'";
+							$result = $this->db->select($query);
+							return $result;
+						}
 }
 
 

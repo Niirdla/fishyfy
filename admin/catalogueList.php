@@ -54,6 +54,13 @@ if (isset($_GET['delpro'])) {
 					<th>SL</th>
 					<th>Fish Name</th>
 					<th>Image</th>
+					<th>Description</th>
+					<th>Family</th>
+					<th>Diet</th>
+					<th>Care</th>
+					<th>Breed</th>
+					<th>Life</th>
+					<th>Tank</th>
 					<th>Type</th>
 					<th>Action</th>
 				</tr>
@@ -71,6 +78,15 @@ if (isset($_GET['delpro'])) {
 				<tr class="odd gradeX">
 					<td><?php echo $i;?></td>
 					<td><?php echo $result['fishName'] ;?></td>
+					
+					<td><?php echo $fm->textShorten($result['Description'],50) ;?></td>
+
+					<td><?php echo $result['family'] ;?></td>
+					<td><?php echo $result['diet'] ;?></td>
+					<td><?php echo $result['care'] ;?></td>
+					<td><?php echo $result['breed'] ;?></td>
+					<td><?php echo $result['life'] ;?></td>
+					<td><?php echo $result['tank'] ;?></td>
 					<td><img src="<?php echo $result['images'] ;?>" height="40px" width="60px" ></td>
 					<td>
 						<?php 

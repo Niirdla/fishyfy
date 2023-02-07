@@ -59,6 +59,65 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
 
                 <tr>
+                    <td style="vertical-align: top; padding-top: 9px;">
+                        <label>Description</label>
+                    </td>
+                    <td>
+                        <textarea class="tinymce" name="Description"></textarea>
+                    </td>
+                </tr>
+                <tr >
+                    <td>
+                        <label>Family</label>
+                    </td>
+                    <td >
+                        <input type="text" name="family" placeholder="Enter Family Name..." class="medium" />
+                    </td>
+                </tr>
+
+                <tr >
+                    <td>
+                        <label>Diet</label>
+                    </td>
+                    <td >
+                        <input type="text" name="diet" placeholder="Enter Diet..." class="medium" />
+                    </td>
+                </tr>
+
+                <tr >
+                    <td>
+                        <label>Care level</label>
+                    </td>
+                    <td >
+                        <input type="text" name="care" placeholder="Enter Care level..." class="medium" />
+                    </td>
+                </tr>
+
+                <tr >
+                    <td>
+                        <label>Breed</label>
+                    </td>
+                    <td >
+                        <input type="text" name="breed" placeholder="Enter Breed..." class="medium" />
+                    </td>
+                </tr>
+                <tr >
+                    <td>
+                        <label>Lifespan</label>
+                    </td>
+                    <td >
+                        <input type="text" name="life" placeholder="Enter Lifespan..." class="medium" />
+                    </td>
+                </tr>
+                <tr >
+                    <td>
+                        <label>Tank size</label>
+                    </td>
+                    <td >
+                        <input type="text" name="tank" placeholder="Enter Tank size detail..." class="medium" />
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         <label>Catalogue Type</label>
                     </td>

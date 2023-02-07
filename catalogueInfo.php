@@ -1,18 +1,89 @@
 <?php include 'inc/header_3.php';?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php
+if (isset($_GET['proid'])) {
+   
+
+    $id = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['proid']);
+}
+
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+    $quantity = $_POST['quantity'];
+    $addCart = $ct->addToCart($quantity,$id,$cmrId);
+	
+}
+?>
+
+
+<style>
+	.mybutton{width: 100px;float: left;margin-right: 50px;}
+
+</style>
+<style>
+
+
+  .left-images {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 120px;
+
+  }
+
+  .right-images {
+	vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 120px;
+
+  }
+  
+
+  .left-images img {
+	width: 100px;
+    height: 100px;
+    background-color: black;
+
+
+
+
+
+  }
+
+  .right-images img {
+	width: 100px;
+    height: 100px;
+    background-color: black;
+	
+
+
+  }
+  .left-images p {
+	display: block;
+
+}
+.right-images p {
+	display: block;
+}
+</style>
+
+
+<!DOCTYPE php>
+<php lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+	<script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
 
 	<!-- title -->
-	<title>About</title>
+	<title>Single Product</title>
 
 	<!-- favicon -->
-	<link rel="shortcut icon" type="image/png" href="assets/img/aacaquaticslogo.png">
+	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -32,12 +103,12 @@
 	<link rel="stylesheet" href="assets/css/main.css">
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
-	<!-- Add icon library -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
+	
 
+	
 	<!-- header -->
 	<div class="top-header-area" id="sticker">
 		<div class="container">
@@ -138,16 +209,17 @@
 		</div>
 	</div>
 	<!-- end search arewa -->
+
 	
-	
+
 	<!-- breadcrumb-section -->
 	<div class="breadcrumb-section breadcrumb-bg">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>We sell quality aquatic needs</p>
-						<h1>About Us</h1>
+						<p>See more Details</p>
+						<h1>Single Product</h1>
 					</div>
 				</div>
 			</div>
@@ -155,216 +227,111 @@
 	</div>
 	<!-- end breadcrumb section -->
 
-	<!-- featured section -->
-	<div class="feature-bg">
+	<!-- single product -->
+	<div class="single-product mt-150 mb-150">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-7">
-					<div class="featured-text">
-						<h2 class="pb-3">Why <span class="orange-text">FISHYFY</span></h2>
-						<div class="row">
-							<div class="col-lg-6 col-md-6 mb-4 mb-md-5">
-								<div class="list-box d-flex">
-									<div class="list-icon">
-										<i class="fas fa-shipping-fast"></i>
-									</div>
-									<div class="content">
-										<h3>Home Delivery</h3>
-										<p>sit voluptatem accusantium dolore mque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 mb-5 mb-md-5">
-								<div class="list-box d-flex">
-									<div class="list-icon">
-										<i class="fas fa-money-bill-alt"></i>
-									</div>
-									<div class="content">
-										<h3>Best Price</h3>
-										<p>sit voluptatem accusantium dolore mque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 mb-5 mb-md-5">
-								<div class="list-box d-flex">
-									<div class="list-icon">
-										<i class="fas fa-briefcase"></i>
-									</div>
-									<div class="content">
-										<h3>Custom Box</h3>
-										<p>sit voluptatem accusantium dolore mque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6">
-								<div class="list-box d-flex">
-									<div class="list-icon">
-										<i class="fas fa-sync-alt"></i>
-									</div>
-									<div class="content">
-										<h3>Quick Refund</h3>
-										<p>sit voluptatem accusantium dolore mque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end featured section -->
+				<div class="col-md-5">	
 
-	<!-- shop banner -->
-	<section class="shop-banner">
-    	<div class="container">
-        	<h3>January sale is on! <br> with big <span class="orange-text">Discounts!</span></h3>
-            <div class="sale-percent"><span>Sale! <br> Up to</span>25% <span>off</span></div>
-            <a href="shop.html" class="cart-btn btn-lg">Shop Now</a>
-        </div>
-    </section>
-	<!-- end shop banner -->
-
-	<!-- team section -->
-	<div class="mt-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">
-						<h3>Our <span class="orange-text">Team</span></h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6"> 
-					<div class="single-team-item">
-						<div class="team-bg team-bg-1"></div>
-						<h4>Lorenz Angeles<span>Leader & Developer</span></h4> 
-						<ul class="social-link-team">
-							<li><a href="https://www.facebook.com/lorenzbrad" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-team-item">
-						<div class="team-bg team-bg-2"></div>
-						<h4>Edriane Joelle Agorilla<span>Developer</span></h4>
-						<ul class="social-link-team">
-							<li><a href="https://www.facebook.com/itsejaaayyyy/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-team-item">
-						<div class="team-bg team-bg-3"></div>
-						<h4>Aldrin James Mendoza<span>Developer</span></h4>
-						<ul class="social-link-team">
-							<li><a href="https://www.facebook.com/aldrinjames.mendoza" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-team-item">
-						<div class="team-bg team-bg-4"></div>
-						<h4>Marcus Christopher Roxas<span>Developer</span></h4>
-						<ul class="social-link-team">
-							<li><a href="https://www.facebook.com/Emcee.roxas" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-5">
-					<div class="single-team-item">
-						<div class="team-bg team-bg-5"></div>
-						<h4>Antoine Christopher Marco Lim<span>Tester</span></h4>
-						<ul class="social-link-team">
-							<li><a href="https://www.facebook.com/ACMEL.415" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-6 offset-lg-0">
-					<div class="single-team-item">
-						<div class="team-bg team-bg-6"></div>
-						<h4>Marc Angelo Baguio<span>Tester</span></h4>
-						<ul class="social-link-team">
-							<li><a href="https://www.facebook.com/itsmeeegelooo" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+					<?php 
+					$getPd = $pd->getSingleCatalogue($id);
+					if ($getPd) {
+						while ($result = $getPd->fetch_assoc()) {
 							
+
+
+					?>			
+						<div class="single-catalogue-img" id= "img-container" style = "width: 1200px">
+							<img src="admin/<?php echo $result['images']; ?>" alt="" />
+							<h2><?php echo $result['fishName']; ?> </h2>
+  						<div class="left-images">
+						
+						
+							<img src="images/family.png" alt="Image 1">
+							<p><?php echo $result['family']; ?></p>
+							
+  							<img src="images/care.png" alt="Image 2">
+							  <p><?php echo $result['care']; ?></p>
+						
+  							<img src="images/lifespan.png" alt="Image 3">
+							  <p><?php echo $result['life']; ?></p>
+							  
+						</div>	
+						<div class="right-images">
+							<img src="images/diet.png" alt="Image 4">
+							<p><?php echo $result['diet']; ?></p>
+  							<img src="images/breed.png" alt="Image 5">
+							<p><?php echo $result['breed']; ?></p>
+  							<img src="images/tank.png" alt="Image 6">
+							  <p><?php echo $result['tank']; ?></p>
+						</div>
+						
+					<p><h3>Product Description:</h3><?php echo $result['Description']; ?></p>
+						</div>
+					</div>
+					
+				
+				<div class="col-md-7">
+					<div class="single-product-content">
+						
+					<div class="single-product-pricing">
+
+						
+							
+						
+						</div>
+						
+
+						<div class="single-product-form">
+							<form action="" method= "post">
+							
+							</form>
+							
+						</div>
+
+
+						<span style="color: red;font-size: 18px;">
+					<?php 
+
+					if (isset($addCart)) {
+						echo $addCart;
+					}
+					 ?>
+
+					 <?php 
+
+					if (isset($insertCom)) {
+						echo $insertCom;
+					}
+
+
+					if (isset($saveWlist)) {
+						echo $saveWlist;
+					}
+					 ?>
+				</span>
+
+				
+			</div>
+			
+			<?php } } ?>	
+	</div>
+						<h4>Share:</h4>
+						<ul class="product-share">
+							<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href=""><i class="fab fa-twitter"></i></a></li>
+							<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+							<li><a href=""><i class="fab fa-linkedin"></i></a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- end team section -->
+	<!-- end single product -->
 
-	<!-- testimonail-section -->
-	<div class="testimonail-section mt-150 mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-10 offset-lg-1 text-center">
-					<div class="testimonial-sliders">
-						<div class="single-testimonial-slider">
-							<div class="client-avater">
-								<img src="assets/img/lorenz.jpg" alt="">
-							</div>
-							<div class="client-meta">
-								<h3>Lorenz Angeles<span>Local Store Owner</span></h3>
-								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-								</p>
-								<div class="last-icon">
-									<i class="fas fa-quote-right"></i>
-								</div>
-							</div>
-						</div>
-						<div class="single-testimonial-slider">
-							<div class="client-avater">
-								<img src="assets/img/aldrin.jpg" alt="">
-							</div>
-							<div class="client-meta">
-								<h3>Aldrin James Mendoza<span>Local Store Owner</span></h3>
-								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-								</p>
-								<div class="last-icon">
-									<i class="fas fa-quote-right"></i>
-								</div>
-							</div>
-						</div>
-						<div class="single-testimonial-slider">
-							<div class="client-avater">
-								<img src="assets/img/mc.jpg" alt="">
-							</div>
-							<div class="client-meta">
-								<h3>Marcus Christopher Roxas<span>Local Store Owner</span></h3>
-								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-								</p>
-								<div class="last-icon">
-									<i class="fas fa-quote-right"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end testimonail-section -->
-
-	<!-- logo carousel -->
+	
+	<<!-- logo carousel -->
 	<div class="logo-carousel-section">
 		<div class="container">
 			<div class="row">
@@ -416,11 +383,11 @@
 					<div class="footer-box pages">
 						<h2 class="widget-title">Pages</h2>
 						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="services.html">Shop</a></li>
-							<li><a href="news.html">News</a></li>
-							<li><a href="contact.html">Contact</a></li>
+							<li><a href="index.php">Home</a></li>
+							<li><a href="about.php">About</a></li>
+							<li><a href="services.php">Shop</a></li>
+							<li><a href="news.php">News</a></li>
+							<li><a href="contact.php">Contact</a></li>
 						</ul>
 					</div>
 				</div>
@@ -428,7 +395,7 @@
 					<div class="footer-box subscribe">
 						<h2 class="widget-title">Subscribe</h2>
 						<p>Subscribe to our mailing list to get the latest updates.</p>
-						<form action="index.html">
+						<form action="index.php">
 							<input type="email" placeholder="Email">
 							<button type="submit"><i class="fas fa-paper-plane"></i></button>
 						</form>
@@ -484,4 +451,23 @@
 	<script src="assets/js/main.js"></script>
 
 </body>
-</html>
+</php>
+					<script>
+
+					var options1 = {
+    				width: 250,
+    				zoomWidth: 500,
+    				offset: {vertical: 0, horizontal: 10},
+					scale:1.5
+					};
+
+					// If the width and height of the image are not known or to adjust the image to the container of it
+					var options2 = {
+    				fillContainer: true,
+    				offset: {vertical: 0, horizontal: 10}
+					};
+
+					new ImageZoom(document.getElementById("img-container"), options2);
+
+					</script>
+

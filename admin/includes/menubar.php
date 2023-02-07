@@ -63,6 +63,21 @@
           <li><a href="inbox.php"><i class="fa fa-circle-o"></i>Manage orders</a></li>
         </ul>
       </li>
+       <!-- /.Chat bot -->
+       <li class="treeview">
+        <a href="#">
+          <i class="fa fa-barcode"></i>
+          <span>AI Chatbot</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="chatbotAdd.php"><i class="fa fa-circle-o"></i> Add chatbot</a></li>
+          <li><a href="chatbotList.php"><i class="fa fa-circle-o"></i> Chatbot keywords & reply list</a></li>
+        </ul>
+      </li>
+
     </ul>
   </section>
   <!-- /.sidebar -->

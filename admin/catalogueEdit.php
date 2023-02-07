@@ -81,7 +81,71 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                         <input type="file" name="images" />
                     </td>
                 </tr>
+
+                <tr>
+                    <td style="vertical-align: top; padding-top: 9px;">
+                        <label>Description</label>
+                    </td>
+                    <td>
+                        <textarea class="tinymce" name="bot_reply">
+                            
+                            <?php echo $value['Description'];?>
+
+                        </textarea>
+                    </td>
+                </tr>
 				
+                <tr>
+                    <td>
+                        <label>Family</label>
+                    </td>
+                    <td>
+                        <input type="text" name="Family" value="<?php echo $value['Family'];?>" class="medium" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Diet</label>
+                    </td>
+                    <td>
+                        <input type="text" name="diet" value="<?php echo $value['diet'];?>" class="medium" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Care</label>
+                    </td>
+                    <td>
+                        <input type="text" name="care" value="<?php echo $value['care'];?>" class="medium" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Breed</label>
+                    </td>
+                    <td>
+                        <input type="text" name="breed" value="<?php echo $value['breed'];?>" class="medium" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Life</label>
+                    </td>
+                    <td>
+                        <input type="text" name="life" value="<?php echo $value['life'];?>" class="medium" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Tank</label>
+                    </td>
+                    <td>
+                        <input type="text" name="tank" value="<?php echo $value['tank'];?>" class="medium" />
+                    </td>
+                </tr>
+
 				<tr>
                     <td>
                         <label>Catalogue Type</label>

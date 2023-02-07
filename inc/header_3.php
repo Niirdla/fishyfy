@@ -16,6 +16,7 @@ $pd = new Product();
 $cat = new Category();
 $ct = new Cart();
 $cmr = new Customer();
+$cht = new Chatbot();
 ?>
 
 <?php
@@ -53,23 +54,7 @@ $cmr = new Customer();
   });
 </script>
 
-<style>
 
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 78%;
-  z-index: 10000;
-
-}
-
-
-.sticky + .content {
-  padding-top: 102px;
-  
-
-}
-</style>
 
 
 
@@ -96,12 +81,12 @@ function myFunction() {
 if (isset($_GET['cid'])) {
 	$cmrId = Session::get("cmrId");
 	$delData = $ct->delCustomerCart();
-	$delComp = $pd->delCompareData($cmrId);
-	Session::destroy();
+	Session::destroy2();
 }
 
 
  ?>
+
 
 		   
 

@@ -74,8 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['wlist'])) {
 	
 
 	
-<!-- header -->
-<div class="top-header-area" id="sticker">
+	<!-- header -->
+	<div class="top-header-area" id="sticker">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 col-sm-12 text-center">
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['wlist'])) {
 								<li class="current-list-item"><a href="#">Home</a>
 									<ul class="sub-menu">
 										<li><a href="index.php">Static Home</a></li>
-										<li><a href="index_2.php">Slider Home</a></li>
+										<li style = "text-align: center;"><a href="index_2.php">Slider Home</a></li>
 									</ul>
 								</li>
 								<li><a href="about.php">About</a></li>
@@ -105,14 +105,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['wlist'])) {
 										<li><a href="payment.php">Check Out</a></li>
 										<li><a href="contacts.php">Contact</a></li>
 										<li><a href="news.php">News</a></li>
-										<li><a href="shop.php">Shop</a></li>
+										<li style = "text-align: center;"><a href="shop.php">Shop</a></li>
                     
 									</ul>
 								</li>
-								<li><a href="blog.php">Catalogue</a>
+								<li><a href="catalogue.php">Catalogue</a>
 									<ul class="sub-menu">
 										<li><a href="news.php">News</a></li>
-										<li><a href="single-news.php">Single News</a></li>
+										<li style = "text-align: center;"><a href="single-news.php">Single News</a></li>
 									</ul>
 								</li>
 								<li><a href="contacts.php">Contact</a></li>
@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['wlist'])) {
 										<li><a href="shop.php">Shop</a></li>
 										<li><a href="checkout.php">Check Out</a></li>
 										<li><a href="single-product.php">Single Product</a></li>
-										<li><a href="cart.php">Cart</a></li>
+										<li style = "text-align: center;"><a href="cart.php">Cart</a></li>
 									</ul>
 								</li>
 								<li>
@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['wlist'])) {
 		</div>
 	</div>
 	<!-- end search arewa -->
-	
+
 	
 
 	<!-- breadcrumb-section -->
