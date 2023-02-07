@@ -13,7 +13,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: -webkit-linear-gradient(left, #000000, #be1a1a);
+  background: -webkit-linear-gradient(left, #0a537a, #5ad8eb);
   font-family: "Nunito", sans-serif;
 }
 
@@ -29,7 +29,7 @@ button {
   position: relative;
   width: 900px;
   height: 550px;
-  background: rgb(210, 165, 165);
+  background: rgb(122, 206, 227);
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
@@ -92,11 +92,11 @@ button {
   text-transform: uppercase;
   font-weight: 600;
   font-family: "Nunito", sans-serif;
-  background: -webkit-linear-gradient(left, #be1a1a, #000000);
+  background: -webkit-linear-gradient(left, #043e7d, #043e7d);
 }
 
 .submit:hover {
-  background: -webkit-linear-gradient(left, #b224ef, #7579ff);
+  background: -webkit-linear-gradient(left, #0092f9, #0092f9);
 }
 
 .forgot-pass {
@@ -109,7 +109,7 @@ button {
 }
 
 .forgot-pass:hover {
-  color: red;
+  color: #5ad8eb;
 }
 
 .social-media {
@@ -141,7 +141,7 @@ button {
   width: 900px;
   height: 100%;
   padding-left: 260px;
-  background: rgb(210, 165, 165);
+  background: #5ad8eb;
   -webkit-transition: -webkit-transform 1.2s ease-in-out;
   transition: -webkit-transform 1.2s ease-in-out;
   transition: transform 1.2s ease-in-out;
@@ -170,7 +170,7 @@ button {
   top: 0;
   width: 900px;
   height: 100%;
-  background-image: url(images/fishbetta.png);
+  background-image: url(assets/img/bettablueee.jpeg);
   background-size: cover;
   transition: -webkit-transform 1.2s ease-in-out;
   transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;

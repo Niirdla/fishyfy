@@ -70,13 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 </head>
 <body>
 	
-	<!--PreLoader-->
-    <div class="loader">
-        <div class="loader-inner">
-            <div class="circle"></div>
-        </div>
-    </div>
-    <!--PreLoader Ends-->
+
 	
 	
 	
@@ -170,19 +164,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 				<div class="col-lg-12">
 					<div class="logo-carousel-inner">
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/fishyfylogooo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/fishyfylogooo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/fishyfylogooo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/fishyfylogooo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/fishyfylogooo.png" alt="">
 						</div>
 					</div>
 				</div>

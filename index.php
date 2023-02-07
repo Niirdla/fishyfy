@@ -12,7 +12,7 @@
 	<title>FISHYFY</title>
 
 	<!-- favicon -->
-	<link rel="shortcut icon" type="image/png" href="assets/img/aacaquaticslogo.png">
+	<link rel="shortcut icon" type="image/png" href="assets/img/fishyfylogooo.png">
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -124,7 +124,7 @@
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product.php"><img src="assets/img/products/aacaquaticslogo.png" alt=""></a>
+							<a href="single-product.php"><img src="assets/img/fishyfylogooo.png" alt=""></a>
 						</div>
 						<h3>Aquarium</h3>
 						<p class="product-price"><span>Per Kg</span> ₱100 </p>
@@ -134,7 +134,7 @@
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product.php"><img src="assets/img/products/aacaquaticslogo.png" alt=""></a>
+							<a href="single-product.php"><img src="assets/img/fishyfylogooo.png" alt=""></a>
 						</div>
 						<h3>Feeds</h3>
 						<p class="product-price"><span>Per Kg</span> ₱150 </p>
@@ -144,7 +144,7 @@
 				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product.php"><img src="assets/img/products/aacaquaticslogo.png" alt=""></a>
+							<a href="single-product.php"><img src="assets/img/fishyfylogooo.png" alt=""></a>
 						</div>
 						<h3>Accesories</h3>
 						<p class="product-price"><span>Per Kg</span> ₱200 </p>
@@ -195,7 +195,7 @@
 					<div class="testimonial-sliders">
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="assets/img/lorenz.jpg" alt="">
+								<img src="assets/img/team/owner1.jpg" alt="">
 							</div>
 							<div class="client-meta">
 								<h3>Lorenz Angeles<span>Local Store Owner</span></h3>
@@ -209,7 +209,7 @@
 						</div>
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="assets/img/aldrin.jpg" alt="">
+								<img src="assets/img/team/owner2.jpg" alt="">
 							</div>
 							<div class="client-meta">
 								<h3>Aldrin James Mendoza<span>Local Store Owner</span></h3>
@@ -223,7 +223,7 @@
 						</div>
 						<div class="single-testimonial-slider">
 							<div class="client-avater">
-								<img src="assets/img/mc.jpg" alt="">
+								<img src="assets/img/team/owner3.jpg" alt="">
 							</div>
 							<div class="client-meta">
 								<h3>Marcus Christopher Roxas<span>Local Store Owner</span></h3>
@@ -248,7 +248,7 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-12">
 					<div class="abt-bg">
-						<a href="https://www.youtube.com/watch?v=wKdaX-mj1Qw" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
+						<a href="https://www.youtube.com/watch?v=wKdaX-mj1Qw#t=1m43s" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-12">
@@ -348,19 +348,19 @@
 				<div class="col-lg-12">
 					<div class="logo-carousel-inner">
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/fishyfylogooo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/fishyfylogooo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/fishyfylogooo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/fishyfylogooo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/fishyfylogooo.png" alt="">
 						</div>
 					</div>
 				</div>

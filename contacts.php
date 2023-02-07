@@ -1,13 +1,4 @@
 <?php include 'inc/header_2.php';?>
-
-
-<?php 
-$login = Session::get("cuslogin");
-if ($login == false) {
-    header("Location:login.php");
-}
- ?>
-
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -292,15 +283,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <div class="col span_2_of_3">
                     <div class="contact-form">
-
-					<?php 
-        $id = Session::get("cmrId");
-		$getdata = $cmr->getCustomerData($id);
-		if ($getdata) {
-			while ($result = $getdata->fetch_assoc()) {
-		
-
-		?>
                         
 
                     <?php 
@@ -317,25 +299,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <form action="" method="post">
                                 <div>
                                     <span><label>NAME</label></span>
-                                    <span><input style= "text-align:center;" type="text" name="name" value="<?php echo $result['name'];?>"></span>
+                                    <span><input type="text" name="name" value=""></span>
                                 </div>
                                 <div>
                                     <span><label>E-MAIL</label></span>
-                                    <span><input style= "text-align:center;" type="text"  name="email" value="<?php echo $result['email'];?>"></span>
+                                    <span><input type="text" name="email" value=""></span>
                                 </div>
                                 <div>
                                     <span><label>MOBILE.NO</label></span>
-                                    <span><input style= "text-align:center;" type="text" name="contact" value="<?php echo $result['phone'];?>"></span>
+                                    <span><input type="text" name="contact" value=""></span>
                                 </div>
                                 <div>
-                                    <span><label>Message</label></span>
+                                    <span><label>SUBJECT</label></span>
                                     <span><textarea name="message"> </textarea></span>
                                 </div>
                             <div>
                                     <span><input type="submit" name="submit" value="SUBMIT"></span>
                             </div>
                             </form>     
-							<?php } } ?>
                     </div> 
                     </div>
 				</div>

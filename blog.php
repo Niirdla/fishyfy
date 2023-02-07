@@ -34,7 +34,7 @@
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
-
+	<link rel="stylesheet" href="style2.css">
 
 </head>
 <body>
@@ -46,47 +46,78 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<h1>Shop</h1>
+						<h1>Catalogue</h1>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- end breadcrumb section -->
-	
-	<!-- products -->
+
+	<!-- blog -->
 	<div class="product-section mt-150 mb-150">
 		<div class="container">
-		<h2 class="product-category">Featured products</h2>
-			<div class="row product-lists">
-				<?php
-	      		$getFpd = $pd->getFeaturedProduct();
+
+
+		<section class="product"> 
+	
+		
+        <h2 class="product-category">best selling</h2>
+        <button class="pre-btn"><img src="images/arrow.png" alt=""></button>
+        <button class="nxt-btn"><img src="images/arrow.png" alt=""></button>
+        <div class="product-container">
+		<?php
+	      		$getFpd = $pd->getFeaturedCatalogue();
 	      		if ($getFpd) {
 	      		while ($result = $getFpd->fetch_assoc()) { 
 	      
 	      			
-	      		?>
+	      		?>	
+            <div class="product-card">
+                <div class="product-image">
 
-				<div class="col-lg-4 col-md-6 text-center strawberry">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.php?proid=<?php echo $result['productId']; ?>"><img src="admin/<?php echo $result['image']; ?>" alt="" /></a>
-						</div>
-						<p><strong><?php echo $fm->textShorten($result['productName'],30); ?></strong></p>
-						<p><span class="product-price">₱<?php echo $result['price']; ?></span></p>
-						<div class="cart-btn"><span><a href="single-product.php?proid=<?php echo $result['productId']; ?>" class="fas fa-shopping-cart">Details</a></span></div>
-					</div>
-				</div>
-				
-				<?php } } ?>
-				
-				
-			</div>
+                    <a href="single-product.php?proid=<?php echo $result['id']; ?>"><img class="product-thumb" src="admin/<?php echo $result['images']; ?>" alt="" /></a>
 
+                </div>
+                <div class="product-info">
+				<p class="product-brand"><strong><?php echo $result['fishName']; ?></strong></p>
+                    
+                </div>
+            </div>
+			<?php } } ?>
+        </div>
+		
+
+    </section>
+	<section class="product"> 
+	<h2 class="product-category">New Arrivals</h2>
+        <button class="pre-btn"><img src="images/arrow.png" alt=""></button>
+        <button class="nxt-btn"><img src="images/arrow.png" alt=""></button>
+        <div class="product-container">
+		<?php
+	      	$getNpd = $pd->getNewCatalogue();
+	      	if ($getNpd) {
+	      		while ($result = $getNpd->fetch_assoc()) { 
+	      			
+	      
+	      	?>
+            <div class="product-card">
+                <div class="product-image">
+
+                    <a href="single-product.php?proid=<?php echo $result['id']; ?>"><img class="product-thumb" src="admin/<?php echo $result['images']; ?>" alt="" /></a>
+
+                </div>
+                <div class="product-info">
+					<p class="product-brand"><strong><?php echo $result['fishName']; ?></strong></p>
+                </div>
+            </div>
+			<?php } } ?>
+        </div>
+		</section>
 			
 		</div>
 	</div>
-	<!-- end products -->
+	<!-- end blog -->
 
 	<!-- logo carousel -->
 	<div class="logo-carousel-section">
@@ -206,6 +237,8 @@
 	<script src="assets/js/sticker.js"></script>
 	<!-- main js -->
 	<script src="assets/js/main.js"></script>
+
+	<script src="script2.js"></script>
 
 </body>
 </html>

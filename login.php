@@ -8,7 +8,7 @@ $login = Session::get("cuslogin");
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
-    $custLogin = $cmr->customerLogin($_POST);
+    $custLogin = $cmr->customerLogin($_POST); 
 }
 
 ?> 
@@ -36,12 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         	
         	<form action="" method="post">
 					<label>
-						<span>Email<span style="color: red;">*</span></span>
-						<input name="email" placeholder ="Enter your email" type="text"/>
+						<span>USERNAME</span>
+						<input name="email" type="text"/>
 					</label>
                     <label>
-						<span>Password<span style="color: red;">*</span></span>
-						<input name="pass" placeholder = "Enter your password" type="password"/>
+						<span>Password</span>
+						<input name="pass" type="password"/>
 					</label>
                     <div><button class="submit" name="login">Sign In</button></div>
 					<div class="link forget-pass text-left"><a href="forgot-password.php">Forgot password?</a></div>
@@ -70,19 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
-	$phoneNumber = $_POST['phone'];
-	$password = $_POST['pass'];
-	if(strlen ($password) < 8){
-		echo "Error: Password must be at least 8 characters long.";
-	}elseif(strlen ($phoneNumber) < 11 && strlen ($phoneNumber) >11){
-		echo "Error: Phone number must atleast 11 characters long.";
-	}else{
     $customerReg = $cmr->customerRegistration($_POST);
-	}
 }
 
 ?>          
-    	<div class="form sign-up" style="overflow-y:scroll;">
+    	<div class="form sign-up">
     		<?php 
 
     		if (isset($customerReg)) {
@@ -92,45 +84,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
 			
     		<h2>Sign Up</h2>
     		<form method="post">
-			<label for= name>
-			<span>Name<span style="color: red;">*</span></span>
-			<input type="text" placeholder= "Enter your full name"name="name">
-			</label>
 			
-			<label for= address>
-			<span>Address<span style="color: red;">*</span></span>
-			<input type="text" placeholder ="House #, Street, Baranggay"name="address">
-			</label>
 
 			<label for= email>
-			<span>Email<span style="color: red;">*</span></span>
-			<input type="text" placeholder= "e.g. juandelacruz@gmail.com" name="email">
-			</label>
-
-							<label for= city>
-			<span>City<span style="color: red;">*</span></span>
-			<input type="text" placeholder ="e.g. Manila" name="city">
-			</label>
-							
-	
-			<label for= zip>
-			<span>ZIP<span style="color: red;">*</span></span>
-			<input type="text" placeholder = "Enter your zip code"name="zip">
-			</label>
-			
-			<label for= phone>
-			<span>Phone number<span style="color: red;">*</span></span>
-			<input type="tel" id= "phoneNumber" maxlength ="13" placeholder="0910-249-4012" name="phone">
+			<span>Email</span>
+			<input type="text" name="email">
 			</label>
 
 			<label for= pass>
-			<span>Password<span style="color: red;">*</span></span>
-			<input type="password" placeholder = "Password atleast 8 characters" name="pass">
+			<span>Password</span>
+			<input type="password" name="pass">
 			</label>
 
 			<label for= pass>
-			<span>Confirm Password<span style="color: red;">*</span></span>
-			<input type="password" placeholder = "Reenter password" name="pass">
+			<span>Confirm Password</span>
+			<input type="password" name="pass">
 			</label>
 			<button class="submit" name="register">Create Account</button>
 			</form>
@@ -142,12 +110,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
  <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
-
-
-<script>
-  const phoneNumber = document.getElementById("phoneNumber");
-  phoneNumber.addEventListener("input", function () {
-    this.value = this.value.replace(/[^0-9]/g, "");
-    this.value = this.value.replace(/(\d{4})(\d{3})(\d{4})/, "$1-$2-$3");
-  });
-</script>

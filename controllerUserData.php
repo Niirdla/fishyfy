@@ -63,7 +63,7 @@ $errors = array();
             if($update_res){
                 $_SESSION['name'] = $name;
                 $_SESSION['email'] = $email;
-                header('location: login.php');
+                header('location: index.php');
                 exit();
             }else{
                 $errors['otp-error'] = "Failed while updating code!";
