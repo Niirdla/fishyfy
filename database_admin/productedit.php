@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                
                 <tr>
                     <td>
-                        <label>Name</label>
+                        <label>Name<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="productName" value="<?php echo $value['productName'];?>" class="medium" />
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
 				<tr>
                     <td>
-                        <label>Category</label>
+                        <label>Category<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <select id="select" name="catId">
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
 				<tr>
                     <td>
-                        <label>Brand</label>
+                        <label>Brand<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <select id="select" name="brandId">
@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 				
 				 <tr>
                     <td style="vertical-align: top; padding-top: 9px;">
-                        <label>Description</label>
+                        <label>Description<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <textarea class="tinymce" name="body">
@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
 				<tr>
                     <td>
-                        <label>Price</label>
+                        <label>Price<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="price" value="<?php echo $value['price'];?>" class="medium" />
@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                 <tr>
                     <td>
-                        <label>Stocks</label>
+                        <label>Stocks<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="stocks" value="<?php echo $value['stocks'];?>" class="medium" />
@@ -174,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 				
 				<tr>
                     <td>
-                        <label>Product Type</label>
+                        <label>Product Type<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <select id="select" name="type">

@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             <table class="form">
             <tr>
                     <td style="vertical-align: top; padding-top: 9px;">
-                        <label>Keywords/ questions</label>
+                        <label>Keywords/ questions<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <textarea class="tinymce" name="keywords"></textarea>
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             
                 <tr>
                     <td style="vertical-align: top; padding-top: 9px;">
-                        <label>Chatbot reply</label>
+                        <label>Chatbot reply<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <textarea class="tinymce" name="bot_reply"></textarea>

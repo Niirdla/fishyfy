@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                
                 <tr>
                     <td>
-                        <label>Name</label>
+                        <label>Name <span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="name" placeholder="Enter User Name..." class="medium" />
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Address</label>
+                        <label>Address<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="address" placeholder="Enter Address..." class="medium" />
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>City</label>
+                        <label>City<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="city" placeholder="Enter City..." class="medium" />
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>ZIP</label>
+                        <label>ZIP<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="zip" placeholder="Enter ZIP..." class="medium" />
@@ -85,15 +85,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Phone</label>
+                        <label>Phone<span style="color: red;"> *</span></label>
                     </td>
                     <td>
-                        <input type="text" name="phone" placeholder="Enter Phone..." class="medium" />
+                        <input type="tel" id= "phoneNumber" maxlength ="13" name="phone" placeholder="Enter Phone number..." class="medium" />
+                      
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>Email</label>
+                        <label>Email<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="email" placeholder="Enter Email..." class="medium" />
@@ -101,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Password</label>
+                        <label>Password<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="pass" placeholder="Enter Password..." class="medium" />
@@ -109,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Role</label>
+                        <label>Role<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <select id="select" name="role">

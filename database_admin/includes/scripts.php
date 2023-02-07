@@ -73,4 +73,22 @@ $(function(){
   });
 </script>
 
+<!-- Load TinyMCE -->
+<script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        setupTinyMCE();
+        setDatePicker('date-picker');
+        $('input[type="checkbox"]').fancybutton();
+        $('input[type="radio"]').fancybutton();
+    });
+</script>
 
+<!-- phone number -->
+<script>
+  const phoneNumber = document.getElementById("phoneNumber");
+  phoneNumber.addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, "");
+    this.value = this.value.replace(/(\d{4})(\d{3})(\d{4})/, "$1-$2-$3");
+  });
+</script>

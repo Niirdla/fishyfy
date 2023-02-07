@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             <table class="form">
             <tr >
                     <td>
-                        <label>Name</label>
+                        <label>Name<span style="color: red;"> *</span></label>
                     </td>
                     <td >
                         <input type="text" name="fishName" placeholder="Enter Fish Name..." class="medium" />
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             
                 <tr>
                     <td>
-                        <label>Upload Image</label>
+                        <label>Upload Image<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="file" name="images" />
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                 <tr>
                     <td style="vertical-align: top; padding-top: 9px;">
-                        <label>Description</label>
+                        <label>Description<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <textarea class="tinymce" name="Description"></textarea>
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr >
                     <td>
-                        <label>Family</label>
+                        <label>Family<span style="color: red;"> *</span></label>
                     </td>
                     <td >
                         <input type="text" name="family" placeholder="Enter Family Name..." class="medium" />
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                 <tr >
                     <td>
-                        <label>Diet</label>
+                        <label>Diet<span style="color: red;"> *</span></label>
                     </td>
                     <td >
                         <input type="text" name="diet" placeholder="Enter Diet..." class="medium" />
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                 <tr >
                     <td>
-                        <label>Care level</label>
+                        <label>Care level<span style="color: red;"> *</span></label>
                     </td>
                     <td >
                         <input type="text" name="care" placeholder="Enter Care level..." class="medium" />
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                 <tr >
                     <td>
-                        <label>Breed</label>
+                        <label>Breed<span style="color: red;"> *</span></label>
                     </td>
                     <td >
                         <input type="text" name="breed" placeholder="Enter Breed..." class="medium" />
@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr >
                     <td>
-                        <label>Lifespan</label>
+                        <label>Lifespan<span style="color: red;"> *</span></label>
                     </td>
                     <td >
                         <input type="text" name="life" placeholder="Enter Lifespan..." class="medium" />
@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr >
                     <td>
-                        <label>Tank size</label>
+                        <label>Tank size<span style="color: red;"> *</span></label>
                     </td>
                     <td >
                         <input type="text" name="tank" placeholder="Enter Tank size detail..." class="medium" />
@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Catalogue Type</label>
+                        <label>Catalogue Type<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <select id="select" name="type">

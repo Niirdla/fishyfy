@@ -24,26 +24,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 <style>
 
 
-  .left-images {
-    vertical-align: top;
-    display: inline-block;
-    text-align: center;
-    width: 120px;
+  .images {
+	float: left;
+  width: 33.33%;
+  padding: 5px;
 
   }
-
-  .right-images {
-	vertical-align: top;
-    display: inline-block;
-    text-align: center;
-    width: 120px;
-
-  }
+  .image-row::after {
+  content: "";
+  clear: both;
+  display: table;
+  
+}
   
 
-  .left-images img {
-	width: 100px;
-    height: 100px;
+  .images img {
+	width: 150px;
+    height: 150px;
     background-color: black;
 
 
@@ -52,21 +49,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
   }
 
-  .right-images img {
-	width: 100px;
-    height: 100px;
-    background-color: black;
-	
-
-
-  }
-  .left-images p {
+  
+  .images p {
 	display: block;
+	background-color: black;
+	color:white;
+	font-size: large;
 
 }
-.right-images p {
-	display: block;
-}
+
 </style>
 
 
@@ -162,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 								<li>
 									<div class="header-icons">
 										<a class="shopping-cart" href="cart.php"><i class="fas fa-shopping-cart"></i></a>
-										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+									
 										<a class="user-profile" href="profile.php"><i class='far fa-user-circle' style='font-size:18px'></i></a>
 										<ul class="sub-menu">
 											<li><a href="profile.php">My Account</a></li>
@@ -243,30 +234,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 					?>			
 						<div class="single-catalogue-img" id= "img-container" style = "width: 1200px">
 							<img src="admin/<?php echo $result['images']; ?>" alt="" />
+							
 							<h2><?php echo $result['fishName']; ?> </h2>
-  						<div class="left-images">
+  						
+							<div class="image-row">
+						<div class="images">
 						
 						
 							<img src="images/family.png" alt="Image 1">
 							<p><?php echo $result['family']; ?></p>
-							
+						</div>
+						<div class="images">		
   							<img src="images/care.png" alt="Image 2">
 							  <p><?php echo $result['care']; ?></p>
-						
+						</div>
+						<div class="images">	
   							<img src="images/lifespan.png" alt="Image 3">
 							  <p><?php echo $result['life']; ?></p>
-							  
+					  
 						</div>	
-						<div class="right-images">
+						<div class="images">
 							<img src="images/diet.png" alt="Image 4">
 							<p><?php echo $result['diet']; ?></p>
+						</div>
+						<div class="images">	
   							<img src="images/breed.png" alt="Image 5">
 							<p><?php echo $result['breed']; ?></p>
+						</div>
+						<div class="images">
   							<img src="images/tank.png" alt="Image 6">
 							  <p><?php echo $result['tank']; ?></p>
 						</div>
-						
-					<p><h3>Product Description:</h3><?php echo $result['Description']; ?></p>
+						</div>
+					<p><h3>Fish Description:</h3><?php echo $result['Description']; ?></p>
 						</div>
 					</div>
 					

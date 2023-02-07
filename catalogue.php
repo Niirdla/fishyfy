@@ -154,7 +154,7 @@
 	</div>
 	<!-- end breadcrumb section -->
 
-	<!-- blog -->
+	<!-- catalogue -->
 	<div class="product-section mt-150 mb-150">
 		<div class="container">
 
@@ -173,8 +173,8 @@
 	      
 	      			
 	      		?>	
-            <div class="product-card">
-                <div class="product-image">
+            <div class="catalogue-card">
+                <div class="catalogue-image">
 
                     <a href="catalogueInfo.php?proid=<?php echo $result['id']; ?>"><img class="product-thumb" src="admin/<?php echo $result['images']; ?>" alt="" /></a>
 					
@@ -202,10 +202,10 @@
 	      			
 	      
 	      	?>
-            <div class="product-card">
-                <div class="product-image">
+            <div class="catalogue-card">
+                <div class="catalogue-image">
 
-                    <a href="catalogueInfo.php?proid=<?php echo $result['id']; ?>"><img class="product-thumb" src="admin/<?php echo $result['images']; ?>" alt="" /></a>
+                    <a href="catalogueInfo.php?proid=<?php echo $result['id']; ?>"><img class="catalogue-thumb" src="admin/<?php echo $result['images']; ?>" alt="" /></a>
 
                 </div>
                 <div class="product-info">
@@ -221,7 +221,7 @@
 			
 		</div>
 	</div>
-	<!-- end blog -->
+	<!-- end catalogue -->
 
 	<!-- logo carousel -->
 	<div class="logo-carousel-section">

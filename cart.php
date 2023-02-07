@@ -8,6 +8,14 @@ if (isset($_GET['delpro'])) {
 
  ?>
 
+ 
+<?php 
+$login = Session::get("cuslogin");
+if ($login == false) {
+    header("Location:login.php");
+}
+ ?>
+
 <?php 
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -278,7 +286,7 @@ if (!isset($_GET['id'])) {
 							<tbody>
 								<tr class="total-data">
 									<td><strong>Subtotal: </strong></td>
-									<td>₱ <?php echo $sum; ?></td>
+									<td >₱ <?php echo $sum; ?></td>
 								</tr>
 								<tr class="total-data">
 									<td><strong>VAT :Shipping: </strong></td>
@@ -298,8 +306,9 @@ if (!isset($_GET['id'])) {
 						</table>
 
 						<?php }else{
-						header("Location:index.php");
-						//echo "Cart Empty ! Please Shop Now...";
+						
+						echo "Cart Empty ! Please Shop Now...";
+						
 					} ?>
 
 						<div class="cart-buttons">	

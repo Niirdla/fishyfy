@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                
                 <tr>
                     <td>
-                        <label>Fish Name</label>
+                        <label>Fish Name<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="fishName" value="<?php echo $value['fishName'];?>" class="medium" />
@@ -81,13 +81,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                         <input type="file" name="images" />
                     </td>
                 </tr>
+				
 
                 <tr>
                     <td style="vertical-align: top; padding-top: 9px;">
-                        <label>Description</label>
+                        <label>Description<span style="color: red;"> *</span></label>
                     </td>
                     <td>
-                        <textarea class="tinymce" name="bot_reply">
+                        <textarea style = "width: 449px; height: 227px;" class="tinymce" name="Description">
                             
                             <?php echo $value['Description'];?>
 
@@ -97,16 +98,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 				
                 <tr>
                     <td>
-                        <label>Family</label>
+                        <label>Family<span style="color: red;"> *</span></label>
                     </td>
                     <td>
-                        <input type="text" name="Family" value="<?php echo $value['Family'];?>" class="medium" />
+                        <input type="text" name="family" value="<?php echo $value['family'];?>" class="medium" />
                     </td>
                 </tr>
 
                 <tr>
                     <td>
-                        <label>Diet</label>
+                        <label>Diet<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="diet" value="<?php echo $value['diet'];?>" class="medium" />
@@ -115,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                 <tr>
                     <td>
-                        <label>Care</label>
+                        <label>Care<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="care" value="<?php echo $value['care'];?>" class="medium" />
@@ -123,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Breed</label>
+                        <label>Breed<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="breed" value="<?php echo $value['breed'];?>" class="medium" />
@@ -131,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Life</label>
+                        <label>Life<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="life" value="<?php echo $value['life'];?>" class="medium" />
@@ -139,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Tank</label>
+                        <label>Tank<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="tank" value="<?php echo $value['tank'];?>" class="medium" />
@@ -148,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
 				<tr>
                     <td>
-                        <label>Catalogue Type</label>
+                        <label>Catalogue Type<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <select id="select" name="type">
@@ -179,16 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         <?php } } ?>
         </div>
 
-<!-- Load TinyMCE -->
-<script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        setupTinyMCE();
-        setDatePicker('date-picker');
-        $('input[type="checkbox"]').fancybutton();
-        $('input[type="radio"]').fancybutton();
-    });
-</script>
+
 <!-- Load TinyMCE -->
 <?php include 'inc/footer.php';?>
 <?php include 'includes/scripts.php'; ?>

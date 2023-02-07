@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                
             <tr>
                     <td style="vertical-align: top; padding-top: 9px;">
-                        <label>Keywords/ question</label>
+                        <label>Keywords/ question<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <textarea class="tinymce" name="keywords">
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             
                 <tr>
                     <td style="vertical-align: top; padding-top: 9px;">
-                        <label>Chatbot reply</label>
+                        <label>Chatbot reply<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <textarea class="tinymce" name="bot_reply">

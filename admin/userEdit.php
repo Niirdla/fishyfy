@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                
             <tr>
                     <td>
-                        <label>Name</label>
+                        <label>Name<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="name" placeholder="Enter User Name..." value="<?php echo $value['name'];?>" class="medium" />
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Address</label>
+                        <label>Address<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="address" placeholder="Enter Address..." value="<?php echo $value['address'];?>"class="medium" />
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>City</label>
+                        <label>City<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="city" placeholder="Enter City..." value="<?php echo $value['city'];?>" class="medium" />
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Country</label>
+                        <label>Country<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="country" placeholder="Enter Country..." value="<?php echo $value['country'];?>" class="medium" />
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>ZIP</label>
+                        <label>ZIP<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="zip" placeholder="Enter ZIP..." value="<?php echo $value['zip'];?>" class="medium" />
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Phone</label>
+                        <label>Phone<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="phone" placeholder="Enter Phone..." value="<?php echo $value['phone'];?>"  class="medium" />
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Email</label>
+                        <label>Email<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="email" placeholder="Enter Email..." value="<?php echo $value['email'];?>" class="medium" />
@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Password</label>
+                        <label>Password<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <input type="text" name="pass" placeholder="Enter Password..." value="<?php echo $value['pass'];?>" class="medium" />
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label>Role</label>
+                        <label>Role<span style="color: red;"> *</span></label>
                     </td>
                     <td>
                         <select id="select" name="role">

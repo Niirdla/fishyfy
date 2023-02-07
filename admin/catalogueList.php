@@ -78,7 +78,7 @@ if (isset($_GET['delpro'])) {
 				<tr class="odd gradeX">
 					<td><?php echo $i;?></td>
 					<td><?php echo $result['fishName'] ;?></td>
-					
+					<td><img src="<?php echo $result['images'] ;?>" height="40px" width="60px" ></td>
 					<td><?php echo $fm->textShorten($result['Description'],50) ;?></td>
 
 					<td><?php echo $result['family'] ;?></td>
@@ -87,7 +87,7 @@ if (isset($_GET['delpro'])) {
 					<td><?php echo $result['breed'] ;?></td>
 					<td><?php echo $result['life'] ;?></td>
 					<td><?php echo $result['tank'] ;?></td>
-					<td><img src="<?php echo $result['images'] ;?>" height="40px" width="60px" ></td>
+					
 					<td>
 						<?php 
 						if ($result['type'] == 0) {

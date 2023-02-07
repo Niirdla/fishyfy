@@ -357,7 +357,7 @@ public function catalogueInsert($data,$file){
 		$unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
 		$uploaded_image = "uploads/".$unique_image;
 	
-	if ($fishName == "" || $file_name == "" || $type == ""|| $Description == "" || $family == ""|| $diet == "" || $care == ""|| $breed == "" || $life == ""|| $tank == "" ) {
+	if ($fishName == "" || $file_name == "" || $type == ""|| $description == "" || $family == ""|| $diet == "" || $care == ""|| $breed == "" || $life == ""|| $tank == "" ) {
 		
 		$msg = "<span class='error'>Fields must not be empty !</span>";
 		return $msg;
@@ -371,7 +371,7 @@ public function catalogueInsert($data,$file){
 	}else{
 	
 		 move_uploaded_file($file_temp, $uploaded_image);
-		 $query = "INSERT INTO tbl_catalogue(fishName,images,type,family,diet,care,breed,life,tank,Description) VALUES('$fishName','$uploaded_image','$type','$family','$diet','$care','$breed','$life','$tank','$description') ";
+		 $query = "INSERT INTO tbl_catalogue(fishName,images,family,diet,care,breed,life,tank,Description,type) VALUES('$fishName','$uploaded_image,'$family','$diet','$care','$breed','$life','$tank','$description'','$type') ";
 	
 		 $inserted_row = $this->db->insert($query);
 				if ($inserted_row) {
@@ -420,7 +420,7 @@ public function catalogueInsert($data,$file){
 					$unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
 					$uploaded_image = "uploads/".$unique_image;
 				
-				if ($fishName == "" || $type == ""|| $Description == "" || $family == ""|| $diet == "" || $care == ""|| $breed == "" || $life == ""|| $tank == "") {
+				if ($fishName == "" || $type == ""|| $description == "" || $family == ""|| $diet == "" || $care == ""|| $breed == "" || $life == ""|| $tank == "") {
 					
 					$msg = "<span class='error'>Fields must not be empty !</span>";
 					return $msg;
@@ -449,14 +449,14 @@ public function catalogueInsert($data,$file){
 					 SET
 					 fishName = '$fishName',
 					 images   = '$uploaded_image',
-					 type        = '$type'
-					 Description        = '$Description'
-					 family = '$family'
-					 diet = '$diet'
-					 care = '$care'
-					 breed = '$breed'
-					 life = '$life'
-					 tank = '$tank'
+					 family = '$family',
+					 diet = '$diet',
+					 care = '$care',
+					 breed = '$breed',
+					 life = '$life',
+					 tank = '$tank',
+					 Description  = '$description',
+					 type      = '$type'
 					 WHERE id = '$id'";
 				
 					 $updatedted_row = $this->db->update($query);
@@ -473,23 +473,22 @@ public function catalogueInsert($data,$file){
 					$query = "UPDATE tbl_catalogue 
 					SET
 					fishName = '$fishName',
-					images   = '$uploaded_image',
-					type        = '$type'
-					Description        = '$Description'
-					family = '$family'
-					 diet = '$diet'
-					 care = '$care'
-					 breed = '$breed'
-					 life = '$life'
-					 tank = '$tank'
-					WHERE id = '$id'";
+					 family = '$family',
+					 diet = '$diet',
+					 care = '$care',
+					 breed = '$breed',
+					 life = '$life',
+					 tank = '$tank',
+					 Description  = '$description',
+					 type      = '$type'
+					 WHERE id = '$id'";
 				
 					 $updatedted_row = $this->db->update($query);
 							if ($updatedted_row) {
-								$msg = "<span class='success'>Product Updated Successfully.</span>";
+								$msg = "<span class='success'>Catalogue Updated Successfully.</span>";
 								return $msg;
 							} else{
-								$msg = "<span class='error'>Product Not Updated.</span>";
+								$msg = "<span class='error'>Catalogue Not Updated.</span>";
 								return $msg;
 						}
 				}
