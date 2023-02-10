@@ -160,7 +160,7 @@ $search = $search;
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>Fresh and Organic</p>
+	
 						<h1>Shop</h1>
 					</div>
 				</div>
@@ -168,9 +168,17 @@ $search = $search;
 		</div>
 	</div>
 	<!-- end breadcrumb section -->
+	<div class="search_box">
+				    <form action="search.php" method="get">
+				    	<input type="text" value="Search for Products" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for Products';}">
+				    	<input type="submit" name="submit" value="SEARCH">
+				    </form>
+			    </div>
 
 	<div class="product-section mt-150 mb-150">
 		<div class="container">
+	
+			<div class="row product-lists">
 
 <?php 
 
@@ -186,12 +194,27 @@ $search = $search;
 
 	 ?>
 
-				<div class="col-lg-4 col-md-6 text-center strawberry">
-					 <a href="single-product.php?proid=<?php echo $result['productId']; ?>"><img src="admin/<?php echo $result['image']; ?>" alt="" /></a>
-					 <p><?php echo $result['productName']; ?></p>
-					 <p><?php echo $fm->textShorten($result['body'],60); ?></p>
-					 <p><span class="price">₱<?php echo $result['price']; ?></span></p>
-				      <div class="button"><span><a href="single-product.php?proid=<?php echo $result['productId']; ?>" class="fas fa-shopping-cart">Details</a></span></div>
+<div class="col-lg-4 col-md-6 text-center strawberry">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="single-product.php?proid=<?php echo $result['productId']; ?>"><img src="admin/<?php echo $result['image']; ?>" alt="" /></a>
+						</div>
+						<p style = " font-size: 1.4rem"><strong><?php echo $fm->textShorten($result['productName'],25); ?></strong></p>
+						<p><span class="product-price">₱<?php echo $result['price']; ?></span></p>
+						<p><span class="stockss">Stocks: </span></p>
+							<?php
+								if($result['stocks'] <= 0){
+									
+									echo '<style>.stockss {display: none;}</style>';
+									echo '<p style = "color: red; font-size: 1rem"><strong>Not available</strong> </p>';
+								}elseif($result['stocks'] >= 0){
+									
+									echo '<style>.stockss {display: inline;}</style>';
+									echo '<p style = "color: green; font-size: 1rem"><strong>Available</strong> </p>';
+								}
+								?>
+						<div class="cart-btn"><span><a href="single-product.php?proid=<?php echo $result['productId']; ?>" class="fas fa-shopping-cart">Details</a></span></div>
+					</div>
 				</div>
 				<?php } } else { ?>
 
@@ -201,6 +224,8 @@ $search = $search;
 				
 				
 			</div>
+				</div>
+				</div>
 
 
 <!-- logo carousel -->

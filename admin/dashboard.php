@@ -47,7 +47,7 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
             <div class="inner">
             <?php
                        
-                       $sql="SELECT * from tbl_product";
+                       $sql="SELECT * from tbl_order";
                        $result=$con-> query($sql);
                        $count=0;
                        if ($result-> num_rows > 0){
@@ -59,12 +59,12 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
                        echo "<h3>" .$count; "</h3>"
                    ?>
           
-              <p>Number of Products</p>
+              <p>Number of Orders</p>
             </div>
             <div class="icon">
               <i class="fa fa-barcode"></i>
             </div>
-            <a href="productlist.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="inbox.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -90,7 +90,7 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a href="userlist.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="user_reports.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         

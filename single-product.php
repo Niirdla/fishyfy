@@ -10,8 +10,10 @@ if (isset($_GET['proid'])) {
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-    $quantity = $_POST['quantity'];
-    $addCart = $ct->addToCart($quantity,$id,$cmrId);
+	$quantity = $_POST['quantity'];
+	$stocks = $_POST['stocks'];
+	$stocks = intval($stocks) - intval($quantity);
+    $addCart = $ct->addToCart($quantity,$stocks,$id,$cmrId);
 	
 }
 ?>
@@ -34,6 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['wlist'])) {
 	.mybutton{width: 100px;float: left;margin-right: 50px;}
 
 </style>
+
+
 
 <!DOCTYPE php>
 <php lang="en">
@@ -218,22 +222,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['wlist'])) {
 					<div class="single-product-content">
 						<h2><?php echo $result['productName']; ?> </h2>	
 					<div class="single-product-pricing">
+					<?php
+								if($result['stocks'] <= 0){
+									
+									echo '<style>.buysubmit {display: none;}</style>';
+									echo '<style>.buyfield {display: none;}</style>';
+									echo '<p style = "color: red; font-size: 3rem"><strong>Product is not available</strong> </p>';
+								}
+								?>
 
 							<p><strong>Price:</strong> <span>₱<?php echo $result['price']; ?></span></p>
 							<p><strong>Category:</strong> <span><?php echo $result['catName']; ?></span></p>
 							<p><strong>Brand:</strong><span><?php echo $result['brandName']; ?></span></p>
+					
 						</div>
-						<p><h3>Product Description:</h3><?php echo $result['body']; ?></p>
-
+						
 						<div class="single-product-form">
 							<form action="" method= "post">
-								<p><strong>Quantity:<input type="number" class="buyfield" name="quantity" value="1"/></strong></p>
+								<p class><strong>Number of stocks:</strong><span><input class = "buyfield"type = "number" style ="display:none;" name="stocks" value = "<?php echo $result['stocks']; ?>"/> <?php echo $result['stocks']; ?></span></p>
+								
+								<p><strong>Quantity:<input type="number"  class="buyfield" max = <?php echo $result['stocks']; ?> min =1 name="quantity" value="1"/></strong></p>
 								<input type="submit" class="buysubmit" name="submit" value="Add to cart"/>
 							</form>
 							
 						</div>
+						<p><h3>Product Description:</h3><?php echo $result['body']; ?></p>
 
-
+					
+						
 						<span style="color: red;font-size: 18px;">
 					<?php 
 

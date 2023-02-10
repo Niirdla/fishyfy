@@ -17,7 +17,7 @@ $con = mysqli_connect("localhost","root","","db_shop");
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Order Reports
+        Item Reports
       </h1>
       <ol class="breadcrumb">
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -41,16 +41,24 @@ $con = mysqli_connect("localhost","root","","db_shop");
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>From Date</label>
-                                        <input type="date" name="from_date" value="<?php if(isset($_GET['from_date'])){ echo $_GET['from_date']; } ?>" class="form-control">
+                                        
+                                    <label>Role</label>
+                                        <select name="product">
+  <?php
+    $selected = $_GET["product"];
+    $options = array("All","stock<50");
+    foreach ($options as $option) {
+      if ($option == $selected) {
+        echo "<option selected='selected' value='$option'>$option</option>";
+      } else {
+        echo "<option value='$option'>$option</option>";
+      }
+    }
+  ?>
+</select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>To Date</label>
-                                        <input type="date" name="to_date" value="<?php if(isset($_GET['to_date'])){ echo $_GET['to_date']; } ?>" class="form-control">
-                                    </div>
-                                </div>
+                              
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Click to Filter</label> <br>
@@ -65,28 +73,8 @@ $con = mysqli_connect("localhost","root","","db_shop");
                 <span id="printout">
 
                 <div class="col-md-12" >
-	              <div class="page-header" style="text-align:center;" ><h1>Order Reports</h1>
-                  <?php 
-                  $from_date = $_GET['from_date'];
-                  $to_date = $_GET['to_date'];
-
-                  $from_date_month = date("F", strtotime($from_date));
-                  $from_date_day = date("d", strtotime($from_date));
-                  $from_date_year = date("Y", strtotime($from_date));
-
-                  $from_date_result = "$from_date_month $from_date_day, $from_date_year";
-
-                  $to_date_month = date("F", strtotime($to_date));
-                  $to_date_day = date("d", strtotime($to_date));
-                  $to_date_year = date("Y", strtotime($to_date));
-
-                  $to_date_result = "$to_date_month $to_date_day, $to_date_year";
-
-                  error_reporting(0);
-                  ?>
-
-             
-		            <div class ="from-to">Inclusive Dates: From : <?php  echo isset($_GET['from_date']) ? $_GET['from_date'] :'';?> - To : <?php echo isset($_GET['to_date']) ?$_GET['to_date'] : '';?> </div>
+	              <div class="page-header" style="text-align:center;" ><h1>Item Reports</h1>
+                 
 	              </div>
 
                 <div class="card mt-4">
@@ -95,12 +83,10 @@ $con = mysqli_connect("localhost","root","","db_shop");
                             <thead>
                                 <tr>
                                                 <th style="text-align: center; color:white;">ID</th>
-                                                <th style="text-align: center; color:white;">Order date</th>
-							                    <th style="text-align: center; color:white;">Customer Id</th>
-                                                <th style="text-align: center; color:white;">Customer name</th>
-							                    <th style="text-align: center; color:white;">Product Name</th>
-							                    <th style="text-align: center; color:white;">Quantity</th>
+                                                <th style="text-align: center; color:white;">Product Name</th>
 							                    <th style="text-align: center; color:white;">Price</th>
+                                                <th style="text-align: center; color:white;">Stocks</th>
+							                 
 							                    
                                 </tr>
                             </thead>
@@ -109,35 +95,62 @@ $con = mysqli_connect("localhost","root","","db_shop");
                             <?php 
                                 
 
-                                if(isset($_GET['from_date']) && isset($_GET['to_date']))
+                                if(isset($_GET['product']))
                                 {
-                                    $from_date = $_GET['from_date'];
-                                    $to_date = $_GET['to_date'];
+                                    $product = $_GET['product'];
 
-                                    $query = "SELECT tbl_customer.name,tbl_order.* from tbl_customer, tbl_order where tbl_customer.id = tbl_order.cmrId AND date BETWEEN '$from_date' AND '$to_date' ";
+                                    $query = "SELECT tbl_product.* FROM tbl_product where productId";
                                     $query_run = mysqli_query($con, $query);
 
-                                    if(mysqli_num_rows($query_run) > 0)
+                                    $query2 = "SELECT tbl_product.* FROM tbl_product where productId AND stocks < 50";
+                                    $query_run2 = mysqli_query($con, $query2);
+
+                                
+
+                                    if($product == "stock<50" && mysqli_num_rows($query_run2)  > 0)
+                                    {
+                                     
+
+                                 
+                                        foreach($query_run2 as $row)
+                                        {
+                                       
+                                            ?>
+                                            
+                                            <tr>
+                                                <td><?= $row['productId']; ?></td>
+                                                <td><?= $row['productName']; ?></td>
+                                                <td><?= $row['price'];?></td>
+                                                <td><?= $row['stocks']; ?></td>
+                                         
+                                                
+                                            </tr>
+                                            <?php
+                                         
+                                        }
+                                    }
+                                   
+                                    else
+                                    {
+                                        echo "No Record Found";
+                                    }
+
+                                    if($product == "All" && mysqli_num_rows($query_run) > 0)
                                     {
                                      
 
                                  
                                         foreach($query_run as $row)
                                         {
-                                            $date = $row['date'];
-                                            $month = date("F", strtotime($date));
-                                            $day = date("d", strtotime($date));
-                                            $year = date("Y", strtotime($date));
+                                         
                                             ?>
                                             
                                             <tr>
-                                                <td><?= $row['id']; ?></td>
-                                                <td><?= "$month $day, $year"; ?></td>
-                                                <td><?= $row['cmrId']; ?></td>
-                                                <td><?= $row['name'];?></td>
+                                                <td><?= $row['productId']; ?></td>
                                                 <td><?= $row['productName']; ?></td>
-                                                <td><?= $row['quantity']; ?></td>
-                                                <td><?= $row['price']; ?></td>
+                                                <td><?= $row['price'];?></td>
+                                                <td><?= $row['stocks']; ?></td>
+                                         
                                                 
                                             </tr>
                                             <?php
@@ -148,11 +161,7 @@ $con = mysqli_connect("localhost","root","","db_shop");
                                     {
                                         echo "No Record Found";
                                     }
-                                     $results = mysqli_query($con, "SELECT sum(price) FROM tbl_order where id AND date BETWEEN '$from_date' AND '$to_date' ") or die(mysqli_error());
-                                    while($rows = mysqli_fetch_array($results)){?>
-                                    <?php echo "<h2>Total Sales between this date = ₱".number_format_short($rows['sum(price)'],2). "</h2>" ?>
-                          <?php
-                                    }
+                                    
                                 }
                             ?>
                             </tbody>
@@ -163,7 +172,7 @@ $con = mysqli_connect("localhost","root","","db_shop");
     width: 30%;
     right: 5px;
     margin-top: 60px;">
-                       <p style = "text-align: center;"> <?php echo Session::get('adminName'); ?> </p>
+                       <p style = "text-align: center;"> <?php echo Session::get('databaseAdminName'); ?> </p>
                        <p style = "text-align: center;"> Prepared by </p>
                             </div>
 

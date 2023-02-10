@@ -1,59 +1,22 @@
 <?php include 'inc/header_3.php';?>
 
+
 <?php 
-$login = Session::get("cuslogin");
-if ($login == false) {
-    header("Location:login.php");
-}
- ?>
-
- <?php 
-if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
-
-	
- $cmrId = Session::get("cmrId");
- $insertOrder = $ct->orderProduct($cmrId);
- $delData = $ct->delCustomerCart();
- header("Location:orderdetails.php");
-
- $con = mysqli_connect("localhost","root","","db_shop");
- $sql = "SELECT tbl_customer.*,tbl_order.* from tbl_customer, tbl_order where tbl_customer.id = tbl_order.cmrId ORDER BY tbl_order.id DESC LIMIT 1";
- $result = mysqli_query($con, $sql);
- if (mysqli_num_rows($result) > 0) {
-	 $row = mysqli_fetch_assoc($result);
-	 $to = $row['email'];
-    $subject = "Order Details";
-
-	$message = "Order ID: " . $row['id'] . "\n" .
-					"Order Date: " . $row['date'] . "\n" .
-
-                         "Customer Name: " . $row['name'] . "\n" .
-                         "Email: " . $row['email'] . "\n" .
-                         "Item: " . $row['productName'] . "\n" .
-                         "Quantity: " . $row['quantity'] . "\n" .
-                         "Total Cost: ₱" . $row['price'] . "\n";
-
-
-  $headers = "From: amberspirit16@gmail.com";
-   
-
-  if (mail($to, $subject, $message, $headers)) {
-	echo "<script>
-	alert('Check Your Email Inbox for the details');		
-</script>";
-   
-  } else {
-    echo "Failed to send email. Please try again later.";
-  }
+$search = mysqli_real_escape_string($db->link,$_GET['search']);
+if (!isset($search) || $search == NULL) {
+	header("Location:404.php");
 } else {
-	echo "No recent order found.";
+
+$search = $search;
+
 }
-}
-  ?>
 
 
-<!DOCTYPE php>
-<php lang="en">
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -61,7 +24,7 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
 	<!-- title -->
-	<title>Check Out</title>
+	<title>Shop</title>
 
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
@@ -85,15 +48,12 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
-	<script src = "https://www.paypal.com/sdk/js?client-id=AcTYM_vIcI8ruRN3yyXlp2PO02Ke58qj8xxBP_LGjimI9W9TMeVdtve_LMzRyDb86lLDY11tpbTUNXRE"></script>
+
 
 </head>
 <body>
-	
-
-	
-		<!-- header -->
-<div class="top-header-area" id="sticker">
+	<!-- header -->
+	<div class="top-header-area" id="sticker">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 col-sm-12 text-center">
@@ -171,8 +131,9 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 		</div>
 	</div>
 	<!-- end header -->		   
-<!-- search area -->
-<div class="search-area">
+
+	<!-- search area -->
+	<div class="search-area">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -180,8 +141,8 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 					<div class="search-bar">
 						<div class="search-bar-tablecell">
 						<h3>Search For:</h3>
-						<form action="search.php" method="get">
-				    		<input type="text" value="Search for Products" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for products';}">
+						<form action="search_catalogue.php" method="get">
+				    		<input type="text" value="Search Fishes" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search Fishes';}">
 							<button type="submit" name="submit" value="SEARCH">Search <i class="fas fa-search"></i></button>
 				    	</form>
 
@@ -192,7 +153,6 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 		</div>
 	</div>
 	<!-- end search arewa -->
-
 	
 	<!-- breadcrumb-section -->
 	<div class="breadcrumb-section breadcrumb-bg">
@@ -200,205 +160,62 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>Fresh and Organic</p>
-						<h1>Check Out Product</h1>
+						<h1>Catalogue</h1>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- end breadcrumb section -->
+	<div class="search_box">
+				    <form action="search_catalogue.php" method="get">
+				    	<input type="text" value="Search Fishes" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search Fishes';}">
+				    	<input type="submit" name="submit" value="SEARCH">
+				    </form>
+			    </div>
 
-	<!-- check out section -->
-	<div class="checkout-section mt-150 mb-150">
+	<div class="product-section mt-150 mb-150">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-8">
-					<div class="checkout-accordion-wrap">
-						<div class="accordion" id="accordionExample">
-						  <div class="card single-accordion">
-						    <div class="card-header" id="headingOne">
-						      <h5 class="mb-0">
-						        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-						          Billing Address
-						        </button>
-						      </h5>
-						    </div>
+	
+			<div class="row product-lists">
 
-						    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-						      <div class="card-body">
-						        <div class="billing-address-form">
-								<?php 
-									$id = Session::get("cmrId");
-									$getdata = $cmr->getCustomerData($id);
-									if ($getdata) {
-										while ($result = $getdata->fetch_assoc()) {
-									
+<?php 
 
-									?>
-										<table class="tblone">
-											<tr>
-												<td colspan="3"><h2>Your Profile Details</h2></td>
-											</tr>
-											<tr>
-												<td width="20%">Name</td>
-												<td width="5%">:</td>
-												<td><?php echo $result['name'];?></td>
-											</tr>
-											<tr>
-												<td>Phone</td>
-												<td>:</td>
-												<td><?php echo $result['phone'];?></td>
-											</tr>
-											<tr>
-												<td>Email</td>
-												<td>:</td>
-												<td><?php echo $result['email'];?></td>
-											</tr>
-											<tr>
-												<td>Address</td>
-												<td>:</td>
-												<td><?php echo $result['address'];?></td>
-											</tr>
-											<tr>
-												<td>City</td>
-												<td>:</td>
-												<td><?php echo $result['city'];?></td>
-											</tr>
-											<tr>
-												<td>Zipcode</td>
-												<td>:</td>
-												<td><?php echo $result['zip'];?></td>
-											</tr>
-											<tr>
-												<td>Country</td>
-												<td>:</td>
-												<td><?php echo $result['country'];?></td>
-											</tr>
+	$query = "select * from tbl_catalogue where fishName like '%$search%' or Description like '%$search%' ORDER BY id DESC LIMIT 30";
 
-											<tr>
-												<td></td>
-												<td></td>
-												<td><a href="edit_profile_payment.php">Update Details</a></td>
-											</tr>
+	$post = $db->select($query);
 
-										</table>
-									<?php }} ?>
-						        </div>
-						      </div>
-						    </div>
-						  </div>
-						  
-						  <div class="card single-accordion">
-						    <div class="card-header" id="headingThree">
-						      <h5 class="mb-0">
-						        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-						          Card Details
-						        </button>
-						      </h5>
-						    </div>
-						    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-						      <div class="card-body">
-						        <div class="card-details">
-
-						        	<div id = "paypal-button-container"> </div>
-
-									<script>
-
-										paypal.Buttons().render('#paypal-button-container');
-
-									</script>
-						        </div>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="col-lg-4">
-					<div class="order-details-wrap">
-						<table class="order-details">
-							
-							<thead>
-								<tr>
-									<th>Your order Details</th>
-									<th>Price</th>
-									<th>Quantity</th>
-								</tr>
-							</thead>
-							<tbody class="order-details-body">
-								<tr>
-									<td>Product</td>
-									<td>Total</td>
-									<td> </td>
-								</tr>
-
-								<tr>
-									<?php 
-
-										$getPro = $ct->getCartProduct();
-										if ($getPro) {
-											$i = 0;
-											$sum = 0;
-											$qty = 0;
-											while ($result = $getPro->fetch_assoc()) {
-											
-											$i++;
-
-										?>
-											<td><?php echo $result['productName']; ?></td>
-											<td>₱ <?php echo $result['price']; ?></td>
-											<td><?php echo $result['quantity']; ?></td>
-											
-										</tr>
-										
-										<?php
-												$total = $result['price'] * $result['quantity'];
-												?>
-										<?php 
-										$qty = $qty + $result['quantity'];
-										$sum = $sum + $total;
-										?>
-
-
-									<?php } } ?>    
-								</tr>
-							</tbody>
-							<tbody class="checkout-details">
-								<tr>
-									<td>Subtotal</td>
-									<td>₱ <?php echo $sum; ?></td>
-								</tr>
-								<tr>
-									<td>VAT: Shipping</td>
-									<td>10%(₱<?php echo $vat = $sum * 0.1; ?>)</td>
-								</tr>
-								<tr>
-									<td>Total</td>
-									<td>₱ 
-                                    <?php 
-                                    $vat = $sum * 0.1;
-                                    $gtotal = $sum + $vat;
-                                    echo $gtotal;
-                                     ?>
-                                	</td>
-								</tr>
-							</tbody>
-						</table>
-					
-						<a href="?orderid=Order" class="boxed-btn">Place Order</a>
+	if ($post) {
 		
+	while ($result = $post->fetch_assoc()) {
+		
+	
+
+	 ?>
+
+<div class="col-lg-4 col-md-6 text-center strawberry">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="catalogueInfo.php?proid=<?php echo $result['id']; ?>"><img src="admin/<?php echo $result['images']; ?>" alt="" /></a>
+						</div>
+						<p class="product-brand"><strong><?php echo $result['fishName']; ?></strong></p>
+				<a href="catalogueInfo.php?proid=<?php echo $result['id']; ?>" class="boxed-btn">Details</a>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end check out section -->
+				<?php } } else { ?>
 
-	<!-- logo carousel -->
-	<div class="logo-carousel-section">
+					<p style="color: red;font-size: 35px;font-weight: bold;text-align: center;">Your Seaech Query not found !!.</p>
+				<?php } ?>
+				
+				
+				
+			</div>
+				</div>
+				</div>
+
+
+<!-- logo carousel -->
+<div class="logo-carousel-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -449,11 +266,11 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 					<div class="footer-box pages">
 						<h2 class="widget-title">Pages</h2>
 						<ul>
-							<li><a href="index.php">Home</a></li>
-							<li><a href="about.php">About</a></li>
-							<li><a href="services.php">Shop</a></li>
-							<li><a href="news.php">News</a></li>
-							<li><a href="contact.php">Contact</a></li>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="services.html">Shop</a></li>
+							<li><a href="news.html">News</a></li>
+							<li><a href="contact.html">Contact</a></li>
 						</ul>
 					</div>
 				</div>
@@ -461,7 +278,7 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 					<div class="footer-box subscribe">
 						<h2 class="widget-title">Subscribe</h2>
 						<p>Subscribe to our mailing list to get the latest updates.</p>
-						<form action="index.php">
+						<form action="index.html">
 							<input type="email" placeholder="Email">
 							<button type="submit"><i class="fas fa-paper-plane"></i></button>
 						</form>
@@ -517,5 +334,5 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 	<script src="assets/js/main.js"></script>
 
 </body>
-</php>
+</html>
 

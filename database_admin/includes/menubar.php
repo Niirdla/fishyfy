@@ -17,7 +17,7 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="#"><i class="fa fa-circle-o"></i> Inventory reports</a></li>
+          <li><a href="item_reports.php"><i class="fa fa-circle-o"></i> Item reports</a></li>
         </ul>
       </li>
 

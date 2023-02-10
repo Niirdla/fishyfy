@@ -60,7 +60,7 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
                        echo "<h3>" .$count; "</h3>"
                    ?>
           
-              <p>Number of Products</p>
+              <p>Number of Items/Products</p>
             </div>
             <div class="icon">
               <i class="fa fa-barcode"></i>
@@ -74,24 +74,26 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
           <div class="small-box bg-yellow">
             <div class="inner">
               <?php
-                        $sql="SELECT * from tbl_customer";
+                        $sql="SELECT * from tbl_product where productId";
                         $result=$con-> query($sql);
                         $count=0;
                         if ($result-> num_rows > 0){
+                      
                             while ($row=$result-> fetch_assoc()) {
-                    
+                              if($row['stocks'] <= 50){
                                 $count=$count+1;
                             }
+                          }
                         }
                         echo "<h3>" .$count; "</h3>"
                     ?>
              
-              <p>Number of Users</p>
+              <p>Items with 50 stocks below</p>
             </div>
             <div class="icon">
-              <i class="fa fa-users"></i>
+              <i class="fa fa-barcode"></i>
             </div>
-            <a href="userlist.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="item_reports.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         
@@ -102,19 +104,24 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
           <div class="small-box bg-aqua">
             <div class="inner">
             <?php
-          $results = mysqli_query($con, "SELECT sum(price) FROM tbl_order WHERE DATE(date) = DATE(NOW())") or die(mysqli_error());
-          while($rows = mysqli_fetch_array($results)){?>
-          <?php echo "<h3> ₱".number_format_short($rows['sum(price)'],2). "</h3>" ?>
-<?php
-          }
-        
-          ?>
-              <p>Todays Sales</p>
+                       
+                       $sql="SELECT * from tbl_category";
+                       $result=$con-> query($sql);
+                       $count=0;
+                       if ($result-> num_rows > 0){
+                           while ($row=$result-> fetch_assoc()) {
+                   
+                               $count=$count+1;
+                           }
+                       }
+                       echo "<h3>" .$count; "</h3>"
+                   ?>
+              <p>Number of Categories</p>
             </div>
             <div class="icon">
-              <i class="fa fa-shopping-cart"></i>
+              <i class="fa fa-barcode"></i>
             </div>
-            <a href="order_reports.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="catlist.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 
@@ -124,87 +131,29 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
           <div class="small-box bg-red">
             <div class="inner">
             <?php
-          $results = mysqli_query($con, "SELECT sum(price) FROM tbl_order") or die(mysqli_error());
-          while($rows = mysqli_fetch_array($results)){?>
-          <?php echo "<h3> ₱".number_format_short($rows['sum(price)'],2). "</h3>" ?>
-<?php
-          }
-          ?>
+                       
+                       $sql="SELECT * from tbl_brand";
+                       $result=$con-> query($sql);
+                       $count=0;
+                       if ($result-> num_rows > 0){
+                           while ($row=$result-> fetch_assoc()) {
+                   
+                               $count=$count+1;
+                           }
+                       }
+                       echo "<h3>" .$count; "</h3>"
+                   ?>
 
-              <p>Total Sales</p>
+              <p>Number of Brands</p>
             </div>
             <div class="icon">
-              <i class="fa fa-money"></i>
+            <i class="fa fa-barcode"></i>
             </div>
-            <a href="order_reports.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="brandlist.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
       </div>
-      <?php 
-  $query = mysqli_query($con, "SELECT MONTHNAME(date) as monthname, sum(price) as amount FROM tbl_order GROUP BY monthname") or die(mysqli_error());
-  
-  foreach($query as $data)
-  {
-    $month[] = $data['monthname'];
-    $amount[] = $data['amount'];
-  }
-
-?>
-<div style="width: 1200px;">
-  <canvas id="myChart"></canvas>
-</div>
-      </section>
-      <!-- right col -->
-      </div>      
-
-
-        <script>
-  // === include 'setup' then 'config' above ===
-  const labels = <?php echo json_encode($month) ?>;
-  const data = {
-    labels: labels,
-    datasets: [{
-      label: 'Monthly Sales Report',
-      data: <?php echo json_encode($amount) ?>,
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 205, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(201, 203, 207, 0.2)'
-      ],
-      borderColor: [
-        'rgb(255, 99, 132)',
-        'rgb(255, 159, 64)',
-        'rgb(255, 205, 86)',
-        'rgb(75, 192, 192)',
-        'rgb(54, 162, 235)',
-        'rgb(153, 102, 255)',
-        'rgb(201, 203, 207)'
-      ],
-      borderWidth: 1
-    }]
-  };
-
-  const config = {
-    type: 'bar',
-    data: data,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    },
-  };
-
-  var myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
-</script>
+   
 </body>
 </html>
 <?php include 'inc/footer.php';?>

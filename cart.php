@@ -1,9 +1,19 @@
 <?php include 'inc/header_3.php';?>
 
 <?php 
-if (isset($_GET['delpro'])) {
-	$delId = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['delpro']);
-	$delProduct = $ct->delProductByCart($delId);
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+	$cartId = $_POST['cartId'];
+	$quantity = $_POST['quantity'];
+
+		$updateCart = $ct->updateCartQuantity($cartId,$quantity);
+
+    if ($quantity <=0) {
+    	$delProduct = $ct->delProductByCart($cartId);
+    }
+	
 }
 
  ?>
@@ -17,17 +27,9 @@ if ($login == false) {
  ?>
 
 <?php 
-
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $cartId = $_POST['cartId'];
-    $quantity = $_POST['quantity'];
-    $updateCart = $ct->updateCartQuantity($cartId,$quantity);
-	
-		
-
-    if ($quantity <=0) {
-    	$delProduct = $ct->delProductByCart($cartId);
-    }
+if (isset($_GET['delpro'])) {
+	$delId = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['delpro']);
+	$delProduct = $ct->delProductByCart($delId,$quantity);
 }
  ?>
  <?php  
@@ -192,6 +194,7 @@ if (!isset($_GET['id'])) {
 	<!-- end breadcrumb section -->
 
 	<!-- cart -->
+	
 	<div class="cart-section mt-150 mb-150">
 		<div class="container">
 			<div class="row">
@@ -240,8 +243,9 @@ if (!isset($_GET['id'])) {
 										<td class="product-price">₱ <?php echo $result['price']; ?></td>
 										<td class="product-quantity">
 											<form action="" method="post">
+													<input class = "buyfield"type = "number" style ="display:none;" name="stocks" value = "<?php echo $result['stocks']; ?>"/> 
 													<input type="hidden" name="cartId" value="<?php echo $result['cartId']; ?>" />
-													<input type="number" name="quantity" value="<?php echo $result['quantity']; ?>" onchange="this.form.submit()"/>	
+													<input type="number" name="quantity" max = <?php echo $result['stocks']; ?> min =1 value="<?php echo $result['quantity']; ?>" onchange="this.form.submit()"/>	
 													
 											</form>
 										</td>
@@ -261,7 +265,7 @@ if (!isset($_GET['id'])) {
 
 
 										<?php } } ?>	
-
+									
 									</tr>
 		
 								</tbody>

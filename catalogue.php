@@ -126,8 +126,8 @@
 					<div class="search-bar">
 						<div class="search-bar-tablecell">
 						<h3>Search For:</h3>
-						<form action="search.php" method="get">
-				    		<input type="text" value="Search for Products" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for products';}">
+						<form action="search_catalogue.php" method="get">
+				    		<input type="text" value="Search for Fish" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for Fish';}">
 							<button type="submit" name="submit" value="SEARCH">Search <i class="fas fa-search"></i></button>
 				    	</form>
 
@@ -153,9 +153,15 @@
 		</div>
 	</div>
 	<!-- end breadcrumb section -->
-
+	<div class="search_box">
+				    <form action="search_catalogue.php" method="get">
+				    	<input type="text" value="Search for Fish" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for Fish';}">
+				    	<input type="submit" name="submit" value="SEARCH">
+				    </form>
+			    </div>
 	<!-- catalogue -->
 	<div class="product-section mt-150 mb-150">
+		
 		<div class="container">
 
 

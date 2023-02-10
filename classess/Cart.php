@@ -19,10 +19,12 @@ private $fm;
 		$this->db = new Database();
 		$this->fm = new Format();
 	}
-public function addToCart($quantity, $id,$cmrId){
+public function addToCart($quantity,$stocks, $id,$cmrId){
 
 	$quantity = $this->fm->validation($quantity);
+	$stocks = $this->fm->validation($stocks);
     $quantity = mysqli_real_escape_string($this->db->link, $quantity);
+	$stocks = mysqli_real_escape_string($this->db->link, $stocks);
     $productId = mysqli_real_escape_string($this->db->link, $id);
 
     $sId  = session_id();
@@ -44,9 +46,10 @@ public function addToCart($quantity, $id,$cmrId){
     	return $msg;
     }else{
 
+	$query = "UPDATE tbl_product SET stocks = '$stocks' WHERE productId = '$productId'";
+		$inserted_row = $this->db->insert($query);
 
-
-    $query = "INSERT INTO tbl_cart(sId,cmrId,productId,productName,price,quantity,image) VALUES('$sId','$cmrId','$productId','$productName','$price','$quantity','$image') ";
+    $query = "INSERT INTO tbl_cart(sId,cmrId,productId,productName,price,quantity,stocks,image) VALUES('$sId','$cmrId','$productId','$productName','$price','$quantity','$stocks','$image') ";
 			$inserted_row = $this->db->insert($query);
 			if ($inserted_row) {
 				header("Location:cart.php");
@@ -71,6 +74,33 @@ public function getCartProduct(){
 		$cartId = mysqli_real_escape_string($this->db->link, $cartId);
 		$quantity = mysqli_real_escape_string($this->db->link, $quantity);
 
+		$query2 ="SELECT * FROM tbl_cart WHERE cartId ='$cartId'";
+		$result = $this->db->select($query2)->fetch_assoc();
+	
+		$stocks = $result['stocks'];
+		$productId = $result['productId'];
+		$quantityFromDatabase = $result['quantity'];
+			if($quantityFromDatabase >$quantity) {
+				$quantityResult = intval($quantityFromDatabase) - intval($quantity);
+				$stocks = intval($stocks) + intval($quantityResult);
+	
+				$queryUpdate = "UPDATE tbl_product SET stocks = '$stocks' WHERE productId = '$productId'";
+				$inserted_row = $this->db->insert($queryUpdate);
+
+				$queryUpdate2 = "UPDATE tbl_cart SET stocks = '$stocks' WHERE productId = '$productId'";
+				$inserted_row = $this->db->insert($queryUpdate2);
+			
+			}elseif($quantityFromDatabase < $quantity ){
+				$quantityResult = intval($quantity) - intval($quantityFromDatabase) ;
+				$stocks = intval($stocks) - intval($quantityResult);
+	
+				$queryUpdate = "UPDATE tbl_product SET stocks = '$stocks' WHERE productId = '$productId'";
+				$inserted_row = $this->db->insert($queryUpdate);
+
+				$queryUpdate2 = "UPDATE tbl_cart SET stocks = '$stocks' WHERE productId = '$productId'";
+				$inserted_row = $this->db->insert($queryUpdate2);
+			}	
+
 	$query = "UPDATE tbl_cart
 
 	SET
@@ -84,12 +114,37 @@ public function getCartProduct(){
 			$msg = "<span class='error'>Quantity Not Updated !</span>";
 				return $msg;
 	}
+
+	
+
+	
+
+		
 	}
 
 
-	public function delProductByCart($delId){
+	public function delProductByCart($delId, $quantity){
 
 	$delId = mysqli_real_escape_string($this->db->link, $delId);
+	$quantity = mysqli_real_escape_string($this->db->link, $quantity);
+
+	$query2 ="SELECT * FROM tbl_cart WHERE cartId ='$delId'";
+	$result = $this->db->select($query2)->fetch_assoc();
+
+	$stocks = $result['stocks'];
+	$productId = $result['productId'];
+	$quantityFromDatabase = $result['quantity'];
+		
+			$quantityResult = intval($quantityFromDatabase) - intval($quantity);
+			$stocks = intval($stocks) + intval($quantityResult);
+
+			$queryUpdate = "UPDATE tbl_product SET stocks = '$stocks' WHERE productId = '$productId'";
+			$inserted_row = $this->db->insert($queryUpdate);
+
+			$queryUpdate2 = "UPDATE tbl_cart SET stocks = '$stocks' WHERE productId = '$productId'";
+			$inserted_row = $this->db->insert($queryUpdate2);
+	
+
 	$query = "DELETE FROM tbl_cart WHERE cartId = '$delId'";
 	$deldata = $this->db->delete($query);
 	if ($deldata) {

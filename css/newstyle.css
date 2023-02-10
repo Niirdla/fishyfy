@@ -53,8 +53,10 @@ body{
 .search_box{
 	float:left;
 	border: 1px solid #DBDBDB;
-	position:relative;
-	width:47%;
+	position:absolute;
+	width:30%;
+	right:50px;
+	margin-top: 60px;
 }
 .search_box input[type="text"]{
 	width:74%;
@@ -76,18 +78,11 @@ body{
 	padding:10px 15px;
 	height: 36px;
 	margin:0;
-	background: -webkit-gradient(linear,left top,left bottom,from(#F58220),to(#F58220));
-	background: -moz-linear-gradient(top,#F58220,#F58220);
-	background: -o-linear-gradient(top,#F58220,#F58220);
-	background: -ms-linear-gradient(top,#F58220,#F58220);
-	-webkit-transition: all .9s;
-	-moz-transition: all .9s;
-	-o-transition: all .9s;
-	-ms-transition: all .9s;
-	transition: all .9s;
-	position:absolute;
+	background: #0a537a;
+	
 	right:0;
 	top:0;
+	margin-top:4px;
 }
 .search_box input[type="submit"]:hover{
 	background:#444;
