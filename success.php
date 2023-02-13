@@ -69,17 +69,6 @@ if ($login == false) {
 									</ul>
 								</li>
 								<li><a href="about.php">About</a></li>
-								<li><a href="#">Pages</a>
-									<ul class="sub-menu">
-										<li><a href="404.php">404 page</a></li>
-										<li><a href="about.php">About</a></li>
-										<li><a href="cart.php">Cart</a></li>
-										<li><a href="payment.php">Check Out</a></li>
-										<li><a href="contacts.php">Contact</a></li>
-										<li><a href="news.php">News</a></li>
-										<li><a href="shop.php">Shop</a></li>
-									</ul>
-								</li>
 								<li><a href="news.php">News</a>
 									<ul class="sub-menu">
 										<li><a href="news.php">News</a></li>
