@@ -62,17 +62,6 @@
 									</ul>
 								</li>
 								<li><a href="about.php">About</a></li>
-								<li><a href="#">Pages</a>
-									<ul class="sub-menu">
-										<li><a href="about.php">About</a></li>
-										<li><a href="cart.php">Cart</a></li>
-										<li><a href="payment.php">Check Out</a></li>
-										<li><a href="contacts.php">Contact</a></li>
-										<li><a href="news.php">News</a></li>
-										<li style = "text-align: center;"><a href="shop.php">Shop</a></li>
-                    
-									</ul>
-								</li>
 								<li><a href="catalogue.php">Catalogue</a>
 									<ul class="sub-menu">
 										<li><a href="news.php">News</a></li>
@@ -170,7 +159,7 @@
 									</div>
 									<div class="content">
 										<h3>Home Delivery</h3>
-										<p>sit voluptatem accusantium dolore mque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</p>
+										<p>We have our own delivery service, which we assure will safely deliver your products to your home.</p>
 									</div>
 								</div>
 							</div>
@@ -181,7 +170,7 @@
 									</div>
 									<div class="content">
 										<h3>Best Price</h3>
-										<p>sit voluptatem accusantium dolore mque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</p>
+										<p>We offer the best prices for our products, especially for feeds as we have partners for pellets and we produce our own live feeds!</p>
 									</div>
 								</div>
 							</div>
@@ -191,8 +180,8 @@
 										<i class="fas fa-briefcase"></i>
 									</div>
 									<div class="content">
-										<h3>Custom Box</h3>
-										<p>sit voluptatem accusantium dolore mque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</p>
+										<h3>Custom Orders</h3>
+										<p>Got special requests? We got you. We will grant all your requests be it special containers for your products or handling for live feed!</p>
 									</div>
 								</div>
 							</div>
@@ -202,8 +191,8 @@
 										<i class="fas fa-sync-alt"></i>
 									</div>
 									<div class="content">
-										<h3>Quick Refund</h3>
-										<p>sit voluptatem accusantium dolore mque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</p>
+										<h3>Shop All You Want</h3>
+										<p>Want more betta products? Now's the chance, grab everything you can, and purchase all you want!</p>
 									</div>
 								</div>
 							</div>
@@ -218,96 +207,13 @@
 	<!-- shop banner -->
 	<section class="shop-banner">
     	<div class="container">
-        	<h3>January sale is on! <br> with big <span class="orange-text">Discounts!</span></h3>
-            <div class="sale-percent"><span>Sale! <br> Up to</span>25% <span>off</span></div>
-            <a href="shop.html" class="cart-btn btn-lg">Shop Now</a>
+        	<p>AAC Aquatics is an exclusive ornamental freshwater fish breeding business located in Sta. Maria Bulacan 
+				who sells a variety of ornamental freshwater fish that can be used competitively. Their live products consist of the following species:
+				goldfish, guppy, molly, and fighting fish. In addition to that, they also sell 
+				fish food or pellets, vitamins, and other fish-related items. <br> <h3><span class="orange-text">Fish now on Fishyfy!</span><h3></p>
         </div>
     </section>
 	<!-- end shop banner -->
-
-	<!-- team section -->
-	<div class="mt-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">
-						<h3>Our <span class="orange-text">Team</span></h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6"> 
-					<div class="single-team-item">
-						<div class="team-bg team-bg-1"></div>
-						<h4>Lorenz Angeles<span>Leader & Developer</span></h4> 
-						<ul class="social-link-team">
-							<li><a href="https://www.facebook.com/lorenzbrad" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-team-item">
-						<div class="team-bg team-bg-2"></div>
-						<h4>Edriane Joelle Agorilla<span>Developer</span></h4>
-						<ul class="social-link-team">
-							<li><a href="https://www.facebook.com/itsejaaayyyy/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-team-item">
-						<div class="team-bg team-bg-3"></div>
-						<h4>Aldrin James Mendoza<span>Developer</span></h4>
-						<ul class="social-link-team">
-							<li><a href="https://www.facebook.com/aldrinjames.mendoza" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-team-item">
-						<div class="team-bg team-bg-4"></div>
-						<h4>Marcus Christopher Roxas<span>Developer</span></h4>
-						<ul class="social-link-team">
-							<li><a href="https://www.facebook.com/Emcee.roxas" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-5">
-					<div class="single-team-item">
-						<div class="team-bg team-bg-5"></div>
-						<h4>Antoine Christopher Marco Lim<span>Tester</span></h4>
-						<ul class="social-link-team">
-							<li><a href="https://www.facebook.com/ACMEL.415" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-6 offset-lg-0">
-					<div class="single-team-item">
-						<div class="team-bg team-bg-6"></div>
-						<h4>Marc Angelo Baguio<span>Tester</span></h4>
-						<ul class="social-link-team">
-							<li><a href="https://www.facebook.com/itsmeeegelooo" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-							
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end team section -->
 
 	<!-- testimonail-section -->
 	<div class="testimonail-section mt-150 mb-150">
@@ -316,13 +222,14 @@
 				<div class="col-lg-10 offset-lg-1 text-center">
 					<div class="testimonial-sliders">
 						<div class="single-testimonial-slider">
-							<div class="client-avater">
-								<img src="assets/img/lorenz.jpg" alt="">
-							</div>
 							<div class="client-meta">
-								<h3>Lorenz Angeles<span>Local Store Owner</span></h3>
+								<h3 style="color:orange">Pojhe's Petshop (Host Building)<span>Store Owner</span></h3>
 								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+									" I wanted to take a moment to share my experience and express my gratitude for the support we have received 
+									from our customers over the past few years. Starting a pet store was always a dream of mine, and in 2020, 
+									I finally had the opportunity to make that dream a reality. With hard work, dedication, and a commitment 
+									to providing the best products and services to our customers, I am proud to say that AAC Aquatics has become 
+									a staple in the local pet community."
 								</p>
 								<div class="last-icon">
 									<i class="fas fa-quote-right"></i>
@@ -330,13 +237,12 @@
 							</div>
 						</div>
 						<div class="single-testimonial-slider">
-							<div class="client-avater">
-								<img src="assets/img/aldrin.jpg" alt="">
-							</div>
 							<div class="client-meta">
-								<h3>Aldrin James Mendoza<span>Local Store Owner</span></h3>
+								<h3 style="color:blue">Arianne Bulingot<span>Store Owner</span></h3>
 								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+									"AAC Aquatics is a small store that was started in 2020. Despite its size, it is packed with a wide selection of high-quality 
+									aquatic products and equipment, ranging from fish to aquariums to maintenance supplies. 
+									The store is well-organized, and the staff, is always eager to help customers find exactly what they need."
 								</p>
 								<div class="last-icon">
 									<i class="fas fa-quote-right"></i>
@@ -344,13 +250,12 @@
 							</div>
 						</div>
 						<div class="single-testimonial-slider">
-							<div class="client-avater">
-								<img src="assets/img/mc.jpg" alt="">
-							</div>
 							<div class="client-meta">
-								<h3>Marcus Christopher Roxas<span>Local Store Owner</span></h3>
+								<h3 style="color:purple">Armel Clemente<span>Store Owner</span></h3>
 								<p class="testimonial-body">
-									" Sed ut perspiciatis unde omnis iste natus error veritatis et  quasi architecto beatae vitae dict eaque ipsa quae ab illo inventore Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
+									"The store offers a wide range of products and services, including grooming, training, and boarding. 
+									The team take the time to get to know each pet and their owners, providing personalized care and attention 
+									to ensure the health and happiness of each animal."
 								</p>
 								<div class="last-icon">
 									<i class="fas fa-quote-right"></i>
@@ -364,6 +269,63 @@
 	</div>
 	<!-- end testimonail-section -->
 
+	<!-- pixxx -section -->
+	<div class="testimonail-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-10 offset-lg-1 text-center">
+					<div class="testimonial-sliders">
+						<div class="single-testimonial-slider">
+							<div class="client-meta">
+								<div class="bg-pic">
+									<img src="assets\img\products\bg1.png" alt="">
+								</div>
+								<h3 style="color:orange">Physical Store<span>Store Picture</span></h3>
+								<div class="last-icon">
+									<i class="fas fa-quote-right"></i>
+								</div>
+							</div>
+						</div>
+						<div class="single-testimonial-slider">
+							<div class="client-meta">
+							<div class="bg-pic">
+									<img src="assets\img\products\bg2.png" alt="">
+								</div>
+								<h3 style="color:blue">Storefront<span>Night Picture</span></h3>
+								<div class="last-icon">
+									<i class="fas fa-quote-right"></i>
+								</div>
+							</div>
+						</div>
+						<div class="single-testimonial-slider">
+							<div class="client-meta">
+							<div class="bg-pic">
+									<img src="assets\img\products\bg3.png" alt="">
+								</div>
+								<h3 style="color:purple">Customers<span>Halloween Picture</span></h3>
+								<div class="last-icon">
+									<i class="fas fa-quote-right"></i>
+								</div>
+							</div>
+						</div>
+						<div class="single-testimonial-slider">
+							<div class="client-meta">
+							<div class="bg-pic">
+									<img src="assets\img\products\bg4.png" alt="">
+								</div>
+								<h3 style="color:purple">Customers<span>Casual Picture</span></h3>
+								<div class="last-icon">
+									<i class="fas fa-quote-right"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end pixxx -section -->
+
 	<!-- logo carousel -->
 	<div class="logo-carousel-section">
 		<div class="container">
@@ -371,19 +333,40 @@
 				<div class="col-lg-12">
 					<div class="logo-carousel-inner">
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets\img\products\1.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets\img\products\2.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets\img\products\3.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets\img\products\4.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets\img\products\5.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets\img\products\6.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets\img\products\7.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets\img\products\8.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets\img\products\9.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets\img\products\10.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets\img\products\11.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets\img\products\12.png" alt="">
 						</div>
 					</div>
 				</div>

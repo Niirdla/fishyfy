@@ -98,17 +98,6 @@ if (!isset($_GET['id'])) {
 									</ul>
 								</li>
 								<li><a href="about.php">About</a></li>
-								<li><a href="#">Pages</a>
-									<ul class="sub-menu">
-										<li><a href="about.php">About</a></li>
-										<li><a href="cart.php">Cart</a></li>
-										<li><a href="payment.php">Check Out</a></li>
-										<li><a href="contacts.php">Contact</a></li>
-										<li><a href="news.php">News</a></li>
-										<li style = "text-align: center;"><a href="shop.php">Shop</a></li>
-                    
-									</ul>
-								</li>
 								<li><a href="catalogue.php">Catalogue</a>
 									<ul class="sub-menu">
 										<li><a href="news.php">News</a></li>
