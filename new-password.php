@@ -12,13 +12,7 @@ $login = Session::get("cuslogin");
  ?>
 
  
-<?php
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change-password'])) {
-    $resetPass = $cmr->resetPassword($_POST);
-}
-
-?>    
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -29,6 +23,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change-password'])) {
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
 </head>
 <div class="cont">
+
+<?php
+function passwordHasNumber($password) {
+    if (preg_match('/[0-9]+/', $password)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change-password'])) {
+    $password = $_POST['pass'];
+    if(strlen ($password) < 8){
+		echo "<p style ='color:red;'>Error: Password must be at least 8 characters long.</p>";
+	}elseif(passwordHasNumber($password) == false){
+		echo "<p style ='color:red;'>Error:Password must contain atleast one number.</p>";
+	}else{
+    $resetPass = $cmr->resetPassword($_POST);
+    }
+}
+
+?>    
         <?php 
 
     		if (isset($resetPass)) {

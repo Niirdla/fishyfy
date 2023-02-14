@@ -48,6 +48,7 @@ h2 {
   width: 100%;
   font-size: 30px;
   text-align: center;
+
 }
 
 label {
@@ -60,7 +61,7 @@ label {
 label span {
   font-size: 14px;
   font-weight: 600;
-  color: #505f75;
+  color: #000000;
   text-transform: uppercase;
 }
 

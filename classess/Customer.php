@@ -32,19 +32,23 @@ $zip = mysqli_real_escape_string($this->db->link, $data['zip']);
 $phone = mysqli_real_escape_string($this->db->link, $data['phone']);
 $email = mysqli_real_escape_string($this->db->link, $data['email']);
 $pass = mysqli_real_escape_string($this->db->link, md5($data['pass']));
+$cpass = mysqli_real_escape_string($this->db->link, md5($data['cpass']));
 
-
-if ($name == "" || $address == "" || $city == "" || $zip == "" || $phone == "" || $email == "" || $pass == "") {
+if ($name == "" || $address == "" || $city == "" || $zip == "" || $phone == "" || $email == "" || $pass == ""|| $cpass == "") {
 	
-	$msg = "<span class='error'>Fields must not be empty !</span>";
+	$msg = "<span class='error'style = 'color:red;'>Fields must not be empty !</span>";
 	return $msg;
 }
 
   $mailquery = "SELECT * FROM tbl_customer WHERE email = '$email' LIMIT 1";
   $mailchk = $this->db->select($mailquery);
   if ($mailchk != false) {
-  	$msg = "<span class='error'>Email already exist !</span>";
+  	$msg = "<span class='error'style = 'color:red;'>Email already exist !</span>";
 	return $msg;
+  }
+  elseif($pass !== $cpass){
+
+	echo "<p style = 'color:red;'>Confirm password not match </p>";
   }else{
 	$code = rand(999999, 111111);
     $status = "notverified";
@@ -72,12 +76,12 @@ if ($name == "" || $address == "" || $city == "" || $zip == "" || $phone == "" |
 	$inserted_row = $this->db->insert($query);
 	if ($inserted_row) {
 		
-	$msg = "<span class='success'>Customer Data inserted Successfully.</span>";
+	$msg = "<span class='success'style = 'color:red;'>Customer Data inserted Successfully.</span>";
 		return $msg;
 	
 		
 	} else{
-		$msg = "<span class='error'>Customer Data Not inserted.</span>";
+		$msg = "<span class='error'style = 'color:red;'>Customer Data Not inserted.</span>";
 		return $msg;
 }
   }
@@ -100,14 +104,14 @@ public function AdmincustomerRegistration($data){
 	
 	if ($name == "" || $address == "" || $city == "" || $country == "" || $zip == "" || $phone == "" || $email == "" || $pass == ""|| $role == "") {
 		
-		$msg = "<span class='error'>Fields must not be empty !</span>";
+		$msg = "<span class='error'style = 'color:red;'>Fields must not be empty !</span>";
 		return $msg;
 	}
 	
 	  $mailquery = "SELECT * FROM tbl_customer WHERE email = '$email' LIMIT 1";
 	  $mailchk = $this->db->select($mailquery);
 	  if ($mailchk != false) {
-		  $msg = "<span class='error'>Email already exist !</span>";
+		  $msg = "<span class='error' style = 'color:red;'>Email already exist !</span>";
 		return $msg;
 	  }else{
 	
@@ -116,10 +120,10 @@ public function AdmincustomerRegistration($data){
 	
 		 $inserted_row = $this->db->insert($query);
 				if ($inserted_row) {
-					$msg = "<span class='success'>Customer Data inserted Successfully.</span>";
+					$msg = "<span class='success'style = 'color:red;'>Customer Data inserted Successfully.</span>";
 					return $msg;
 				} else{
-					$msg = "<span class='error'>Customer Data Not inserted.</span>";
+					$msg = "<span class='error'style = 'color:red;'>Customer Data Not inserted.</span>";
 					return $msg;
 			}
 	  }
@@ -129,9 +133,17 @@ public function resetPassword($data){
 	$con = mysqli_connect('localhost', 'root', '', 'db_shop');	
 	$errors = array();	
 	//if user click change password button
+
     if(isset($_POST['change-password'])){
         $_SESSION['info'] = "";
         $pass = mysqli_real_escape_string($this->db->link, md5($data['pass']));
+		$cpass = mysqli_real_escape_string($this->db->link, md5($data['cpass']));
+
+		if($pass !== $cpass){
+
+			echo "<p style = 'color:red;'>Confirm password not match</p>";
+		  }else{
+
        
             $code = 0;
             $email = $_SESSION['email']; //getting this email using session
@@ -145,6 +157,7 @@ public function resetPassword($data){
                 $errors['db-error'] = "Failed to change your password!";
             }
         }
+	}
 	
 }
 public function getAllCustomer(){
@@ -194,7 +207,11 @@ if ($result != false && $role === 'Admin') {
 	Session::set("cuslogin",true);
 	Session::set("cmrId",$value['id']);
 	Session::set("cmrName",$value['name']);
-	header("Location:index_2.php");
+
+
+		header("Location:cart.php");
+	
+	
 	exit;
   }elseif ($result != false && $role === 'Database Admin') {
 

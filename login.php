@@ -13,6 +13,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
 ?> 
 
+<style>
+
+input[type="text"]::placeholder{
+	color:black;
+}
+input[type="password"]::placeholder{
+	color:black;
+}
+input[type="tel"]::placeholder{
+	color:black;
+}
+</style>
+
+
+
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -68,6 +84,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
 
 
 <?php
+function passwordHasNumber($password) {
+    if (preg_match('/[0-9]+/', $password)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
 	$phoneNumber = $_POST['phone'];
@@ -76,6 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
 		echo "Error: Password must be at least 8 characters long.";
 	}elseif(strlen ($phoneNumber) < 11 && strlen ($phoneNumber) >11){
 		echo "Error: Phone number must atleast 11 characters long.";
+	}elseif(passwordHasNumber($password) == false){
+		echo "Password must contain atleast one number.";
 	}else{
     $customerReg = $cmr->customerRegistration($_POST);
 	}
@@ -122,15 +147,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
 			<span>Phone number<span style="color: red;">*</span></span>
 			<input type="tel" id= "phoneNumber" maxlength ="13" placeholder="0910-249-4012" name="phone">
 			</label>
-
+			
 			<label for= pass>
 			<span>Password<span style="color: red;">*</span></span>
-			<input type="password" placeholder = "Password atleast 8 characters" name="pass">
+			<input type="password" placeholder = "Enter your password" name="pass">
 			</label>
 
+			<p><strong>Note: </strong>Password should have atleast 8 characters and number.</p>
+			
 			<label for= pass>
 			<span>Confirm Password<span style="color: red;">*</span></span>
-			<input type="password" placeholder = "Reenter password" name="pass">
+			<input type="password" placeholder = "Reenter password" name="cpass">
 			</label>
 			<button class="submit" name="register">Create Account</button>
 			</form>

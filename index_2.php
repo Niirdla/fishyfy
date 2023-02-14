@@ -1,5 +1,18 @@
 <?php include 'inc/header_3.php';?>
 
+
+
+<?php 
+$login = Session::get("cuslogin");
+if ($login == false) {
+
+	echo '<style>.sign-out {visibility: hidden;}</style>';
+
+	
+}
+ ?>
+
+
 <!DOCTYPE php>
 <php lang="en">
 <head>
@@ -61,50 +74,25 @@
 									</ul>
 								</li>
 								<li><a href="about.php">About</a></li>
-								<li><a href="#">Pages</a>
-									<ul class="sub-menu">
-										<li><a href="about.php">About</a></li>
-										<li><a href="cart.php">Cart</a></li>
-										<li><a href="payment.php">Check Out</a></li>
-										<li><a href="contacts.php">Contact</a></li>
-										<li><a href="news.php">News</a></li>
-										<li style = "text-align: center;"><a href="shop.php">Shop</a></li>
-                    
-									</ul>
-								</li>
-								<li><a href="catalogue.php">Catalogue</a>
-									<ul class="sub-menu">
-										<li><a href="news.php">News</a></li>
-										<li style = "text-align: center;"><a href="single-news.php">Single News</a></li>
-									</ul>
-								</li>
+								<li><a href="news.php">News</a></li>
+								
+								<li><a href="catalogue.php">Catalogue</a></li>
+								
 								<li><a href="contacts.php">Contact</a></li>
-								<li><a href="shop.php">Shop</a>
-									<ul class="sub-menu">
-										<li><a href="shop.php">Shop</a></li>
-										<li><a href="checkout.php">Check Out</a></li>
-										<li><a href="single-product.php">Single Product</a></li>
-										<li style = "text-align: center;"><a href="cart.php">Cart</a></li>
-									</ul>
-								</li>
+								<li><a href="shop.php">Shop</a></li>
 								<li>
 									<div class="header-icons">
 										<a class="shopping-cart" href="cart.php"><i class="fas fa-shopping-cart"></i></a>
+										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
 										
-										<a class="user-profile" href="profile.php"><i class='far fa-user-circle' style='font-size:18px'></i></a>
+										<a class="user-profile" href="profile.php"><i class='far fa-user-circle' style='font-size:1.7rem'></i></a>
 										<ul class="sub-menu">
 											<li><a href="profile.php">My Account</a></li>
 											<li><a href="orderdetails.php">My Orders</a></li>
 										</ul>
-										
-										<a class="sign-out" href="?cid=<?php Session::get('cmrId') ?>"><i class='fas fa-sign-out-alt' style='font-size:18px;color:white'></i></a>
-										
+										<a class="sign-out" href="?cid=<?php Session::get('cmrId') ?>"><i class='fas fa-sign-out-alt' style='font-size:1.7rem;color:white'></i></a>
 									</div>
 								</li>
-
-						
-								
-								
 							</ul>
 						</nav>
 						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
@@ -260,38 +248,48 @@
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-lg-4 col-md-6 text-center">
+			
+		
+		<div class="container">
+
+			<div class="row product-lists">
+				<?php
+	      		$getFpd = $pd->homeGetFeaturedProduct();
+	      		if ($getFpd) {
+	      		while ($result = $getFpd->fetch_assoc()) { 
+	      
+	      			
+	      		?>
+
+				<div class="col-lg-4 col-md-6 text-center strawberry">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product.php"><img src="assets/img/products/aacaquaticslogo.png" alt=""></a>
+							<a href="single-product.php?proid=<?php echo $result['productId']; ?>"><img src="admin/<?php echo $result['image']; ?>" alt="" /></a>
 						</div>
-						<h3>Strawberry</h3>
-						<p class="product-price"><span>Per Kg</span> ₱100 </p>
-						<a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+						<p style = " font-size: 1.4rem"><strong><?php echo $fm->textShorten($result['productName'],30); ?></strong></p>
+						<p><span class="product-price">₱<?php echo $result['price']; ?></span></p>
+						<p><span class="stockss">Stocks: </span></p>
+							<?php
+								if($result['stocks'] <= 0){
+									
+									echo '<style>.stockss {display: none;}</style>';
+									echo '<p style = "color: red; font-size: 1rem"><strong>Not available</strong> </p>';
+								}elseif($result['stocks'] >= 0){
+									
+									echo '<style>.stockss {display: inline;}</style>';
+									echo '<p style = "color: green; font-size: 1rem"><strong>Available</strong> </p>';
+								}
+								?>
+						<div class="cart-btn"><span><a href="single-product.php?proid=<?php echo $result['productId']; ?>" class="fas fa-shopping-cart">Details</a></span></div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.php"><img src="assets/img/products/aacaquaticslogo.png" alt=""></a>
-						</div>
-						<h3>Berry</h3>
-						<p class="product-price"><span>Per Kg</span> ₱150 </p>
-						<a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.php"><img src="assets/img/products/aacaquaticslogo.png" alt=""></a>
-						</div>
-						<h3>Lemon</h3>
-						<p class="product-price"><span>Per Kg</span> ₱200 </p>
-						<a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
+				
+				<?php } } ?>
+				
+				
 			</div>
+
+			
 		</div>
 	</div>
 	<!-- end product section -->

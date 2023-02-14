@@ -1,5 +1,18 @@
 <?php include 'inc/header_3.php';?>
 
+
+<?php 
+$login = Session::get("cuslogin");
+if ($login == false) {
+
+	echo '<style>.sign-out {visibility: hidden;}</style>';
+
+	
+}
+ ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,32 +75,12 @@
 									</ul>
 								</li>
 								<li><a href="about.php">About</a></li>
-								<li><a href="#">Pages</a>
-									<ul class="sub-menu">
-										<li><a href="about.php">About</a></li>
-										<li><a href="cart.php">Cart</a></li>
-										<li><a href="payment.php">Check Out</a></li>
-										<li><a href="contacts.php">Contact</a></li>
-										<li><a href="news.php">News</a></li>
-										<li style = "text-align: center;"><a href="shop.php">Shop</a></li>
-                    
-									</ul>
-								</li>
-								<li><a href="catalogue.php">Catalogue</a>
-									<ul class="sub-menu">
-										<li><a href="news.php">News</a></li>
-										<li style = "text-align: center;"><a href="single-news.php">Single News</a></li>
-									</ul>
-								</li>
+								<li><a href="news.php">News</a></li>
+								
+								<li><a href="catalogue.php">Catalogue</a></li>
+								
 								<li><a href="contacts.php">Contact</a></li>
-								<li><a href="shop.php">Shop</a>
-									<ul class="sub-menu">
-										<li><a href="shop.php">Shop</a></li>
-										<li><a href="checkout.php">Check Out</a></li>
-										<li><a href="single-product.php">Single Product</a></li>
-										<li style = "text-align: center;"><a href="cart.php">Cart</a></li>
-									</ul>
-								</li>
+								<li><a href="shop.php">Shop</a></li>
 								<li>
 									<div class="header-icons">
 										<a class="shopping-cart" href="cart.php"><i class="fas fa-shopping-cart"></i></a>
@@ -97,15 +90,9 @@
 											<li><a href="profile.php">My Account</a></li>
 											<li><a href="orderdetails.php">My Orders</a></li>
 										</ul>
-										
-										<a class="sign-out" href="?cid=<?php Session::get('cmrId') ?>"><i class='fas fa-sign-out-alt' style='font-size:18px;color:white'></i></a>
-										
+										<a class="sign-out" href="?cid=<?php Session::get('cmrId') ?>"><i class='fas fa-sign-out-alt' style='font-size:1.7rem;color:white'></i></a>
 									</div>
 								</li>
-
-						
-								
-								
 							</ul>
 						</nav>
 						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
