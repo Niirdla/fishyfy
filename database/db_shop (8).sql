@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2023 at 06:20 AM
+-- Generation Time: Feb 17, 2023 at 06:06 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_shop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `id` int(11) NOT NULL,
+  `orderId` int(11) NOT NULL,
+  `cmrId` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `paymentMethod` varchar(255) NOT NULL,
+  `proofOfPayment` varchar(255) NOT NULL,
+  `paymentDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`id`, `orderId`, `cmrId`, `amount`, `paymentMethod`, `proofOfPayment`, `paymentDate`) VALUES
+(3, 0, 1, 0, 'Gcash', 'images/fa18cc5053.jpg', '0000-00-00'),
+(4, 106, 74, 0, 'Gcash', 'images/040f9e569c.jpg', '0000-00-00'),
+(5, 107, 74, 0, 'Gcash', 'images/4dfef562c6.jpg', '0000-00-00'),
+(6, 110, 74, 0, 'Gcash', 'images/2e0dbf8c24.jpg', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -122,20 +148,8 @@ CREATE TABLE `tbl_cart` (
 --
 
 INSERT INTO `tbl_cart` (`cart_unique_id`, `cartId`, `cmrId`, `sId`, `productId`, `productName`, `price`, `quantity`, `stocks`, `image`) VALUES
-(0, 9, 0, 'd9b4uu9b4qah7atcirosalsi4u', 22, 'Aqueon Aquarium Fish Tank Starter Kit with LED', 69.00, 1, 0, 'uploads/4121ebe6ac.jpg'),
-(0, 10, 0, 'd9b4uu9b4qah7atcirosalsi4u', 4, 'Rechargeable Mini Fan', 1500.00, 1, 0, 'uploads/fa56e62bef.jpg'),
-(0, 11, 0, '5sv9s20cbcknd9rdom9v1i8uo5', 22, 'Aqueon Aquarium Fish Tank Starter Kit with LED', 69.00, 1, 0, 'uploads/4121ebe6ac.jpg'),
-(0, 22, 0, 'ng3rckq66u82fr37pvbar5cca2', 22, 'Aqueon Aquarium Fish Tank Starter Kit with LED', 69.00, 1, 0, 'uploads/4121ebe6ac.jpg'),
-(0, 25, 0, 'bee3rvnboggg9l6koen698arsi', 26, 'Red Sea Max nano aquarium tank', 50.00, 1, 0, 'uploads/ff26f7b647.jpg'),
-(0, 26, 0, 'bee3rvnboggg9l6koen698arsi', 22, 'Aqueon Aquarium Fish Tank Starter Kit with LED', 69.00, 3, 0, 'uploads/4121ebe6ac.jpg'),
-(0, 29, 0, 'at3errbb02cbmn4ehv87f9n8a3', 22, 'Aqueon Aquarium Fish Tank Starter Kit with LED', 69.00, 4, 0, 'uploads/4121ebe6ac.jpg'),
-(0, 54, 0, 'a8pjqvcpg2dlk3homv432ifrmi', 43, 'Infinity Stylish Plastic Fish Bowl (S,M,L)', 320.00, 2, 0, 'uploads/827e9b003c.jpg'),
-(0, 55, 0, 'a8pjqvcpg2dlk3homv432ifrmi', 37, 'Periha Aqua Heater', 450.00, 3, 996, 'uploads/41bbf8b7a5.jpg'),
-(0, 80, 0, '3q1a8nbqkkvc6em7s1q5copt2k', 43, 'Infinity Stylish Plastic Fish Bowl (S,M,L)', 320.00, 1, 0, 'uploads/827e9b003c.jpg'),
-(0, 81, 0, 't826r0m696taolelhs36repg6k', 43, 'Infinity Stylish Plastic Fish Bowl (S,M,L)', 320.00, 23, 0, 'uploads/827e9b003c.jpg'),
-(0, 106, 0, 'j5190t4f4gieqci79l18rlgp1b', 34, 'Aquarium Filter Pad Filter Media Roll Biochemical Cotton Filter Foam Fish Tank Sponge (1m X 12cm)', 874.00, 1, 998, 'uploads/46c74ae395.jpg'),
 (2147483647, 153, 0, '', 0, '', 0.00, 0, 0, ''),
-(2147483647, 154, 0, 'llo0r5g5v4g63uu774ac3k8vd3', 39, 'Live feeds', 69.00, 10, 1140, 'uploads/efbbb518e8.jpg');
+(2147483647, 154, 0, 'llo0r5g5v4g63uu774ac3k8vd3', 39, 'Live feeds', 69.00, 10, 1180, 'uploads/efbbb518e8.jpg');
 
 -- --------------------------------------------------------
 
@@ -289,7 +303,7 @@ INSERT INTO `tbl_customer` (`id`, `name`, `address`, `city`, `country`, `zip`, `
 (61, 'Aldrin James Mendoza', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '0910-167-6224', 'amberspirit16@gmail.com', '', '3d68333b47b4762fac37583cc91b6ad1', 0, 'verified', 'Customer', 0),
 (67, 'Aldrin James Mendoza', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '09699669699', 'mendozaar@students.nu-fairview.edu.ph', '', '531b07b9c1d9e8679d99020a9f836d73', 0, '', 'Database Admin', 0),
 (70, 'Admin', 'block 69 Lot 6 admin street', 'San Jose del Monte', '', '4002', '09102494012', 'admin@admin.com', '', '751cb3f4aa17c36186f4856c8982bf27', 0, '', 'Admin', 0),
-(73, 'Aldrin James Mendoza', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '0969-424-8893', 'aldrinlhabsyu@gmail.com', '', '3d68333b47b4762fac37583cc91b6ad1', 0, 'verified', 'Customer', 0);
+(74, 'Aldrin James Mendoza', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '0969-424-8893', 'aldrinlhabsyu@gmail.com', '', '3d68333b47b4762fac37583cc91b6ad1', 0, 'verified', 'Customer', 0);
 
 -- --------------------------------------------------------
 
@@ -361,7 +375,26 @@ INSERT INTO `tbl_order` (`id`, `cmrId`, `productId`, `productName`, `quantity`, 
 (90, 61, 32, 'Resun Ceramic Rings', 1, 200.00, 'uploads/aa3b192759.jpg', '2023-02-07 14:54:27', 0),
 (91, 61, 39, 'Live feeds', 1, 69.00, 'uploads/efbbb518e8.jpg', '2023-02-07 23:15:00', 0),
 (92, 61, 39, 'Live feeds', 1, 69.00, 'uploads/efbbb518e8.jpg', '2023-02-08 01:42:02', 0),
-(93, 61, 37, 'Periha Aqua Heater', 1, 450.00, 'uploads/41bbf8b7a5.jpg', '2023-02-12 01:09:05', 0);
+(93, 61, 37, 'Periha Aqua Heater', 1, 450.00, 'uploads/41bbf8b7a5.jpg', '2023-02-12 01:09:05', 0),
+(94, 74, 39, 'Live feeds', 10, 690.00, 'uploads/efbbb518e8.jpg', '2023-02-16 02:54:03', 0),
+(95, 74, 37, 'Periha Aqua Heater', 5, 2250.00, 'uploads/41bbf8b7a5.jpg', '2023-02-16 02:58:22', 0),
+(96, 74, 32, 'Resun Ceramic Rings', 10, 2000.00, 'uploads/aa3b192759.jpg', '2023-02-16 03:03:26', 0),
+(97, 74, 39, 'Live feeds', 10, 690.00, 'uploads/efbbb518e8.jpg', '2023-02-16 20:50:11', 0),
+(98, 74, 39, 'Live feeds', 10, 690.00, 'uploads/efbbb518e8.jpg', '2023-02-16 21:09:06', 0),
+(99, 74, 34, 'Aquarium Filter Pad Filter Media Roll Biochemical Cotton Filter Foam Fish Tank Sponge (1m X 12cm)', 10, 8740.00, 'uploads/46c74ae395.jpg', '2023-02-16 21:15:10', 0),
+(100, 74, 39, 'Live feeds', 10, 690.00, 'uploads/efbbb518e8.jpg', '2023-02-16 21:20:31', 0),
+(101, 74, 34, 'Aquarium Filter Pad Filter Media Roll Biochemical Cotton Filter Foam Fish Tank Sponge (1m X 12cm)', 8, 6992.00, 'uploads/46c74ae395.jpg', '2023-02-16 21:21:23', 0),
+(102, 74, 32, 'Resun Ceramic Rings', 10, 2000.00, 'uploads/aa3b192759.jpg', '2023-02-16 21:25:08', 0),
+(103, 74, 32, 'Resun Ceramic Rings', 10, 2000.00, 'uploads/aa3b192759.jpg', '2023-02-16 21:26:23', 0),
+(104, 74, 32, 'Resun Ceramic Rings', 10, 2000.00, 'uploads/aa3b192759.jpg', '2023-02-16 21:26:52', 0),
+(105, 74, 32, 'Resun Ceramic Rings', 30, 6000.00, 'uploads/aa3b192759.jpg', '2023-02-16 23:02:36', 0),
+(106, 74, 37, 'Periha Aqua Heater', 15, 6750.00, 'uploads/41bbf8b7a5.jpg', '2023-02-16 23:13:53', 0),
+(107, 74, 39, 'Live feeds', 10, 690.00, 'uploads/efbbb518e8.jpg', '2023-02-17 03:22:30', 0),
+(108, 74, 39, 'Live feeds', 6, 414.00, 'uploads/efbbb518e8.jpg', '2023-02-17 03:26:02', 0),
+(109, 74, 34, 'Aquarium Filter Pad Filter Media Roll Biochemical Cotton Filter Foam Fish Tank Sponge (1m X 12cm)', 10, 8740.00, 'uploads/46c74ae395.jpg', '2023-02-17 03:29:29', 0),
+(110, 74, 39, 'Live feeds', 10, 690.00, 'uploads/efbbb518e8.jpg', '2023-02-17 03:30:59', 0),
+(111, 74, 34, 'Aquarium Filter Pad Filter Media Roll Biochemical Cotton Filter Foam Fish Tank Sponge (1m X 12cm)', 10, 8740.00, 'uploads/46c74ae395.jpg', '2023-02-17 03:43:05', 0),
+(112, 74, 39, 'Live feeds', 10, 690.00, 'uploads/efbbb518e8.jpg', '2023-02-17 03:46:41', 0);
 
 -- --------------------------------------------------------
 
@@ -391,14 +424,14 @@ INSERT INTO `tbl_product` (`productId`, `productName`, `catId`, `brandId`, `body
 (29, 'Aquaspeed Submersible Pump A2000 13W', 11, 9, '<p><span>Aquaspeed Submersible Pump A2000 13W </span></p>\r\n<p><span>&bull; German technology is quieter </span></p>\r\n<p><span>&bull; Energy saving </span></p>\r\n<p><span>&bull; Large flow high lift </span></p>\r\n<p><span>&bull; High-quality plastic, durable </span></p>\r\n<p><span>&bull; For fresh and saltwater use - The introduction of German technology optimizes the submersible pump parts, to achieve the pump work without a sound quiet state, the noise reduction. - Motor with a seamless movement, fluid mechanics design, energy-saving. - Ceramic shaft chip light seawater wear and tear durable, durable energy-efficient power surging. - Surging power from the non-destructive motor, high distance pumping no longer worry. </span></p>\r\n<p><span>Model: A2000 Power: 13W F.Max: 2000 L/H H.Max: 1.6M ? Item has been opened and tested for functionality before shipping. #AquaSpeedSubmersiblePump&nbsp;</span></p>', 650.00, '999', 'uploads/0f49812a51.jpg', 1),
 (30, 'Aquaspeed wave maker  A100M', 11, 9, '<p><span>Aquaspeed Wave Maker A100M 6w </span></p>\r\n<p><span>Water Wave Pump Circulation With Suction Cup </span></p>\r\n<p><span>? Energy Saving </span></p>\r\n<p><span>? Promotes water cycle of the fish tank </span></p>\r\n<p><span>? Diving filter pump, energy saving and durable </span></p>\r\n<p><span>? Safety super static machinery </span></p>\r\n<p><span>? Biological purification, freshwater, sea water </span></p>\r\n<p><span>? Low noise, easy to operate </span></p>\r\n<p><span>? Applicable to all types of aquarium, ecological cylinder, breeding cylinder, landscaping cylinder, semi-water tank filter biochemical </span></p>\r\n<p><span>Model: A100M Voltage: 220-240V Frequency: 50/60HZ Watts: 6W F.Max: 3000L/H</span></p>', 750.00, '999', 'uploads/b17dd6ba59.jpg', 0),
 (31, 'ATEC AR-8500 Aquarium Air Pump', 11, 10, '<p><span>Atec AR-8500 Aquarium Air Pump: </span></p>\r\n<p><span>The Atec Aquarium Air Pump is a reliable and multi-functional product, which is high in implementation. The pump creates movement in the water and builds aeration through the constant mixing of the surface with water in the aquarium. There are many varieties of fish that don&rsquo;t survive, if the proper current is not available in the water, the air pump comes to the rescue, as these pumps aid in building current. The product is built of good quality material and is extremely reliable. The equipment is fitted with suction cups so that it fits any aquarium comfortably. In spite of creating continuous movement in the water, the pump produces no sound and operates quietly. Moreover, the pump comes with 2-speed control based on the requirement; you can choose the level of speed. </span></p>\r\n<p><span>The high on performance pumps are attached with top quality motor for better functioning. The body of the pump is made out of sturdy material to make it durable. The pumps are designed to be placed above the water level and care should be taken to ensure no water enters the pumps as this might lead to a fault. Equipped with a single outlet, the pumps are available in different sizes based on the capacity of the aquarium.</span></p>', 550.00, '999', 'uploads/d01da9d6a3.jpg', 1),
-(32, 'Resun Ceramic Rings', 12, 11, '<ul>\r\n<li>Model: CR-1000</li>\r\n<li>Color: White</li>\r\n<li>Material: CeramicThe ceramic rings have a structure of dense holes where live a lot of good vital bacteria such as nitro-bacteria. These bacteria help improve biological filtration effect and stabilize water quality to maintain healthy living environment for aquatic livings.Provides a large surface area for beneficial bacteria to grow and cultivate</li>\r\n<li>Helps eliminate harmful ammonia and nitrite levels in your aquarium water</li>\r\n<li>Net weight: 1000g</li>\r\n</ul>', 200.00, '990', 'uploads/aa3b192759.jpg', 0),
+(32, 'Resun Ceramic Rings', 12, 11, '<ul>\r\n<li>Model: CR-1000</li>\r\n<li>Color: White</li>\r\n<li>Material: CeramicThe ceramic rings have a structure of dense holes where live a lot of good vital bacteria such as nitro-bacteria. These bacteria help improve biological filtration effect and stabilize water quality to maintain healthy living environment for aquatic livings.Provides a large surface area for beneficial bacteria to grow and cultivate</li>\r\n<li>Helps eliminate harmful ammonia and nitrite levels in your aquarium water</li>\r\n<li>Net weight: 1000g</li>\r\n</ul>', 200.00, '940', 'uploads/aa3b192759.jpg', 0),
 (33, 'CLASSICA SUPER GRADE ACTIVATED CARBON', 12, 12, '<p><span>CLASSICA SUPER GRADE ACTIVATED CARBON </span></p>\r\n<ul>\r\n<li><span>Highly absorbent removing any cloudiness, impurities, colouring and chemical build ups within the aquarium.&nbsp;</span></li>\r\n<li><span>The carbon is a fine polishing this is done after the filter has removed larger debris, carbon will trap and absorb fine particles.&nbsp;</span></li>\r\n<li><span>The carbon will unfortunately absorb any chemical used to treat the aquarium, so it is important that it is removed if any treatments are being used.&nbsp;</span></li>\r\n<li><span>Supplied in handy net bags to allow ease of use. </span></li>\r\n</ul>\r\n<div><span style=\"color: rgba(0, 0, 0, 0.8); font-family: Roboto, \'Helvetica Neue\', Helvetica, Arial, ?????, \'WenQuanYi Zen Hei\', \'Hiragino Sans GB\', \'?? Pro\', \'LiHei Pro\', \'Heiti TC\', ?????, \'Microsoft JhengHei UI\', \'Microsoft JhengHei\', sans-serif; font-size: 14px; white-space: pre-wrap;\"><br /></span></div>', 150.00, '999', 'uploads/1e7f2ffb55.jpg', 1),
-(34, 'Aquarium Filter Pad Filter Media Roll Biochemical Cotton Filter Foam Fish Tank Sponge (1m X 12cm)', 13, 13, '<p><span>Size: About 100x12x2cm. </span></p>\r\n<p><span>Can be cut any size as your needed by yourself. </span></p>\r\n<p><span>Strong cotton and soft feel, can be repeated washing rather goes badly, durable to use.Strong filterability. It can be used repeatedly after cleaning. </span></p>\r\n<p><span>Filter media pad - Made of super dense thickened cotton with good water absorption and high permeability, filtering and decomposing dirt. </span></p>\r\n<p><span>Aquarium Filter Pad - Suitable for sea water tank, fresh water tank, aqua-plant tank. Description </span></p>\r\n<p><span>This filter pad is well made of premium material for durable and practical use. It has a good effect on filtering the leftover. And its strong filterability can stable water quality, remove small and large debris particles and decompose some ammonia nitrogen debris particles.</span></p>\r\n<p><span> Feature </span></p>\r\n<ul>\r\n<li>Color: White.&nbsp;</li>\r\n<li>Material: Cotton.&nbsp;&nbsp;</li>\r\n<li>Size: About 100x12x2cm.&nbsp;</li>\r\n<li>Made of super dense thickened cotton with good water absorption and high permeability, filtering and decomposing dirt.&nbsp;</li>\r\n<li>Strong filterability. It can be used repeatedly after cleaning.&nbsp;&nbsp;</li>\r\n<li>Strong cotton and soft feel, can be repeated washing rather goes badly, durable to use.&nbsp;&nbsp;</li>\r\n<li>Can be cut any size as your needed by yourself.&nbsp;&nbsp;</li>\r\n<li>Suitable for sea water tank, fresh water tank, aqua-plant tank.</li>\r\n</ul>', 874.00, '998', 'uploads/46c74ae395.jpg', 0),
+(34, 'Aquarium Filter Pad Filter Media Roll Biochemical Cotton Filter Foam Fish Tank Sponge (1m X 12cm)', 13, 13, '<p><span>Size: About 100x12x2cm. </span></p>\r\n<p><span>Can be cut any size as your needed by yourself. </span></p>\r\n<p><span>Strong cotton and soft feel, can be repeated washing rather goes badly, durable to use.Strong filterability. It can be used repeatedly after cleaning. </span></p>\r\n<p><span>Filter media pad - Made of super dense thickened cotton with good water absorption and high permeability, filtering and decomposing dirt. </span></p>\r\n<p><span>Aquarium Filter Pad - Suitable for sea water tank, fresh water tank, aqua-plant tank. Description </span></p>\r\n<p><span>This filter pad is well made of premium material for durable and practical use. It has a good effect on filtering the leftover. And its strong filterability can stable water quality, remove small and large debris particles and decompose some ammonia nitrogen debris particles.</span></p>\r\n<p><span> Feature </span></p>\r\n<ul>\r\n<li>Color: White.&nbsp;</li>\r\n<li>Material: Cotton.&nbsp;&nbsp;</li>\r\n<li>Size: About 100x12x2cm.&nbsp;</li>\r\n<li>Made of super dense thickened cotton with good water absorption and high permeability, filtering and decomposing dirt.&nbsp;</li>\r\n<li>Strong filterability. It can be used repeatedly after cleaning.&nbsp;&nbsp;</li>\r\n<li>Strong cotton and soft feel, can be repeated washing rather goes badly, durable to use.&nbsp;&nbsp;</li>\r\n<li>Can be cut any size as your needed by yourself.&nbsp;&nbsp;</li>\r\n<li>Suitable for sea water tank, fresh water tank, aqua-plant tank.</li>\r\n</ul>', 874.00, '960', 'uploads/46c74ae395.jpg', 0),
 (35, 'Infinity Slim External Hang on Filter CS48', 13, 14, '<div class=\"pdp-product-detail\" data-spm=\"product_detail\">\r\n<div class=\"pdp-product-desc \" data-spm-anchor-id=\"a2o4l.pdp_revamp.product_detail.i0.c6e31e82pBboFk\">\r\n<div class=\"html-content pdp-product-highlights\">\r\n<ul>\r\n<li>Ideal for freshwater and marine aquarium</li>\r\n<li>quiet operation</li>\r\n<li>easy start without adding water</li>\r\n<li>adjustable flow value to adjust flow and dissolved oxygen for creature growing</li>\r\n<li>easy to install, only fill up water and plug in</li>\r\n<li>Specification:</li>\r\n<li>Power: 4.8 Watts</li>\r\n<li>Max Output: 290L/H</li>\r\n</ul>\r\n</div>\r\n</div>\r\n</div>', 581.00, '0', 'uploads/df74e847e5.jpg', 0),
 (36, 'Infinity Slim External Hang on Filter CS25', 13, 14, '<ul>\r\n<li><span>Ideal for freshwater and marine aquarium&nbsp;</span></li>\r\n<li><span>quiet operation&nbsp;</span></li>\r\n<li><span>easy start without adding water&nbsp;</span></li>\r\n<li><span>adjustable flow value to adjust flow and dissolved oxygen for creature growing&nbsp;</span></li>\r\n<li>easy to install, only fill up water and plug in Specification: Power: 2.5 Watts Max Output: 160L/H</li>\r\n</ul>', 400.00, '999', 'uploads/e677d66b1e.jpg', 1),
-(37, 'Periha Aqua Heater', 14, 15, '<p><span>? With a safety protection system, easy to operate, convenient and safe.&nbsp; </span></p>\r\n<p><span>?Using explosion-proof glass heating tube, it has double insulation function, fast heating speed, can withstand great temperature difference without bursting, so you can use it more securely.&nbsp; </span></p>\r\n<p><span>? Unique and humanized design, high-quality material production process, durable.&nbsp; </span></p>\r\n<p><span>?The use of fresh sea water is more complete.&nbsp; </span></p>\r\n<p><span><br /></span></p>\r\n<p><span>?Instructions? </span></p>\r\n<p><span>? Put the product into the aquarium for 15 minutes to ensure that the probe temperature is consistent with the actual water temperature. Turn on the power switch after 15 minutes, then turn the thermostat knob to adjust the temperature to 22-34 degrees. </span></p>\r\n<p><span>? Temperature control : Heating starts when the water temperature is lower than the set temperature by 0.5 degrees, and stops when the water temperature is higher than 0.5 degrees.&nbsp; </span></p>\r\n<p><span>? Power-off memory: Once the temperature controller is set, the temperature set even after the power-off will not change.&nbsp; </span></p>\r\n<p><span><br /></span></p>\r\n<p><span>?Precautions? </span></p>\r\n<p><span>1. The power must be turned off before using this product or before cleaning the product.&nbsp; </span></p>\r\n<p><span>2. When the product is heated, do not touch the heat part directly with your hand.&nbsp; </span></p>\r\n<p><span>3. This product is only suitable for indoor use.&nbsp; </span></p>\r\n<p><span>4. The indicator will light up when the product is heating.&nbsp; </span></p>\r\n<p><span>5, never allowed to use in the waterless state.&nbsp; </span></p>\r\n<div><span style=\"color: rgba(0, 0, 0, 0.8); font-family: Roboto, \'Helvetica Neue\', Helvetica, Arial, ?????, \'WenQuanYi Zen Hei\', \'Hiragino Sans GB\', \'?? Pro\', \'LiHei Pro\', \'Heiti TC\', ?????, \'Microsoft JhengHei UI\', \'Microsoft JhengHei\', sans-serif; font-size: 14px; white-space: pre-wrap;\"><br /></span></div>', 450.00, '970', 'uploads/41bbf8b7a5.jpg', 0),
+(37, 'Periha Aqua Heater', 14, 15, '<p><span>? With a safety protection system, easy to operate, convenient and safe.&nbsp; </span></p>\r\n<p><span>?Using explosion-proof glass heating tube, it has double insulation function, fast heating speed, can withstand great temperature difference without bursting, so you can use it more securely.&nbsp; </span></p>\r\n<p><span>? Unique and humanized design, high-quality material production process, durable.&nbsp; </span></p>\r\n<p><span>?The use of fresh sea water is more complete.&nbsp; </span></p>\r\n<p><span><br /></span></p>\r\n<p><span>?Instructions? </span></p>\r\n<p><span>? Put the product into the aquarium for 15 minutes to ensure that the probe temperature is consistent with the actual water temperature. Turn on the power switch after 15 minutes, then turn the thermostat knob to adjust the temperature to 22-34 degrees. </span></p>\r\n<p><span>? Temperature control : Heating starts when the water temperature is lower than the set temperature by 0.5 degrees, and stops when the water temperature is higher than 0.5 degrees.&nbsp; </span></p>\r\n<p><span>? Power-off memory: Once the temperature controller is set, the temperature set even after the power-off will not change.&nbsp; </span></p>\r\n<p><span><br /></span></p>\r\n<p><span>?Precautions? </span></p>\r\n<p><span>1. The power must be turned off before using this product or before cleaning the product.&nbsp; </span></p>\r\n<p><span>2. When the product is heated, do not touch the heat part directly with your hand.&nbsp; </span></p>\r\n<p><span>3. This product is only suitable for indoor use.&nbsp; </span></p>\r\n<p><span>4. The indicator will light up when the product is heating.&nbsp; </span></p>\r\n<p><span>5, never allowed to use in the waterless state.&nbsp; </span></p>\r\n<div><span style=\"color: rgba(0, 0, 0, 0.8); font-family: Roboto, \'Helvetica Neue\', Helvetica, Arial, ?????, \'WenQuanYi Zen Hei\', \'Hiragino Sans GB\', \'?? Pro\', \'LiHei Pro\', \'Heiti TC\', ?????, \'Microsoft JhengHei UI\', \'Microsoft JhengHei\', sans-serif; font-size: 14px; white-space: pre-wrap;\"><br /></span></div>', 450.00, '950', 'uploads/41bbf8b7a5.jpg', 0),
 (38, 'Huike AC/DC air pump', 11, 16, '<p><span>Huike H5 AC and DC air pump with Lithium battery </span></p>\r\n<p><span>Lithium battery up to 30h </span></p>\r\n<p><span>Voltage: DC5V </span></p>\r\n<p><span>Output: 3L/min </span></p>\r\n<p><span>Pressure: 0.01Mpa </span></p>\r\n<p><span>Power: 2.0W</span></p>', 850.00, '999', 'uploads/62777abf70.jpg', 1),
-(39, 'Live feeds', 15, 17, '<p>...</p>', 69.00, '1140', 'uploads/efbbb518e8.jpg', 0),
+(39, 'Live feeds', 15, 17, '<p>...</p>', 69.00, '1104', 'uploads/efbbb518e8.jpg', 0),
 (40, 'Net', 16, 17, '<p>...</p>', 69.00, '999', 'uploads/94d23a978e.jpg', 1),
 (41, 'GEBO 6D SERIES AQUARIUM EXTREME BRIGHT LED LIGHT', 17, 18, '<p>...</p>', 450.00, '999', 'uploads/5b68ae3cec.jpg', 1),
 (42, 'INFINITY LED AQUARIUM SUBMERSIBLE LIGHT (20 led lights)', 17, 14, '<p><span>??INFINITY LED AQUARIUM SUBMERSIBLE LIGHT </span></p>\r\n<p><span>??SECURITY, ENERGY SAVING, DURABLE </span></p>\r\n<p><span>??SAFE AND RELIABLE IN BOTH FRESH &amp; SALTWATER AQUARIUMS </span></p>\r\n<p><span>??TECHNICAL DATA</span></p>\r\n<div class=\"product-detail page-product__detail\">\r\n<div class=\"U9rGd1\">\r\n<div class=\"MCCLkq\">\r\n<div class=\"f7AU53\">\r\n<p class=\"irIKAp\">Model: 20</p>\r\n<p class=\"irIKAp\">Led Power: 3.5w</p>\r\n<p class=\"irIKAp\">Lamp Lenght: 18cm</p>\r\n<p class=\"irIKAp\">Voltage: 220 - 240V 50Hz</p>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n<div>\r\n<div class=\"product-ratings\" data-nosnippet=\"true\">&nbsp;</div>\r\n</div>\r\n<p><span><br /></span></p>', 220.00, '999', 'uploads/9639ac69bb.jpg', 1),
@@ -440,6 +473,12 @@ INSERT INTO `tbl_wlist` (`id`, `cmrId`, `productId`, `productName`, `price`, `im
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_admin`
@@ -518,6 +557,12 @@ ALTER TABLE `tbl_wlist`
 --
 
 --
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
@@ -539,7 +584,7 @@ ALTER TABLE `tbl_brand`
 -- AUTO_INCREMENT for table `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
 
 --
 -- AUTO_INCREMENT for table `tbl_catalogue`
@@ -569,13 +614,13 @@ ALTER TABLE `tbl_contact`
 -- AUTO_INCREMENT for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `tbl_product`
