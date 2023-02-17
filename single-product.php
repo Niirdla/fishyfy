@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 	$quantity = $_POST['quantity'];
 	$stocks = $_POST['stocks'];
 	$stocks = intval($stocks) - intval($quantity);
-    $addCart = $ct->addToCart($quantity,$stocks,$id,$cmrId);
+    $addCart = $ct->addToCart($quantity,$stocks,$id);
 	
 }
 ?>

@@ -19,7 +19,7 @@ private $fm;
 		$this->db = new Database();
 		$this->fm = new Format();
 	}
-public function addToCart($quantity,$stocks, $id,$cmrId){
+public function addToCart($quantity,$stocks, $id){
 
 	$quantity = $this->fm->validation($quantity);
 	$stocks = $this->fm->validation($stocks);
@@ -33,7 +33,7 @@ public function addToCart($quantity,$stocks, $id,$cmrId){
 	
     $sId  = session_id();
 
-	$cquery = "SELECT * FROM tbl_customer WHERE tbl_customer.id = '$cmrId'";
+
 
     $squery = "SELECT * FROM tbl_product WHERE productId = '$productId'";
     $result = $this->db->select($squery)->fetch_assoc();
@@ -42,22 +42,24 @@ public function addToCart($quantity,$stocks, $id,$cmrId){
     $price = $result['price'];
     $image = $result['image'];
 
-	
+
+
+
 
     $chquery = "SELECT * FROM tbl_cart WHERE productId = '$productId' AND sId='$sId' ";
     $getPro = $this->db->select($chquery);
     if ($getPro) {
-		$productAlreadyAddedQuery = "SELECT * FROM tbl_cart WHERE productId = '$productId' AND sId='$sId'";
+		$productAlreadyAddedQuery = "SELECT * FROM tbl_cart WHERE productId = '$productId' AND sId='$sId' ";
     $getProductAdded = $this->db->select($productAlreadyAddedQuery)->fetch_assoc();
    $quantityFromCartDatabase = $getProductAdded['quantity'];
    $cartId = $getProductAdded['cartId'];
 
 		$quantityResult = $quantityFromCartDatabase + $quantity;
 
-		$query = "UPDATE tbl_product SET stocks = '$stocks' WHERE productId = '$productId'";
+		$query = "UPDATE tbl_product SET stocks = '$stocks' WHERE productId = '$productId' ";
 		$inserted_row = $this->db->insert($query);
 	
-		$queryUpdate2 = "UPDATE tbl_cart SET stocks = '$stocks' WHERE productId = '$productId' ";
+		$queryUpdate2 = "UPDATE tbl_cart SET stocks = '$stocks' WHERE productId = '$productId'  ";
 				$inserted_row = $this->db->insert($queryUpdate2);
 			
     $query = "UPDATE tbl_cart
@@ -198,7 +200,7 @@ $msg = "<span class='error'>Product Not Deleted !</span>";
 		$this->db->delete($query);
 	}
 
-	public function orderProduct($cmrId){
+	public function orderProduct($data,$file,$paymentMethod, $cmrId){
 		$sId  = session_id();
 	    $query = "SELECT * FROM tbl_cart WHERE sId = '$sId'";
 		$getPro = $this->db->select($query);
@@ -212,8 +214,107 @@ $msg = "<span class='error'>Product Not Deleted !</span>";
 
 				$query = "INSERT INTO tbl_order(cmrId,productId,productName,quantity,price,image) VALUES('$cmrId','$productId','$productName','$quantity','$price','$image') ";
 			$inserted_row = $this->db->insert($query);
+
+			$last_insert_id = mysqli_insert_id($this->db->link);
 			}
 		}
+
+		$orderId = $last_insert_id;
+
+		$paymentMethod = $this->fm->validation($data['paymentMethod']);
+
+		$paymentMethod = mysqli_real_escape_string($this->db->link, $data['paymentMethod']);
+
+		
+
+    $permited  = array('jpg', 'jpeg', 'png', 'gif');
+    $file_name = $file['proofOfPayment']['name'];
+    $file_size = $file['proofOfPayment']['size'];
+    $file_temp = $file['proofOfPayment']['tmp_name'];
+
+    $div = explode('.', $file_name);
+    $file_ext = strtolower(end($div));
+    $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
+    $uploaded_image = "images/".$unique_image;
+
+if ( $file_name == "") {
+	
+	$msg = "<span class='error'>Fields must not be empty !</span>";
+	return $msg;
+}elseif ($file_size > 8388608) {
+     echo "<span class='error'>Image Size should be less then 8MB!
+     </span>";
+    } elseif (in_array($file_ext, $permited) === false) {
+     echo "<span class='error'>You can upload only:-".implode(', ', $permited)."</span>";
+
+
+}else{
+
+	 move_uploaded_file($file_temp, $uploaded_image);
+	 $query = "INSERT INTO payment(orderId,cmrId,paymentMethod,proofOfPayment) VALUES('$orderId','$cmrId','$paymentMethod','$uploaded_image') ";
+
+	 $inserted_row = $this->db->insert($query);
+			if ($inserted_row) {
+				$msg = "<span class='success'>Product inserted Successfully.</span>";
+				return $msg;
+			} else{
+				$msg = "<span class='error'>Product Not inserted.</span>";
+				return $msg;
+		}
+	
+		
+		}
+		
+	}
+
+	public function orderProductCOD($paymentMethod, $cmrId){
+		$sId  = session_id();
+	    $query = "SELECT * FROM tbl_cart WHERE sId = '$sId'";
+		$getPro = $this->db->select($query);
+		if ($getPro) {
+			while ($result = $getPro->fetch_assoc()) {
+				$productId = $result['productId'];
+				$productName = $result['productName'];
+				$quantity = $result['quantity'];
+				$price = $result['price'] * $quantity;
+				$image = $result['image'];
+
+				$query = "INSERT INTO tbl_order(cmrId,productId,productName,quantity,price,image) VALUES('$cmrId','$productId','$productName','$quantity','$price','$image') ";
+			$inserted_row = $this->db->insert($query);
+
+			$last_insert_id = mysqli_insert_id($this->db->link);
+			}
+		}
+
+		$orderId = $last_insert_id;
+
+		$paymentMethod = $this->fm->validation($data['paymentMethod']);
+
+		$paymentMethod = mysqli_real_escape_string($this->db->link, $data['paymentMethod']);
+
+		
+
+   
+
+if ( $file_name == "" || $paymentMethod == "") {
+	
+	$msg = "<span class='error'>Fields must not be empty !</span>";
+	return $msg;
+}else{
+
+	
+			$query = "INSERT INTO payment(orderId,cmrId,paymentMethod) VALUES('$orderId','$cmrId','$paymentMethod') ";
+
+			$inserted_row = $this->db->insert($query);
+				   if ($inserted_row) {
+					   $msg = "<span class='success'>Product inserted Successfully.</span>";
+					   return $msg;
+				   } else{
+					   $msg = "<span class='error'>Product Not inserted.</span>";
+					   return $msg;
+			   }
+		}
+		
 	}
 	public function payableAmount($cmrId){
 	$query = "SELECT price FROM tbl_order WHERE cmrId = '$cmrId' AND date = now()";

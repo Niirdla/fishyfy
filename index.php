@@ -83,11 +83,9 @@ if ($login == false) {
 									<div class="header-icons">
 										<a class="shopping-cart" href="cart.php"><i class="fas fa-shopping-cart"></i></a>
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+									
 										<a class="user-profile" href="profile.php"><i class='far fa-user-circle' style='font-size:1.7rem'></i></a>
-										<ul class="sub-menu">
-											<li><a href="profile.php">My Account</a></li>
-											<li><a href="orderdetails.php">My Orders</a></li>
-										</ul>
+										
 										<a class="sign-out" href="?cid=<?php Session::get('cmrId') ?>"><i class='fas fa-sign-out-alt' style='font-size:1.7rem;color:white'></i></a>
 									</div>
 								</li>

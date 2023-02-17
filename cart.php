@@ -27,6 +27,7 @@ $login = Session::get("cuslogin");
 if ($login == false) {
 
 	echo '<style>.sign-out {visibility: hidden;}</style>';
+	header("Location:login.php");
 
 	
 }

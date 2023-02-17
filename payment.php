@@ -54,6 +54,21 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 }
   ?>
 
+<?php
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+	$paymentMethod = $_POST['paymentMethod'];
+	$cmrId = Session::get("cmrId");
+	$insertOrder = $ct->orderProduct($_POST,$_FILES,$paymentMethod, $cmrId);
+    
+
+	$delData = $ct->delCustomerCart();
+ header("Location:orderdetails.php");
+}
+
+?>
+
 
 <!DOCTYPE php>
 <php lang="en">
@@ -68,6 +83,7 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+	
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -87,11 +103,22 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 	<link rel="stylesheet" href="assets/css/main.css">
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
+	<!-- modal -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	<!-- include Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<!-- include jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- include Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 	<script src = "https://www.paypal.com/sdk/js?client-id=AcTYM_vIcI8ruRN3yyXlp2PO02Ke58qj8xxBP_LGjimI9W9TMeVdtve_LMzRyDb86lLDY11tpbTUNXRE"></script>
 
+
+	
 </head>
-<body>
+<body  onload="changeImage()">
 	
 
 	
@@ -269,22 +296,97 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
 						  <div class="card single-accordion">
 						    <div class="card-header" id="headingThree">
 						      <h5 class="mb-0">
-						        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-						          Card Details
+						        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" >
+						         Payment method
 						        </button>
 						      </h5>
 						    </div>
-						    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+						    <div id="collapseThree" class="collapse in" aria-labelledby="headingThree" data-parent="#accordionExample">
 						      <div class="card-body">
 						        <div class="card-details">
 
-						        	<div id = "paypal-button-container"> </div>
+						        <div style="display: flex;">
+  <div style="flex: 1;">
+    <img id="image" src="assets/img/COD.png" alt="Image" style="max-width: 100%;">
+  </div>
+  <div style="flex: 1;">
+    <select id="imageSelector" onchange="changeImage()" name="paymentMethod" style= "background-color: white;
+  font-weight: bold; margin-top:30px; height:40px; width:300px;">
+  	
+      <option value="Cash on Delivery">Cash on Delivery</option>
+      <option value="Gcash">Gcash </option>
+    </select>
+  </div>
+</div>
 
-									<script>
+<script>
+// JavaScript code
+function changeImage() {
+  var selector = document.getElementById("imageSelector");
+  var selectedValue = selector.value;
+  var image = document.getElementById("image");
+  var button = document.getElementById("uploadButton");
 
-										paypal.Buttons().render('#paypal-button-container');
+  switch(selectedValue) {
+    case "Cash on Delivery":
+      image.src = "assets/img/COD.png";
+	  button.style.display = "none";
+      break;
+    case "Gcash":
+      image.src = "assets/img/gcash.png";
+	  button.style.display = "block";
+      break;
+    default:
+      image.src = "assets/img/COD.png";
+	  button.style.display = "none";
+      break;
+  }
+}
+changeImage();
+</script>
+									<!-- button to trigger the modal -->
+	<button id="uploadButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Pay and upload proof of payment</button>
 
-									</script>
+<!-- modal window -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- modal content -->
+		<div class="modal-content">
+			<!-- modal header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Upload your proof of payment</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<!-- modal body -->
+			<div class="modal-body">
+				<!-- image at the top of the modal -->
+				<img src="assets/img/gcash-scan.jpg" alt="Image" style="width:100%;">
+				
+				<?php
+        if (isset($uploadPayment)) {
+            echo $uploadPayment;
+        }
+
+        ?>    
+				<!-- form to upload image -->
+				<form method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="file">Upload your proof of payment after scanning here:</label>
+						 <input type="hidden" name="paymentMethod" value="Gcash">
+						<input type="file" class="form-control" id="file" name="proofOfPayment">
+					</div>
+					<button type="submit" name = "submit" value ="Save"class="btn btn-primary">Upload</button>
+				</form>
+			</div>
+			<!-- modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 						        </div>
 						      </div>
 						    </div>
