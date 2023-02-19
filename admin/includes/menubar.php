@@ -20,6 +20,7 @@
           <li><a href="order_reports.php"><i class="fa fa-circle-o"></i> Order reports</a></li>
           <li><a href="user_reports.php"><i class="fa fa-circle-o"></i> User reports</a></li>
           <li><a href="item_reports.php"><i class="fa fa-circle-o"></i> Item reports</a></li>
+          <li><a href="paymentReports.php"><i class="fa fa-circle-o"></i> Payment reports</a></li>
         </ul>
       </li>
 

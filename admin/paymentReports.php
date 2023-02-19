@@ -17,7 +17,7 @@ $con = mysqli_connect("localhost","root","","db_shop");
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Item Reports
+        Payment Reports
       </h1>
       <ol class="breadcrumb">
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -43,10 +43,10 @@ $con = mysqli_connect("localhost","root","","db_shop");
                                     <div class="form-group">
                                         
                                     <label>Role</label>
-                                        <select name="product">
+                                        <select name="payment">
   <?php
-    $selected = $_GET["product"];
-    $options = array("All","stock<50");
+    $selected = $_GET["payment"];
+    $options = array("All", "Cash on Delivery", "Gcash");
     foreach ($options as $option) {
       if ($option == $selected) {
         echo "<option selected='selected' value='$option'>$option</option>";
@@ -73,7 +73,7 @@ $con = mysqli_connect("localhost","root","","db_shop");
                 <span id="printout">
 
                 <div class="col-md-12" >
-	              <div class="page-header" style="text-align:center;" ><h1>Item Reports</h1>
+	              <div class="page-header" style="text-align:center;" ><h1>Payment Reports</h1>
                  
 	              </div>
 
@@ -82,10 +82,15 @@ $con = mysqli_connect("localhost","root","","db_shop");
                         <table class="data display datatable" style = "text-align:center;" >
                             <thead>
                                 <tr>
-                                                <th style="text-align: center; color:white;">ID</th>
-                                                <th style="text-align: center; color:white;">Product Name</th>
-							                    <th style="text-align: center; color:white;">Price</th>
-                                                <th style="text-align: center; color:white;">Stocks</th>
+                                <th style = "text-align: center; color: white;">Order no.</th>
+                                
+								<th style = "text-align: center; color: white;">Product Name</th>
+                                <th style = "text-align: center; color: white;">Quantity</th>
+                                <th style = "text-align: center; color: white;">Price</th>
+                                <th style = "text-align: center; color: white;">Date</th>
+								<th style = "text-align: center; color: white;">Payment Method</th>
+                                <th style = "text-align: center; color: white;">Status</th>
+                                <th style = "text-align: center; color: white;">Action</th>
 							                 
 							                    
                                 </tr>
@@ -95,47 +100,21 @@ $con = mysqli_connect("localhost","root","","db_shop");
                             <?php 
                                 
 
-                                if(isset($_GET['product']))
+                                if(isset($_GET['payment']))
                                 {
-                                    $product = $_GET['product'];
+                                    $payment = $_GET['payment'];
 
-                                    $query = "SELECT tbl_product.* FROM tbl_product where productId";
+                                    $query = "SELECT tbl_order.*, payment.paymentMethod FROM tbl_order, payment WHERE tbl_order.cmrId = payment.cmrId and tbl_order.id = payment.orderId ORDER BY date DESC";
                                     $query_run = mysqli_query($con, $query);
 
-                                    $query2 = "SELECT tbl_product.* FROM tbl_product where productId AND stocks < 50";
-                                    $query_run2 = mysqli_query($con, $query2);
-
+                                    $query_COD = "SELECT tbl_order.*, payment.paymentMethod FROM tbl_order, payment WHERE tbl_order.cmrId = payment.cmrId and tbl_order.id = payment.orderId AND payment.paymentMethod = 'Cash on Delivery' ORDER BY date DESC";
+                                    $query_run_COD = mysqli_query($con, $query_COD);
                                 
+                                    $query_Gcash = "SELECT tbl_order.*, payment.paymentMethod FROM tbl_order, payment WHERE tbl_order.cmrId = payment.cmrId and tbl_order.id = payment.orderId AND payment.paymentMethod = 'Gcash' ORDER BY date DESC";
+                                    $query_run_Gcash = mysqli_query($con, $query_Gcash);
 
-                                    if($product == "stock<50" && mysqli_num_rows($query_run2)  > 0)
-                                    {
-                                     
-
-                                 
-                                        foreach($query_run2 as $row)
-                                        {
-                                       
-                                            ?>
-                                            
-                                            <tr>
-                                                <td><?= $row['productId']; ?></td>
-                                                <td><?= $row['productName']; ?></td>
-                                                <td><?= $row['price'];?></td>
-                                                <td><?= $row['stocks']; ?></td>
-                                         
-                                                
-                                            </tr>
-                                            <?php
-                                         
-                                        }
-                                    }
                                    
-                                    else
-                                    {
-                                        echo "No Record Found";
-                                    }
-
-                                    if($product == "All" && mysqli_num_rows($query_run) > 0)
+                                    if($payment == "All" && mysqli_num_rows($query_run) > 0)
                                     {
                                      
 
@@ -146,15 +125,85 @@ $con = mysqli_connect("localhost","root","","db_shop");
                                             ?>
                                             
                                             <tr>
-                                                <td><?= $row['productId']; ?></td>
+                                                <td><?= $row['id']; ?></td>
                                                 <td><?= $row['productName']; ?></td>
-                                                <td><?= $row['price'];?></td>
-                                                <td><?= $row['stocks']; ?></td>
-                                         
-                                                
+                                                <td><?= $row['quantity'];?></td>
+                                                <td><?= $row['price']; ?></td>
+                                                <td><?= $row['date']; ?></td>
+                                                <td><?= $row['paymentMethod']; ?></td>
+                                                <td><?php
+
+if ($row['status'] == '0') {
+    echo "Pending";
+}elseif($row['status'] == '1'){
+   echo "Shifted";
+} else{ 
+   echo "Order received";
+}
+
+
+?></td>
                                             </tr>
                                             <?php
                                         }
+                                    }elseif($payment == "Gcash" && mysqli_num_rows($query_run_Gcash) > 0){
+                                        foreach($query_run_Gcash as $row)
+                                        {
+                                         
+                                            ?>
+                                            
+                                            <tr>
+                                                <td><?= $row['id']; ?></td>
+                                                <td><?= $row['productName']; ?></td>
+                                                <td><?= $row['quantity'];?></td>
+                                                <td><?= $row['price']; ?></td>
+                                                <td><?= $row['date']; ?></td>
+                                                <td><?= $row['paymentMethod']; ?></td>
+                                                <td><?php
+
+if ($row['status'] == '0') {
+    echo "Pending";
+}elseif($row['status'] == '1'){
+   echo "Shifted";
+} else{ 
+   echo "Order received";
+}
+
+
+?></td>
+                                            </tr>
+                                            <?php
+                                        }
+
+                                    }elseif($payment == "Cash on Delivery" && mysqli_num_rows($query_run_COD) > 0){
+                                        foreach($query_run_COD as $row)
+                                        {
+                                         
+                                            ?>
+                                            
+                                            <tr>
+                                                <td><?= $row['id']; ?></td>
+                                                <td><?= $row['productName']; ?></td>
+                                                <td><?= $row['quantity'];?></td>
+                                                <td><?= $row['price']; ?></td>
+                                                <td><?= $row['date']; ?></td>
+                                                <td><?= $row['paymentMethod']; ?></td>
+                                                <td><?php
+
+if ($row['status'] == '0') {
+    echo "Pending";
+}elseif($row['status'] == '1'){
+   echo "Shifted";
+} else{ 
+   echo "Order received";
+}
+
+
+?></td>
+                                            </tr>
+                                            <?php
+                                        }
+
                                     }
                                    
                                     else
@@ -163,6 +212,7 @@ $con = mysqli_connect("localhost","root","","db_shop");
                                     }
                                     
                                 }
+                                
                             ?>
                             </tbody>
                         </table>

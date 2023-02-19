@@ -4,7 +4,7 @@
 <?php 
 $login = Session::get("cuslogin");
 if ($login == false) {
-	echo '<style>.header-icons {visibility: hidden;}</style>';
+	echo '<style>.sign-out {visibility: hidden;}</style>';
     header("Location:login.php");
 }
  ?>
@@ -96,8 +96,8 @@ if (isset($_GET['customerId'])) {
 										<ul class="sub-menu">
 											<li><a href="profile.php">My Account</a></li>
 											<li><a href="orderdetails.php">My Orders</a></li>
-											<a class="sign-out" href="?cid=<?php Session::get('cmrId') ?>"><i class='fas fa-sign-out-alt' style='font-size:1.7rem;color:white'></i></a>
 										</ul>
+										<a class="sign-out" href="?cid=<?php Session::get('cmrId') ?>"><i class='fas fa-sign-out-alt' style='font-size:1.7rem;color:white'></i></a>
 									</div>
 								</li>
 							</ul>
@@ -120,8 +120,8 @@ if (isset($_GET['customerId'])) {
 					<div class="search-bar">
 						<div class="search-bar-tablecell">
 						<h3>Search For:</h3>
-						<form action="search.php" method="get">
-				    		<input type="text" value="Search for Products" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for products';}">
+						<form action="search_order.php" method="get">
+				    		<input type="text" value="Search for Order ID, Product Name." name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for Order ID, Product Name.';}">
 							<button type="submit" name="submit" value="SEARCH">Search <i class="fas fa-search"></i></button>
 				    	</form>
 
@@ -149,22 +149,34 @@ if (isset($_GET['customerId'])) {
 		</div>
 	</div>
 	<!-- end breadcrumb section -->
+	<div class="search_box">
+				    <form action="search_order.php" method="get">
+				    	<input type="text" value="Search for Order ID, Product Name." name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for Order ID, Product Name.';}">
+				    	<input type="submit" name="submit" value="SEARCH">
+				    </form>
+			    </div>
 
 <div class="checkout-section mt-150 mb-150">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8">
-    		<h2>Order details</h2>
-            <table class="cart-table">
+    	
+            <table class="cart-table" style = "width: 155%;">
 				<thead class="cart-table-head">
+				<tr class="table-head-row">
+                            <th colspan="9">
+                                <h2 style="text-align: center; color:white;">Order details</h2>
+                            </th>
+                        </tr>
                             <tr class="table-head-row">
-                                <th>No</th>
+                                <th>Order no.</th>
                                 
                                 <th>Image</th>
 								<th>Product Name</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
                                 <th>Date</th>
+								<th>Payment Method</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -176,13 +188,13 @@ if (isset($_GET['customerId'])) {
                             $cmrId = Session::get("cmrId");
                             $getOrder = $ct->getOrderedProduct($cmrId);
                             if ($getOrder) {
-                                $i = 0;
+                               
                                 while ($result = $getOrder->fetch_assoc()) {
                                 
-                                $i++;
+                           
 
                              ?>
-                                <td><?php echo $i;?></td>
+                                <td><?php echo $result['id'];;?></td>
 								<td class="product-image"><img src="admin/<?php echo $result['image']; ?>" alt="" style= "    width: 90%;
     height: 100%;
 	max-width:250px;
@@ -197,7 +209,7 @@ if (isset($_GET['customerId'])) {
                     
                                 <td>₱ <?php echo $result['price'];?></td>
                          <td><?php echo $fm->formatDate($result['date']); ?></td>
-
+						 <td><?php echo $result['paymentMethod']; ?></td>
                          <td><?php
 
                          if ($result['status'] == '0') {

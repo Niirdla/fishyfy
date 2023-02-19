@@ -55,18 +55,52 @@ if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
   ?>
 
 <?php
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-	$paymentMethod = $_POST['paymentMethod'];
-	$cmrId = Session::get("cmrId");
-	$insertOrder = $ct->orderProduct($_POST,$_FILES,$paymentMethod, $cmrId);
+    $paymentMethod = $_POST['paymentMethod'];
+    $cmrId = Session::get("cmrId");
+    if($paymentMethod === "Gcash"){
+        $insertOrder = $ct->orderProduct($_POST,$_FILES,$paymentMethod, $cmrId);
+		$delData = $ct->delCustomerCart();
+    header("Location:orderdetails.php");
+    } elseif($paymentMethod === "Cash on Delivery"){
+        $insertOrder2 = $ct->orderProductCOD($_POST,$paymentMethod, $cmrId);
+		$delData = $ct->delCustomerCart();
+    header("Location:orderdetails.php");
+    }
+	$con = mysqli_connect("localhost","root","","db_shop");
+	$sql = "SELECT tbl_customer.*,tbl_order.* from tbl_customer, tbl_order where tbl_customer.id = tbl_order.cmrId ORDER BY tbl_order.id DESC LIMIT 1";
+	$result = mysqli_query($con, $sql);
+	if (mysqli_num_rows($result) > 0) {
+		$row = mysqli_fetch_assoc($result);
+		$to = $row['email'];
+	   $subject = "Order Details";
+   
+	   $message = "Order ID: " . $row['id'] . "\n" .
+					   "Order Date: " . $row['date'] . "\n" .
+   
+							"Customer Name: " . $row['name'] . "\n" .
+							"Email: " . $row['email'] . "\n" .
+							"Item: " . $row['productName'] . "\n" .
+							"Quantity: " . $row['quantity'] . "\n" .
+							"Total Cost: ₱" . $row['price'] . "\n";
+   
+   
+	 $headers = "From: amberspirit16@gmail.com";
+	  
+   
+	 if (mail($to, $subject, $message, $headers)) {
+	   echo "<script>
+	   alert('Check Your Email Inbox for the details');		
+   </script>";
+	  
+	 } else {
+	   echo "Failed to send email. Please try again later.";
+	 }
+   } else {
+	   echo "No recent order found.";
+   }
     
-
-	$delData = $ct->delCustomerCart();
- header("Location:orderdetails.php");
 }
-
 ?>
 
 
@@ -319,72 +353,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
   </div>
 </div>
 
-<script>
-// JavaScript code
-function changeImage() {
-  var selector = document.getElementById("imageSelector");
-  var selectedValue = selector.value;
-  var image = document.getElementById("image");
-  var button = document.getElementById("uploadButton");
-
-  switch(selectedValue) {
-    case "Cash on Delivery":
-      image.src = "assets/img/COD.png";
-	  button.style.display = "none";
-      break;
-    case "Gcash":
-      image.src = "assets/img/gcash.png";
-	  button.style.display = "block";
-      break;
-    default:
-      image.src = "assets/img/COD.png";
-	  button.style.display = "none";
-      break;
-  }
-}
-changeImage();
-</script>
-									<!-- button to trigger the modal -->
-	<button id="uploadButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Pay and upload proof of payment</button>
-
-<!-- modal window -->
-<div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog">
-		<!-- modal content -->
-		<div class="modal-content">
-			<!-- modal header -->
-			<div class="modal-header">
-				<h4 class="modal-title">Upload your proof of payment</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-			<!-- modal body -->
-			<div class="modal-body">
-				<!-- image at the top of the modal -->
-				<img src="assets/img/gcash-scan.jpg" alt="Image" style="width:100%;">
-				
-				<?php
-        if (isset($uploadPayment)) {
-            echo $uploadPayment;
-        }
-
-        ?>    
-				<!-- form to upload image -->
-				<form method="post" enctype="multipart/form-data">
-					<div class="form-group">
-						<label for="file">Upload your proof of payment after scanning here:</label>
-						 <input type="hidden" name="paymentMethod" value="Gcash">
-						<input type="file" class="form-control" id="file" name="proofOfPayment">
-					</div>
-					<button type="submit" name = "submit" value ="Save"class="btn btn-primary">Upload</button>
-				</form>
-			</div>
-			<!-- modal footer -->
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
 
 
 						        </div>
@@ -467,8 +435,101 @@ changeImage();
 							</tbody>
 						</table>
 					
-						<a href="?orderid=Order" class="boxed-btn">Place Order</a>
+						<form method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						
+					<input type="hidden" name="paymentMethod" value="Cash on Delivery">
+					
+					</div>
+					<button type="button" class="btn btn-primary" id="modal_button" style="display: none; background-color: #0a537a;" data-toggle="modal" data-target="#myModal">Place order</button>
+
+<button type="submit"  name = "submit" class="btn btn-primary" value ="Save" id="submit_button" style="display: none; background-color: #0a537a;">Place order</button>
+</form>
 		
+
+	
+<!-- modal window -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- modal content -->
+		<div class="modal-content">
+			<!-- modal header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Upload your proof of payment</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<!-- modal body -->
+			<div class="modal-body">
+				<!-- image at the top of the modal -->
+				<img src="assets/img/gcash-scan.jpg" alt="Image" style="width:100%;">
+				
+				<?php
+        if (isset($uploadPayment)) {
+            echo $uploadPayment;
+        }
+
+        ?>    
+				<!-- form to upload image -->
+				<form method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="file">Upload your proof of payment after scanning here:</label>
+						 <input type="hidden" name="paymentMethod" value="Gcash">
+						<input type="file" class="form-control" id="file" name="proofOfPayment" required>
+					</div>
+					<button type="submit" name = "submit" value ="Save"class="btn btn-primary">Upload</button>
+				</form>
+			</div>
+			<!-- modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+				<script>
+       document.getElementById("submit_button").addEventListener("click", function() {
+  var inputFieldValue = document.getElementById("myInput").value;
+  var selectValue = document.getElementById("imageSelector").value;
+  
+});
+    </script>
+	<script>
+// JavaScript code
+
+  
+function changeImage() {
+  var selector = document.getElementById("imageSelector");
+  var selectedValue = selector.value;
+  var image = document.getElementById("image");
+  var button = document.getElementById("uploadButton");
+  var modalButton = document.getElementById("modal_button");
+  var submitButton = document.getElementById("submit_button");
+  switch(selectedValue) {
+    case "Cash on Delivery":
+      image.src = "assets/img/COD.png";
+	  modalButton.style.display = "none";
+      submitButton.style.display = "block";
+	  submitButton.style.width = "35rem";
+      break;
+    case "Gcash":
+      image.src = "assets/img/gcash.png";
+	  modalButton.style.display = "block";
+	  modalButton.style.width = "35rem";
+      submitButton.style.display = "none";
+	  
+      break;
+    default:
+      image.src = "assets/img/COD.png";
+	  modalButton.style.display = "none";
+      submitButton.style.display = "block";
+	  submitButton.style.width = "35rem";
+      break;
+  }
+}
+changeImage();
+
+</script>	
 					</div>
 				</div>
 			</div>

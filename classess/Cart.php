@@ -267,7 +267,7 @@ if ( $file_name == "") {
 		
 	}
 
-	public function orderProductCOD($paymentMethod, $cmrId){
+	public function orderProductCOD($data,$paymentMethod, $cmrId){
 		$sId  = session_id();
 	    $query = "SELECT * FROM tbl_cart WHERE sId = '$sId'";
 		$getPro = $this->db->select($query);
@@ -296,7 +296,7 @@ if ( $file_name == "") {
 
    
 
-if ( $file_name == "" || $paymentMethod == "") {
+if ( $paymentMethod == "") {
 	
 	$msg = "<span class='error'>Fields must not be empty !</span>";
 	return $msg;
@@ -323,7 +323,7 @@ if ( $file_name == "" || $paymentMethod == "") {
 	}
 
 	public function getOrderedProduct($cmrId){
-    $query = "SELECT * FROM tbl_order WHERE cmrId = '$cmrId' ORDER BY date DESC";
+    $query = "SELECT tbl_order.*, payment.paymentMethod FROM tbl_order, payment WHERE tbl_order.cmrId = payment.cmrId and tbl_order.id = payment.orderId ORDER BY date DESC";
 	$result = $this->db->select($query);
 	return $result;
 

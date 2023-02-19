@@ -1,53 +1,31 @@
 <?php include 'inc/header_3.php';?>
 
-
-
-
-<?php 
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-	$cartId = $_POST['cartId'];
-	$quantity = $_POST['quantity'];
-
-		$updateCart = $ct->updateCartQuantity($cartId,$quantity);
-
-    if ($quantity <=0) {
-    	$delProduct = $ct->delProductByCart($cartId);
-    }
-	
-}
-
- ?>
-
- 
 <?php 
 $login = Session::get("cuslogin");
 if ($login == false) {
 
 	echo '<style>.sign-out {visibility: hidden;}</style>';
-	header("Location:login.php");
 
 	
 }
  ?>
 
-
 <?php 
-if (isset($_GET['delpro'])) {
-	$delId = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['delpro']);
-	$delProduct = $ct->delProductByCart($delId);
-}
- ?>
- <?php  
-if (!isset($_GET['id'])) {
-	echo "<meta http-equiv = 'refresh' content ='0;URL=?id=nayem' />";
-}
- ?>
+$search = mysqli_real_escape_string($db->link,$_GET['search']);
+if (!isset($search) || $search == NULL) {
+	header("Location:404.php");
+} else {
 
-<!DOCTYPE php>
-<php lang="en">
+$search = $search;
+
+}
+
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,7 +33,7 @@ if (!isset($_GET['id'])) {
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
 	<!-- title -->
-	<title>Cart</title>
+	<title>Shop</title>
 
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
@@ -79,9 +57,10 @@ if (!isset($_GET['id'])) {
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
+
+
 </head>
 <body>
-	
 	<!-- header -->
 	<div class="top-header-area" id="sticker">
 		<div class="container">
@@ -135,8 +114,9 @@ if (!isset($_GET['id'])) {
 		</div>
 	</div>
 	<!-- end header -->		   
-<!-- search area -->
-<div class="search-area">
+
+	<!-- search area -->
+	<div class="search-area">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -144,8 +124,8 @@ if (!isset($_GET['id'])) {
 					<div class="search-bar">
 						<div class="search-bar-tablecell">
 						<h3>Search For:</h3>
-						<form action="search.php" method="get">
-				    		<input type="text" value="Search for Products" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for products';}">
+						<form action="search_order.php" method="get">
+				    		<input type="text" value="Search for Order ID, Product Name." name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for Order ID, Product Name.';}">
 							<button type="submit" name="submit" value="SEARCH">Search <i class="fas fa-search"></i></button>
 				    	</form>
 
@@ -156,9 +136,6 @@ if (!isset($_GET['id'])) {
 		</div>
 	</div>
 	<!-- end search arewa -->
-
-	
-	
 	
 	<!-- breadcrumb-section -->
 	<div class="breadcrumb-section breadcrumb-bg">
@@ -166,62 +143,64 @@ if (!isset($_GET['id'])) {
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-					
-						<h1>Cart</h1>
+	
+						<h1>Shop</h1>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- end breadcrumb section -->
+	<div class="search_box">
+				    <form action="search_order.php" method="get">
+				    	<input type="text" value="Search for Order ID, Product Name." name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for Order ID, Product Name.';}">
+				    	<input type="submit" name="submit" value="SEARCH">
+				    </form>
+			    </div>
 
-	<!-- cart -->
+				<div class="checkout-section mt-150 mb-150">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8">
+    	
+            <table class="cart-table" style = "width: 155%;">
+				<thead class="cart-table-head">
+				<tr class="table-head-row">
+                            <th colspan="9">
+                                <h2 style="text-align: center; color:white;">Order details</h2>
+                            </th>
+                        </tr>
+                            <tr class="table-head-row">
+                                <th>Order no.</th>
+                                
+                                <th>Image</th>
+								<th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Date</th>
+								<th>Payment Method</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                </thead>
+				<tbody>
+                        <tr class="table-body-row">
+<?php 
+
+	$query = "select tbl_order.*, payment.paymentMethod FROM tbl_order, payment where tbl_order.productName like '%$search%' or tbl_order.id like '%$search%' ORDER BY productId DESC LIMIT 30";
+
+	$post = $db->select($query);
+
+	if ($post) {
+		
+	while ($result = $post->fetch_assoc()) {
+		
 	
-	<div class="cart-section mt-150 mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-md-12">
-						<div class="cart-table-wrap">
-						<?php 
-						if (isset($updateCart)) {
-							echo $updateCart;
-						}
 
-						if (isset($delProduct)) {
-							echo $delProduct;
-						}
-						?>
-							<table class="cart-table">
-								<thead class="cart-table-head" >
-									<tr class="table-head-row">
-										<th class ="product-price">SL</th>
-										<th class="product-image">Product Image</th>
-										<th class="product-name">Name</th>
-										<th class="product-price">Price</th>
-										<th class="product-quantity">Quantity</th>
-										<th class="product-total">Subtotal Price</th>
-										
-										<th class="product-remove"></th>
-									</tr>
-								</thead>
+	 ?>
 
-								<?php 
-
-								$getPro = $ct->getCartProduct();
-								if ($getPro) {
-									$i = 0;
-									$sum = 0;
-									$qty = 0;
-									while ($result = $getPro->fetch_assoc()) {
-									
-									$i++;
-
-								?>
-
-								<tbody>
-									<tr class="table-body-row">
-										<td><?php echo $i;?></td>
-										<td class="product-image"><img src="admin/<?php echo $result['image']; ?>" alt="" style= "    width: 100%;
+<td><?php echo $result['id'];;?></td>
+								<td class="product-image"><img src="admin/<?php echo $result['image']; ?>" alt="" style= "    width: 90%;
     height: 100%;
 	max-width:250px;
     position: relative;
@@ -229,109 +208,57 @@ if (!isset($_GET['id'])) {
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);"/></td>
-										<td class="product-name"><?php echo $result['productName']; ?></td>
-										<td class="product-price">₱ <?php echo $result['price']; ?></td>
-										<td class="product-quantity">
-											<form action="" method="post">
-													<input class = "buyfield"type = "number" style ="display:none;" name="stocks" value = "<?php echo $result['stocks']; ?>"/> 
-													<input type="hidden" name="cartId" value="<?php echo $result['cartId']; ?>" />
-													<input type="number" name="quantity" max = <?php echo $result['stocks']; ?> min =1 value="<?php echo $result['quantity']; ?>" onchange="this.form.submit()"/>	
-													
-											</form>
-										</td>
+                                <td><?php echo $result['productName']; ?></td>
+                                
+                                <td><?php echo $result['quantity']; ?></td>
+                    
+                                <td>₱ <?php echo $result['price'];?></td>
+                         <td><?php echo $fm->formatDate($result['date']); ?></td>
+						 <td><?php echo $result['paymentMethod']; ?></td>
+                         <td><?php
 
-										<td class="product-total">₱ 
-											<?php
-											$total = $result['price'] * $result['quantity'];
-											echo $total;
-										?></td>
-										
-										<td class="product-remove"><a onclick="return confirm('Are you Sure to Delete!')" href="?delpro=<?php echo $result['cartId']; ?>"> <i class="far fa-window-close"></i></a></td>
-										<?php 
-											$qty = $qty + $result['quantity'];
-											$sum = $sum + $total;
-											Session::set("qty",$qty);
-											Session::set("sum",$sum);
-											?>
+                         if ($result['status'] == '0') {
+                             echo "Pending";
+                         }elseif($result['status'] == '1'){
+                            echo "Shifted";
+                       } else{ 
+                            echo "Order received";
+                         }
 
 
-										<?php } } ?>	
-									
-									</tr>
-		
-								</tbody>
-							</table>
-					</div>
-				</div>
+           ?></td>
+                    </td>
 
-				<div class="col-lg-4">
-					<div class="total-section">
-					<?php
-						$getData = $ct->checkCartTable();
-							if ($getData){
+                
+                    <?php 
+                    if ($result['status'] == '1') { ?>
+                     <td> <a href="?customerId=<?php echo $result['id']; ?>">Confirm</a><td>
+                   <?php } elseif($result['status'] == '2'){?>
+                    <td>Order Received</td>
 
-								?>
-						<table class="total-table">
-							<thead class="total-table-head">
-								<tr class="table-total-row">
-									<th>Total</th>
-									<th>Price</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="total-data">
-									<td><strong>Subtotal: </strong></td>
-									<td >₱ <?php echo $sum; ?></td>
-								</tr>
-								<tr class="total-data">
-									<td><strong>VAT :Shipping: </strong></td>
-									<td>10%</td>
-								</tr>
-								<tr class="total-data">
-									<td><strong>Grand Total : </strong></td>
-									<td>₱
-										<?php 
-										$vat = $sum * 0.1;
-										$gtotal = $sum + $vat;
-										echo $gtotal;
-										?>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+                  <?php }elseif ($result['status'] == '0') {?>
+                      <td>N/A</td>
+                 <?php  }  ?>
+                   
+            </tr>
+                            
 
-						<?php }else{
-						
-						echo "Cart Empty ! Please Shop Now...";
-						
-					} ?>
 
-						<div class="cart-buttons">	
-						<form action="" method="post">
-							<a href="payment.php" class="boxed-btn">Check Out</a>
-						</form>
-						</div>
-					</div>
-					
+                        <?php } } 
+					else { ?>
 
-					<div class="coupon-section">
-						<h3>Apply Coupon</h3>
-						<div class="coupon-form-wrap">
-							<form action="index.php">
-								<p><input type="text" placeholder="Coupon"></p>
-								<p><input type="submit" value="Apply"></p>
-							</form>
-						</div>
-					</div>
-					<div class="clear"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end cart -->
+<p style="color: red;font-size: 35px;font-weight: bold;text-align: center;">Your Seaech Query not found !!.</p>
+<?php } ?>  
+                  </tbody>
+                </table>
+                </div>
+    	</div>
+    </div>
+ </div>
 
-	<!-- logo carousel -->
-	<div class="logo-carousel-section">
+
+<!-- logo carousel -->
+<div class="logo-carousel-section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -382,11 +309,11 @@ if (!isset($_GET['id'])) {
 					<div class="footer-box pages">
 						<h2 class="widget-title">Pages</h2>
 						<ul>
-							<li><a href="index.php">Home</a></li>
-							<li><a href="about.php">About</a></li>
-							<li><a href="services.php">Shop</a></li>
-							<li><a href="news.php">News</a></li>
-							<li><a href="contact.php">Contact</a></li>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="about.html">About</a></li>
+							<li><a href="services.html">Shop</a></li>
+							<li><a href="news.html">News</a></li>
+							<li><a href="contact.html">Contact</a></li>
 						</ul>
 					</div>
 				</div>
@@ -394,7 +321,7 @@ if (!isset($_GET['id'])) {
 					<div class="footer-box subscribe">
 						<h2 class="widget-title">Subscribe</h2>
 						<p>Subscribe to our mailing list to get the latest updates.</p>
-						<form action="index.php">
+						<form action="index.html">
 							<input type="email" placeholder="Email">
 							<button type="submit"><i class="fas fa-paper-plane"></i></button>
 						</form>
@@ -450,4 +377,5 @@ if (!isset($_GET['id'])) {
 	<script src="assets/js/main.js"></script>
 
 </body>
-</php>
+</html>
+
