@@ -39,9 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                  <form action="" method="post">
                     <table class="form">                    
                         <tr>
-                            <td>Name</td>
+                            <td>First Name</td>
                             <td>
-                                <input type="text"readonly="readonly" value="<?php echo $result['name'];?>" class="medium" />
+                                <input type="text"readonly="readonly" value="<?php echo $result['first_name'];?>" class="medium" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Last Name</td>
+                            <td>
+                                <input type="text"readonly="readonly" value="<?php echo $result['last_name'];?>" class="medium" />
                             </td>
                         </tr>
                           <tr>

@@ -1,7 +1,8 @@
 <?php 
 require "connection.php";
 $email = "";
-$name = "";
+$first_name = "";
+$last_name = "";
 $errors = array();
 
 //if user signup
@@ -61,7 +62,8 @@ $errors = array();
             $update_otp = "UPDATE tbl_customer SET code = $code, status = '$status' WHERE code = $fetch_code";
             $update_res = mysqli_query($con, $update_otp);
             if($update_res){
-                $_SESSION['name'] = $name;
+                $_SESSION['first_name'] = $first_name;
+                $_SESSION['last_name'] = $last_name;
                 $_SESSION['email'] = $email;
                 header('location: login.php');
                 exit();

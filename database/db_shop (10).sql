@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2023 at 01:56 PM
+-- Generation Time: Feb 22, 2023 at 08:13 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -276,39 +276,39 @@ INSERT INTO `tbl_contact` (`id`, `name`, `email`, `contact`, `message`, `status`
 
 CREATE TABLE `tbl_customer` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
   `address` text NOT NULL,
   `city` varchar(30) NOT NULL,
   `country` varchar(30) NOT NULL,
   `zip` varchar(30) NOT NULL,
   `phone` varchar(30) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `username` varchar(50) NOT NULL,
   `pass` varchar(32) NOT NULL,
   `code` mediumint(50) NOT NULL,
   `status` text NOT NULL,
-  `role` varchar(50) NOT NULL,
-  `cart_unique_id` int(11) NOT NULL
+  `role` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tbl_customer`
 --
 
-INSERT INTO `tbl_customer` (`id`, `name`, `address`, `city`, `country`, `zip`, `phone`, `email`, `username`, `pass`, `code`, `status`, `role`, `cart_unique_id`) VALUES
-(1, 'bappy', 'khilgaon, Dhaka', 'Dhaka', 'Bangladesh', '1219', '01622425286', 'customer@gmail.com', '', '202cb962ac59075b964b07152d234b70', 0, '', '', 0),
-(10, '', '', '', '', '', '', 'al16@gmail.com', 'Al_James', 'd41d8cd98f00b204e9800998ecf8427e', 0, '', '', 0),
-(11, '', '', '', '', '', '', 'carldappro@gmail.com', 'carldappro', '14bfa6bb14875e45bba028a21ed38046', 0, '', '', 0),
-(12, '', '', '', '', '', '', 'andrei.mendoza21@yahoo.com', 'Aldrinaline16', '14bfa6bb14875e45bba028a21ed38046', 0, '', '', 0),
-(23, '', '', '', '', '', '', 'ggg@gmail.com', 'XenoMastah2', '14bfa6bb14875e45bba028a21ed38046', 0, '', '', 0),
-(35, '', '', '', '', '', '', 'shessg@gmail.com', 'shesh', '202cb962ac59075b964b07152d234b70', 718466, 'notverified', '', 0),
-(51, '', '', '', '', '', '', 'test@gmail.com', '', '733b5e6a2e24f2764086325a28b6013d', 548146, 'notverified', '', 0),
-(52, '', '', '', '', '', '', 'test@gmail.com', '', '733b5e6a2e24f2764086325a28b6013d', 548146, 'notverified', '', 0),
-(59, 'Raphael', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '44', 'ddd@gmail.com', '', '3d68333b47b4762fac37583cc91b6ad1', 444838, 'notverified', '', 0),
-(61, 'Aldrin James Mendoza', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '0910-167-6224', 'amberspirit16@gmail.com', '', '3d68333b47b4762fac37583cc91b6ad1', 0, 'verified', 'Customer', 0),
-(67, 'Aldrin James Mendoza', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '09699669699', 'mendozaar@students.nu-fairview.edu.ph', '', '531b07b9c1d9e8679d99020a9f836d73', 0, '', 'Database Admin', 0),
-(70, 'Admin', 'block 69 Lot 6 admin street', 'San Jose del Monte', '', '4002', '09102494012', 'admin@admin.com', '', '751cb3f4aa17c36186f4856c8982bf27', 0, '', 'Admin', 0),
-(74, 'Aldrin James Mendoza', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '0969-424-8893', 'aldrinlhabsyu@gmail.com', '', '3d68333b47b4762fac37583cc91b6ad1', 0, 'verified', 'Customer', 0);
+INSERT INTO `tbl_customer` (`id`, `first_name`, `last_name`, `address`, `city`, `country`, `zip`, `phone`, `email`, `pass`, `code`, `status`, `role`) VALUES
+(1, 'bappy', '', 'khilgaon, Dhaka', 'Dhaka', 'Bangladesh', '1219', '01622425286', 'customer@gmail.com', '202cb962ac59075b964b07152d234b70', 0, '', ''),
+(10, '', '', '', '', '', '', '', 'al16@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', 0, '', ''),
+(11, '', '', '', '', '', '', '', 'carldappro@gmail.com', '14bfa6bb14875e45bba028a21ed38046', 0, '', ''),
+(12, '', '', '', '', '', '', '', 'andrei.mendoza21@yahoo.com', '14bfa6bb14875e45bba028a21ed38046', 0, '', ''),
+(23, '', '', '', '', '', '', '', 'ggg@gmail.com', '14bfa6bb14875e45bba028a21ed38046', 0, '', ''),
+(35, '', '', '', '', '', '', '', 'shessg@gmail.com', '202cb962ac59075b964b07152d234b70', 718466, 'notverified', ''),
+(51, '', '', '', '', '', '', '', 'test@gmail.com', '733b5e6a2e24f2764086325a28b6013d', 548146, 'notverified', ''),
+(52, '', '', '', '', '', '', '', 'test@gmail.com', '733b5e6a2e24f2764086325a28b6013d', 548146, 'notverified', ''),
+(59, 'Raphael', '', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '44', 'ddd@gmail.com', '3d68333b47b4762fac37583cc91b6ad1', 444838, 'notverified', ''),
+(67, 'Aldrin James Mendoza', '', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '09699669699', 'mendozaar@students.nu-fairview.edu.ph', '531b07b9c1d9e8679d99020a9f836d73', 0, '', 'Database Admin'),
+(70, 'Admin', '', 'block 69 Lot 6 admin street', 'San Jose del Monte', '', '4002', '09102494012', 'admin@admin.com', '751cb3f4aa17c36186f4856c8982bf27', 0, '', 'Admin'),
+(74, 'Aldrin James Mendoza', '', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '0969-424-8893', 'aldrinlhabsyu@gmail.com', '3d68333b47b4762fac37583cc91b6ad1', 0, 'verified', 'Customer'),
+(75, 'Aldrin James', 'Mendoza', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '0976-368-8137', 'amberspirit16@gmail.com', '3d68333b47b4762fac37583cc91b6ad1', 0, 'verified', 'Customer'),
+(76, 'Admin', 'Vendor', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '0969-966-9699', 'vendor@vendor.com', 'ce24a07a6873eb433bddf1340022352d', 0, '', 'Database Admin');
 
 -- --------------------------------------------------------
 
@@ -634,7 +634,7 @@ ALTER TABLE `tbl_contact`
 -- AUTO_INCREMENT for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `tbl_order`

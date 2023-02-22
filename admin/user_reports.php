@@ -85,7 +85,8 @@ $con = mysqli_connect("localhost","root","","db_shop");
                             <thead>
                                 <tr>
                                                 <th style="text-align: center; color:white;">ID</th>
-                                                <th style="text-align: center; color:white;">Name</th>
+                                                <th style="text-align: center; color:white;">First Name</th>
+                                                <th style="text-align: center; color:white;">Last Name</th>
 							                    <th style="text-align: center; color:white;">Address</th>
                                                 <th style="text-align: center; color:white;">City</th>
 							                    <th style="text-align: center; color:white;">ZIP</th>
@@ -122,7 +123,8 @@ $con = mysqli_connect("localhost","root","","db_shop");
                                             
                                             <tr>
                                                 <td><?= $row['id']; ?></td>
-                                                <td><?= $row['name']; ?></td>
+                                                <td><?= $row['first_name']; ?></td>
+                                                <td><?= $row['last_name']; ?></td>
                                                 <td><?= $row['address']; ?></td>
                                                 <td><?= $row['city'];?></td>
                                                 <td><?= $row['zip']; ?></td>
@@ -154,7 +156,8 @@ $con = mysqli_connect("localhost","root","","db_shop");
                                             
                                             <tr>
                                                 <td><?= $row['id']; ?></td>
-                                                <td><?= $row['name']; ?></td>
+                                                <td><?= $row['first_name']; ?></td>
+                                                <td><?= $row['last_name']; ?></td>
                                                 <td><?= $row['address']; ?></td>
                                                 <td><?= $row['city'];?></td>
                                                 <td><?= $row['zip']; ?></td>

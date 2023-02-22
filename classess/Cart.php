@@ -334,7 +334,7 @@ if ( $paymentMethod == "") {
 		return $result;
 	}
 	public function getAllOrderProduct(){
-		$query = "SELECT * FROM tbl_order ORDER BY date DESC";
+		$query = "SELECT tbl_order.*, payment.* FROM tbl_order, payment WHERE tbl_order.cmrId = payment.cmrId and tbl_order.id = payment.orderId ORDER BY date DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}

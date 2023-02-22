@@ -18,21 +18,25 @@ if ($login == false) {
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-	$name = $fm->validation($_POST['name']);
+	$first_name = $fm->validation($_POST['first_name']);
+	$last_name = $fm->validation($_POST['last_name']);
 	$email = $fm->validation($_POST['email']);
 	$contact = $fm->validation($_POST['contact']);
 	$message = $fm->validation($_POST['message']);
 	
 
-	$name = mysqli_real_escape_string($db->link, $name);
+	$first_name = mysqli_real_escape_string($db->link, $first_name);
+	$last_name = $fm->validation($_POST['last_name']);
 	$email = mysqli_real_escape_string($db->link, $email);
 	$contact = mysqli_real_escape_string($db->link, $contact);
 	$message = mysqli_real_escape_string($db->link, $message);
 
 	$error = "";
 
-	if (empty($name)) {
+	if (empty($first_name)) {
 		$error = "Name must not be empty !";
+	}elseif (empty($last_name)) {
+		$error = "Email must not be empty !";
 	} elseif (empty($email)) {
 		$error = "Email must not be empty !";
 	} elseif (empty($contact)) {
@@ -44,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$error = "Subject field not be empty !";
 
 	} else {
- $query = "INSERT INTO tbl_contact(name,email,contact,message) VALUES('$name','$email','$contact','$message')";
+ $query = "INSERT INTO tbl_contact(first_name,last_name,email,contact,message) VALUES('$first_name','$last_name','$email','$contact','$message')";
 
     $inserted_rows = $db->insert($query);
 
@@ -397,15 +401,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     ?>
                             <form action="" method="post">
                                 <div>
-                                    <span>NAME<span style="color: red;">*</span><span>
-                                    <span><input style= "text-align:center;" type="text" name="name" value="<?php echo $result['name'];?>"></span>
+                                    <span>First name<span style="color: red;">*</span><span>
+                                    <span><input style= "text-align:center;" type="text" name="first_name" value="<?php echo $result['first_name'];?>"></span>
+                                </div>
+								<div>
+                                    <span>Last name<span style="color: red;">*</span><span>
+                                    <span><input style= "text-align:center;" type="text" name="last_name" value="<?php echo $result['last_name'];?>"></span>
                                 </div>
                                 <div>
-                                    <span><label>E-MAIL</label><span style="color: red;">*</span></span>
+                                    <span><label>Email</label><span style="color: red;">*</span></span>
                                     <span><input style= "text-align:center;" type="text"  name="email" value="<?php echo $result['email'];?>"></span>
                                 </div>
                                 <div>
-                                    <span><label>MOBILE.NO</label><span style="color: red;">*</span></span>
+                                    <span><label>Mobile no.</label><span style="color: red;">*</span></span>
                                     <span><input style= "text-align:center;" type="text" name="contact" value="<?php echo $result['phone'];?>"></span>
                                 </div>
                                 <div>

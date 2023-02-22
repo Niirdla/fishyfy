@@ -66,26 +66,6 @@ $con = mysqli_connect("localhost","root","","db_shop");
 
                 <div class="col-md-12" >
 	              <div class="page-header" style="text-align:center;" ><h1>Order Reports</h1>
-                  <?php 
-                  $from_date = $_GET['from_date'];
-                  $to_date = $_GET['to_date'];
-
-                  $from_date_month = date("F", strtotime($from_date));
-                  $from_date_day = date("d", strtotime($from_date));
-                  $from_date_year = date("Y", strtotime($from_date));
-
-                  $from_date_result = "$from_date_month $from_date_day, $from_date_year";
-
-                  $to_date_month = date("F", strtotime($to_date));
-                  $to_date_day = date("d", strtotime($to_date));
-                  $to_date_year = date("Y", strtotime($to_date));
-
-                  $to_date_result = "$to_date_month $to_date_day, $to_date_year";
-
-                  error_reporting(0);
-                  ?>
-
-             
 		            <div class ="from-to">Inclusive Dates: From : <?php  echo isset($_GET['from_date']) ? $_GET['from_date'] :'';?> - To : <?php echo isset($_GET['to_date']) ?$_GET['to_date'] : '';?> </div>
 	              </div>
 
@@ -96,8 +76,9 @@ $con = mysqli_connect("localhost","root","","db_shop");
                                 <tr>
                                                 <th style="text-align: center; color:white;">ID</th>
                                                 <th style="text-align: center; color:white;">Order date</th>
-							                    <th style="text-align: center; color:white;">Customer Id</th>
-                                                <th style="text-align: center; color:white;">Customer name</th>
+							                    <th style="text-align: center; color:white;">Customer ID</th>
+                                                <th style="text-align: center; color:white;">Customer first name</th>
+                                                <th style="text-align: center; color:white;">Customer last name</th>
 							                    <th style="text-align: center; color:white;">Product Name</th>
 							                    <th style="text-align: center; color:white;">Quantity</th>
 							                    <th style="text-align: center; color:white;">Price</th>
@@ -114,7 +95,7 @@ $con = mysqli_connect("localhost","root","","db_shop");
                                     $from_date = $_GET['from_date'];
                                     $to_date = $_GET['to_date'];
 
-                                    $query = "SELECT tbl_customer.name,tbl_order.* from tbl_customer, tbl_order where tbl_customer.id = tbl_order.cmrId AND date BETWEEN '$from_date' AND '$to_date' ";
+                                    $query = "SELECT tbl_customer.*,tbl_order.* from tbl_customer, tbl_order where tbl_customer.id = tbl_order.cmrId AND date BETWEEN '$from_date' AND '$to_date' ";
                                     $query_run = mysqli_query($con, $query);
 
                                     if(mysqli_num_rows($query_run) > 0)
@@ -134,7 +115,8 @@ $con = mysqli_connect("localhost","root","","db_shop");
                                                 <td><?= $row['id']; ?></td>
                                                 <td><?= "$month $day, $year"; ?></td>
                                                 <td><?= $row['cmrId']; ?></td>
-                                                <td><?= $row['name'];?></td>
+                                                <td><?= $row['first_name'];?></td>
+                                                <td><?= $row['last_name'];?></td>
                                                 <td><?= $row['productName']; ?></td>
                                                 <td><?= $row['quantity']; ?></td>
                                                 <td><?= $row['price']; ?></td>

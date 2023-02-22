@@ -47,4 +47,3 @@
 
   </nav>
 </header>
-<?php include 'includes/profile_modal.php'; ?>

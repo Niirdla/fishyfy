@@ -117,9 +117,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
 			
     		<h2>Sign Up</h2>
     		<form method="post">
-			<label for= name>
-			<span>Name<span style="color: red;">*</span></span>
-			<input type="text" placeholder= "Enter your full name"name="name">
+			<label for= first_name>
+			<span>First name<span style="color: red;">*</span></span>
+			<input type="text" placeholder= "Enter your first name"name="first_name">
+			</label>
+
+			<label for= last_name>
+			<span>Last name<span style="color: red;">*</span></span>
+			<input type="text" placeholder= "Enter your last name"name="last_name">
 			</label>
 			
 			<label for= address>
@@ -153,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
 			<input type="password" placeholder = "Enter your password" name="pass">
 			</label>
 
-			<p><strong>Note: </strong>Password should have atleast 8 characters and number.</p>
+			<p><strong style = "color:red;">Note: Password should have atleast 8 characters and number.</strong></p>
 			
 			<label for= pass>
 			<span>Confirm Password<span style="color: red;">*</span></span>

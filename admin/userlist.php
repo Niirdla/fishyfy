@@ -53,7 +53,8 @@ if (isset($delUser)) {
 			<thead>
 				<tr>
 					<th>Id</th>
-					<th>Name</th>
+					<th>First Name</th>
+					<th>Last Name</th>
 					<th>Address</th>
 					<th>City</th>
 					<th>ZIP Code</th>
@@ -75,7 +76,8 @@ if (isset($delUser)) {
 				?>
 				<tr class="odd gradeX">
 					<td><?php echo $i;?></td>
-					<td><?php echo $result['name'] ;?></td>
+					<td><?php echo $result['first_name'] ;?></td>
+					<td><?php echo $result['last_name'] ;?></td>
 					<td><?php echo $result['address'] ;?></td>
 					<td><?php echo $result['city'] ;?></td>
 					<td><?php echo $result['zip'] ;?></td>

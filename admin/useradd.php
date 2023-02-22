@@ -45,10 +45,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                
                 <tr>
                     <td>
-                        <label>Name <span style="color: red;"> *</span></label>
+                        <label>First Name <span style="color: red;"> *</span></label>
                     </td>
                     <td>
-                        <input type="text" name="name" placeholder="Enter User Name..." class="medium" />
+                        <input type="text" name="first_name" placeholder="Enter First Name..." class="medium" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Last Name <span style="color: red;"> *</span></label>
+                    </td>
+                    <td>
+                        <input type="text" name="last_name" placeholder="Enter Last Name..." class="medium" />
                     </td>
                 </tr>
                 <tr>

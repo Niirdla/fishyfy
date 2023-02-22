@@ -203,8 +203,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 												<td colspan="2"><h2>Update Profile Details</h2></td>
 											</tr>
 											<tr>
-												<td width="20%">Name</td>
-												<td><input type="text" name="name" value="<?php echo $result['name'];?>"></td>
+												<td width="20%">First Name</td>
+												<td><input type="text" name="first_name" value="<?php echo $result['first_name'];?>"></td>
+												
+											</tr>
+											<tr>
+												<td width="20%">Last Name</td>
+												<td><input type="text" name="last_name" value="<?php echo $result['last_name'];?>"></td>
 												
 											</tr>
 											<tr>
@@ -228,11 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 												<td>Zipcode</td>
 												<td><input type="text" name="zip" value="<?php echo $result['zip'];?>"></td>
 											</tr>
-											<tr>
-												<td>Country</td>
-												<td><input type="text" name="country" value="<?php echo $result['country'];?>"></td>
-											</tr>
-
+										
 											<tr>
 												<td></td>
 												<td><input  type="submit" name="submit" value="Save"></td>

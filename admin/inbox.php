@@ -20,7 +20,20 @@ if (isset($_GET['delproid'])) {
 
 }
  ?>
+<!DOCTYPE php>
+<php lang="en">
+<head>
+<!-- include Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<!-- include jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- include Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+
+
+	
+</head>	
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -61,6 +74,8 @@ if (isset($_GET['delproid'])) {
 							<th>Price</th>
 							<th>Cust. ID</th>
 							<th>Address</th>
+							<th>Payment Method</th>
+							<th>Proof of Payment</th>
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -80,8 +95,9 @@ if (isset($_GET['delproid'])) {
 							<td><?php echo $result['quantity']; ?></td>
 							<td>₱ <?php echo $result['price']; ?></td>
 							<td><?php echo $result['cmrId']; ?></td>
-							<td><a href="customer.php?custId=<?php echo $result['cmrId']; ?>">View Details</a></td>
-
+							<td><a href="customer.php?custId=<?php echo $result['cmrId']; ?>">View Customer Details</a></td>
+							<td><?php echo $result['paymentMethod']; ?></td>
+							<td><a href="#" data-toggle="modal" data-target="#myModal" data-cmrid="<?php echo $result['cmrId']; ?>">View Proof of payment</a></td>
 							<?php 
 
 							if ($result['status'] == '0') { ?>
@@ -95,6 +111,44 @@ if (isset($_GET['delproid'])) {
 					<?php }} ?>
 					</tbody>
 				</table>
+				<!-- modal window -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- modal content -->
+		<div class="modal-content">
+			<!-- modal header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Upload your proof of payment</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<!-- modal body -->
+			<div class="modal-body">
+				<!-- image at the top of the modal -->
+				<img src="assets/img/gcash-scan.jpg" alt="Image" style="width:100%;">
+				
+				<?php
+        if (isset($uploadPayment)) {
+            echo $uploadPayment;
+        }
+
+        ?>    
+				<!-- form to upload image -->
+				<form method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="file">Upload your proof of payment after scanning here:</label>
+						 <input type="hidden" name="paymentMethod" value="Gcash">
+						<input type="file" class="form-control" id="file" name="proofOfPayment" required>
+					</div>
+					<button type="submit" name = "submit" value ="Save"class="btn btn-primary">Upload</button>
+				</form>
+			</div>
+			<!-- modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
                </div>
            
 <script type="text/javascript">

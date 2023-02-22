@@ -1331,17 +1331,17 @@ p.note{
 }
 .support_desc h3{
 	font-size:30px;
-	color: #6C6C6C;
+	color: #ffffff;
 	padding:5px 0;
 	font-family: 'Monda', sans-serif;
 }
 .support_desc p span{
 	font-size:15px;
-	color:#666;
+	color:#ffffff;
 }
 .support_desc p{
 	font-size:12px;
-	color:#777;
+	color:#ffffff;
 	line-height:1.8em;
 	padding:5px 0;
 }

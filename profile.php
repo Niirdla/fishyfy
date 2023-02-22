@@ -183,9 +183,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 												<td colspan="3"><h2>Your Profile Details</h2></td>
 											</tr>
 											<tr>
-												<td width="20%">Name</td>
+												<td width="20%">First Name</td>
 												<td width="5%">:</td>
-												<td><?php echo $result['name'];?></td>
+												<td><?php echo $result['first_name'];?></td>
+											</tr>
+											<tr>
+												<td width="20%">Last Name</td>
+												<td width="5%">:</td>
+												<td><?php echo $result['last_name'];?></td>
 											</tr>
 											<tr>
 												<td>Phone</td>
@@ -212,12 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 												<td>:</td>
 												<td><?php echo $result['zip'];?></td>
 											</tr>
-											<tr>
-												<td>Country</td>
-												<td>:</td>
-												<td><?php echo $result['country'];?></td>
-											</tr>
-
+										
 											<tr>
 												<td></td>
 												<td></td>

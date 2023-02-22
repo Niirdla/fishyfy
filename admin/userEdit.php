@@ -65,10 +65,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                
             <tr>
                     <td>
-                        <label>Name<span style="color: red;"> *</span></label>
+                        <label>First Name<span style="color: red;"> *</span></label>
                     </td>
                     <td>
-                        <input type="text" name="name" placeholder="Enter User Name..." value="<?php echo $value['name'];?>" class="medium" />
+                        <input type="text" name="first_name" placeholder="Enter User Name..." value="<?php echo $value['first_name'];?>" class="medium" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Last Name<span style="color: red;"> *</span></label>
+                    </td>
+                    <td>
+                        <input type="text" name="last_name" placeholder="Enter User Name..." value="<?php echo $value['last_name'];?>" class="medium" />
                     </td>
                 </tr>
                 <tr>

@@ -9,7 +9,7 @@
 		exit;
 	}
 	
-	$name = $_POST['name'];
+	$first_name = $_POST['first_name'];
 	$from = $_POST['email'];
 	$phone = $_POST['phone'];
 	$subject = stripslashes( nl2br( $_POST['subject'] ) );
@@ -21,11 +21,11 @@
 	
 	ob_start();
 	?>
-		Hi imransdesign!<br /><br />
-		<?php echo ucfirst( $name ); ?>  has sent you a message via contact form on your website!
+		Hi!<br /><br />
+		<?php echo ucfirst( $first_name ); ?>  has sent you a message via contact form on your website!
 		<br /><br />
 		
-		Name: <?php echo ucfirst( $name ); ?><br />
+		Name: <?php echo ucfirst( $first_name ); ?><br />
 		Email: <?php echo $from; ?><br />
 		Phone: <?php echo $phone; ?><br />
 		Subject: <?php echo $subject; ?><br />

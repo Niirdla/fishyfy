@@ -25,7 +25,8 @@ public function customerRegistration($data){
 $con = mysqli_connect('localhost', 'root', '', 'db_shop');	
 $errors = array();	
 
-$name = mysqli_real_escape_string($this->db->link, $data['name']);
+$first_name = mysqli_real_escape_string($this->db->link, $data['first_name']);
+$last_name = mysqli_real_escape_string($this->db->link, $data['last_name']);
 $address = mysqli_real_escape_string($this->db->link, $data['address']);
 $city = mysqli_real_escape_string($this->db->link, $data['city']);
 $zip = mysqli_real_escape_string($this->db->link, $data['zip']);
@@ -34,7 +35,7 @@ $email = mysqli_real_escape_string($this->db->link, $data['email']);
 $pass = mysqli_real_escape_string($this->db->link, md5($data['pass']));
 $cpass = mysqli_real_escape_string($this->db->link, md5($data['cpass']));
 
-if ($name == "" || $address == "" || $city == "" || $zip == "" || $phone == "" || $email == "" || $pass == ""|| $cpass == "") {
+if ($first_name == "" || $last_name == "" ||$address == "" || $city == "" || $zip == "" || $phone == "" || $email == "" || $pass == ""|| $cpass == "") {
 	
 	$msg = "<span class='error'style = 'color:red;'>Fields must not be empty !</span>";
 	return $msg;
@@ -54,7 +55,7 @@ if ($name == "" || $address == "" || $city == "" || $zip == "" || $phone == "" |
     $status = "notverified";
 	$role = "Customer";
 
-	$query = "INSERT INTO tbl_customer(name,address,city,zip,phone,email,pass,code,status,role) VALUES('$name','$address','$city','$zip','$phone','$email','$pass','$code','$status','$role')";
+	$query = "INSERT INTO tbl_customer(first_name,last_name,address,city,zip,phone,email,pass,code,status,role) VALUES('$first_name','$last_name','$address','$city','$zip','$phone','$email','$pass','$code','$status','$role')";
 	$data_check = mysqli_query($con, $query);
 	if($data_check){
 		$subject = "Email Verification Code";
@@ -92,17 +93,18 @@ if ($name == "" || $address == "" || $city == "" || $zip == "" || $phone == "" |
 
 public function AdmincustomerRegistration($data){
 
-	$name = mysqli_real_escape_string($this->db->link, $data['name']);
+	$first_name = mysqli_real_escape_string($this->db->link, $data['first_name']);
+	$last_name = mysqli_real_escape_string($this->db->link, $data['last_name']);
 	$address = mysqli_real_escape_string($this->db->link, $data['address']);
 	$city = mysqli_real_escape_string($this->db->link, $data['city']);
-	$country = mysqli_real_escape_string($this->db->link, $data['country']);
+
 	$zip = mysqli_real_escape_string($this->db->link, $data['zip']);
 	$phone = mysqli_real_escape_string($this->db->link, $data['phone']);
 	$email = mysqli_real_escape_string($this->db->link, $data['email']);
 	$pass = mysqli_real_escape_string($this->db->link, md5($data['pass']));
 	$role = mysqli_real_escape_string($this->db->link, $data['role']);
 	
-	if ($name == "" || $address == "" || $city == "" || $country == "" || $zip == "" || $phone == "" || $email == "" || $pass == ""|| $role == "") {
+	if ($first_name == "" ||$last_name == "" || $address == "" || $city == "" || $zip == "" || $phone == "" || $email == "" || $pass == ""|| $role == "") {
 		
 		$msg = "<span class='error'style = 'color:red;'>Fields must not be empty !</span>";
 		return $msg;
@@ -116,7 +118,7 @@ public function AdmincustomerRegistration($data){
 	  }else{
 	
 	
-		   $query = "INSERT INTO tbl_customer(name,address,city,zip,phone,email,pass,role) VALUES('$name','$address','$city','$zip','$phone','$email','$pass','$role')";
+		   $query = "INSERT INTO tbl_customer(first_name,last_name,address,city,zip,phone,email,pass,role) VALUES('$first_name','$last_name','$address','$city','$zip','$phone','$email','$pass','$role')";
 	
 		 $inserted_row = $this->db->insert($query);
 				if ($inserted_row) {
@@ -191,40 +193,37 @@ $msg = "<span class='error'>Fields must not be empty !</span>";
 }
 $query = "SELECT * FROM tbl_customer WHERE email = '$email' AND pass = '$pass'";
 $result = $this->db->select($query);
-$value = $result->fetch_assoc();
-$role = $value['role'];
 
-if ($result != false && $role === 'Admin') {
-	
-				Session::set("adminlogin",true);
-				Session::set("adminId",$value['id']);
-				Session::set("adminUser",$value['email']);
-				Session::set("adminName",$value['name']);
-	header("Location: admin/dashboard.php");
-	exit;
-  } elseif ($result != false && $role === 'Customer') {
+if ($result) {
+    $value = $result->fetch_assoc();
+   
+    $role = $value['role'];
 
-	Session::set("cuslogin",true);
-	Session::set("cmrId",$value['id']);
-	Session::set("cmrName",$value['name']);
-
-
-		header("Location:cart.php");
-	
-	
-	exit;
-  }elseif ($result != false && $role === 'Database Admin') {
-
-	Session::set("databaseAdminLogin",true);
-	Session::set("databaseAdminId",$value['id']);
-	Session::set("databaseAdminUser",$value['email']);
-	Session::set("databaseAdminName",$value['name']);
-	header("Location: database_admin/dashboard.php");
-	exit;
-  }else{
-	$msg = "<span class='error'>Email or Password not matched !</span>";
-				return $msg;
+    if ($role === 'Admin') {
+        Session::set("adminlogin", true);
+        Session::set("adminId", $value['id']);
+        Session::set("adminUser", $value['email']);
+        Session::set("adminName", $value['first_name']);
+        header("Location: admin/dashboard.php");
+        exit;
+    } elseif ($role === 'Customer') {
+        Session::set("cuslogin", true);
+        Session::set("cmrId", $value['id']);
+        Session::set("cmrName", $value['first_name']);
+        header("Location:cart.php");
+        exit;
+    } elseif ($role === 'Database Admin') {
+        Session::set("databaseAdminLogin", true);
+        Session::set("databaseAdminId", $value['id']);
+        Session::set("databaseAdminUser", $value['email']);
+        Session::set("databaseAdminName", $value['first_name']);
+        header("Location: vendor/dashboard.php");
+        exit;
+    }
 }
+
+$msg = "<span class='error'>Email or Password not matched !</span>";
+return $msg;
 }
 
 public function getCustomerData($id){
@@ -235,31 +234,33 @@ public function getCustomerData($id){
 
 public function customerUpdate($data,$cmrId){
 
-$name = mysqli_real_escape_string($this->db->link, $data['name']);
+$first_name = mysqli_real_escape_string($this->db->link, $data['first_name']);
+$last_name = mysqli_real_escape_string($this->db->link, $data['last_name']);
 $address = mysqli_real_escape_string($this->db->link, $data['address']);
 $city = mysqli_real_escape_string($this->db->link, $data['city']);
-$country = mysqli_real_escape_string($this->db->link, $data['country']);
+
 $zip = mysqli_real_escape_string($this->db->link, $data['zip']);
 $phone = mysqli_real_escape_string($this->db->link, $data['phone']);
 $email = mysqli_real_escape_string($this->db->link, $data['email']);
 $role = mysqli_real_escape_string($this->db->link, $data['role']);
 
-if ($name == "" || $address == "" || $city == "" || $country == "" || $zip == "" || $phone == "" || $email == ""|| $role == "") {
+if ($first_name == "" || $last_name == "" || $address == "" || $city == "" || $zip == "" || $phone == "" || $email == ""|| $role == "") {
 	
 	$msg = "<span class='error'>Fields must not be empty !</span>";
 	return $msg;
 }else{
 
 
-  	 $query = "INSERT INTO tbl_customer(name,address,city,country,zip,phone,email,role) VALUES('$name','$address','$city','$country','$zip','$phone','$email',$role')";
+  	 $query = "INSERT INTO tbl_customer(first_name,last_name,address,city,zip,phone,email,role) VALUES('$first_name','$last_name','$address','$city','$zip','$phone','$email',$role')";
 
 	$query = "UPDATE tbl_customer
 
 	SET
-	name = '$name',
+	first_name = '$first_name',
+	last_name = '$last_name',
 	address = '$address', 
 	city = '$city', 
-	country = '$country', 
+	
 	zip = '$zip', 
 	phone = '$phone', 
 	email = '$email' 
