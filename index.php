@@ -1,5 +1,7 @@
 <?php include 'inc/header_3.php';?>
 
+
+
 <?php 
 $login = Session::get("cuslogin");
 if ($login == false) {
@@ -20,7 +22,7 @@ if ($login == false) {
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
 
 	<!-- title -->
-	<title>FISHYFY</title>
+	<title>FISHYFY - Slider Version</title>
 
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="assets/img/aacaquaticslogo.png">
@@ -48,8 +50,7 @@ if ($login == false) {
 
 </head>
 <body>
-	
-	<!-- header -->
+<!-- header -->
 <div class="top-header-area" id="sticker">
 		<div class="container">
 			<div class="row">
@@ -69,7 +70,7 @@ if ($login == false) {
 								<li class="current-list-item"><a href="#">Home</a>
 									<ul class="sub-menu">
 										<li><a href="index.php">Static Home</a></li>
-										<li style = "text-align: center;"><a href="index_2.php">Slider Home</a></li>
+										<li style = "text-align: center;"><a href="index.php">Slider Home</a></li>
 									</ul>
 								</li>
 								<li><a href="about.php">About</a></li>
@@ -83,13 +84,15 @@ if ($login == false) {
 									<div class="header-icons">
 										<a class="shopping-cart" href="cart.php"><i class="fas fa-shopping-cart"></i></a>
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-									
-										<a class="user-profile" href="profile.php"><i class='far fa-user-circle' style='font-size:1.7rem'></i></a>
 										
+										<a class="user-profile" href="profile.php"><i class='far fa-user-circle' style='font-size:1.7rem'></i></a>
+										<ul class="sub-menu">
+											<li><a href="profile.php">My Account</a></li>
+											<li><a href="orderdetails.php">My Orders</a></li>
+										</ul>
 										<a class="sign-out" href="?cid=<?php Session::get('cmrId') ?>"><i class='fas fa-sign-out-alt' style='font-size:1.7rem;color:white'></i></a>
 									</div>
 								</li>
-							
 							</ul>
 						</nav>
 						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
@@ -122,19 +125,64 @@ if ($login == false) {
 		</div>
 	</div>
 	<!-- end search arewa -->
+	
+	
+	
+	
 
-	<!-- hero area -->
-	<div class="hero-area hero-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-9 offset-lg-2 text-center">
-					<div class="hero-text">
-						<div class="hero-text-tablecell">
-							<p class="subtitle">Your One Stop Shop</p>
-							<h1>- FISHYFY -</h1>
-							<div class="hero-btns">
-								<a href="shop.php" class="boxed-btn">Shop Now</a>
-								<a href="contact.php" class="bordered-btn">Contact Us</a>
+	<!-- home page slider -->
+	<div class="homepage-slider">
+		<!-- single home slider -->
+		<div class="single-homepage-slider homepage-bg-1">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-lg-7 offset-lg-1 offset-xl-0">
+						<div class="hero-text">
+							<div class="hero-text-tablecell">
+								<p class="subtitle">Your One Stop Shop</p>
+								<h1>Provides Your Aquatic Needs</h1>
+								<div class="hero-btns">
+									<a href="shop.php" class="boxed-btn">Shop Now</a>
+									<a href="contact.php" class="bordered-btn">Contact Us</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- single home slider -->
+		<div class="single-homepage-slider homepage-bg-2">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-10 offset-lg-1 text-center">
+						<div class="hero-text">
+							<div class="hero-text-tablecell">
+								<p class="subtitle">Your One Stop Shop</p>
+								<h1>100% Legitimate and Trusted</h1>
+								<div class="hero-btns">
+									<a href="shop.php" class="boxed-btn">Visit Shop</a>
+									<a href="contact.php" class="bordered-btn">Contact Us</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- single home slider -->
+		<div class="single-homepage-slider homepage-bg-3">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-10 offset-lg-1 text-right">
+						<div class="hero-text">
+							<div class="hero-text-tablecell">
+								<p class="subtitle">Mega Sale Going On!</p>
+								<h1>Get January Discount</h1>
+								<div class="hero-btns">
+									<a href="shop.php" class="boxed-btn">Visit Shop</a>
+									<a href="contact.php" class="bordered-btn">Contact Us</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -142,7 +190,7 @@ if ($login == false) {
 			</div>
 		</div>
 	</div>
-	<!-- end hero area -->
+	<!-- end home page slider -->
 
 	<!-- features list section -->
 	<div class="list-section pt-80 pb-80">
@@ -200,38 +248,48 @@ if ($login == false) {
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-lg-4 col-md-6 text-center">
+			
+		
+		<div class="container">
+
+			<div class="row product-lists">
+				<?php
+	      		$getFpd = $pd->homeGetFeaturedProduct();
+	      		if ($getFpd) {
+	      		while ($result = $getFpd->fetch_assoc()) { 
+	      
+	      			
+	      		?>
+
+				<div class="col-lg-4 col-md-6 text-center strawberry">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product.php"><img src="assets/img/products/aacaquaticslogo.png" alt=""></a>
+							<a href="single-product.php?proid=<?php echo $result['productId']; ?>"><img src="admin/<?php echo $result['image']; ?>" alt="" /></a>
 						</div>
-						<h3>Aquarium</h3>
-						<p class="product-price"><span>Per Kg</span> ₱100 </p>
-						<a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+						<p style = " font-size: 1.4rem"><strong><?php echo $fm->textShorten($result['productName'],30); ?></strong></p>
+						<p><span class="product-price">₱<?php echo $result['price']; ?></span></p>
+						<p><span class="stockss">Stocks: </span></p>
+							<?php
+								if($result['stocks'] <= 0){
+									
+									echo '<style>.stockss {display: none;}</style>';
+									echo '<p style = "color: red; font-size: 1rem"><strong>Not available</strong> </p>';
+								}elseif($result['stocks'] >= 0){
+									
+									echo '<style>.stockss {display: inline;}</style>';
+									echo '<p style = "color: green; font-size: 1rem"><strong>Available</strong> </p>';
+								}
+								?>
+						<div class="cart-btn"><span><a href="single-product.php?proid=<?php echo $result['productId']; ?>" class="fas fa-shopping-cart">Details</a></span></div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.php"><img src="assets/img/products/aacaquaticslogo.png" alt=""></a>
-						</div>
-						<h3>Feeds</h3>
-						<p class="product-price"><span>Per Kg</span> ₱150 </p>
-						<a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.php"><img src="assets/img/products/aacaquaticslogo.png" alt=""></a>
-						</div>
-						<h3>Accesories</h3>
-						<p class="product-price"><span>Per Kg</span> ₱200 </p>
-						<a href="cart.php" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-					</div>
-				</div>
+				
+				<?php } } ?>
+				
+				
 			</div>
+
+			
 		</div>
 	</div>
 	<!-- end product section -->
@@ -259,7 +317,7 @@ if ($login == false) {
                     <h4>Grooming Pellet</h4>
                     <div class="text">Quisquam minus maiores repudiandae nobis, minima saepe id, fugit ullam similique! Beatae, minima quisquam molestias facere ea. Perspiciatis unde omnis iste natus error sit voluptatem accusant</div>
                     <!--Countdown Timer-->
-                    <div class="time-counter"><div class="time-countdown clearfix" data-countdown="2023/2/01"><div class="counter-column"><div class="inner"><span class="count">00</span>Days</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Hours</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Mins</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Secs</div></div></div></div>
+                    <div class="time-counter"><div class="time-countdown clearfix" data-countdown="2020/2/01"><div class="counter-column"><div class="inner"><span class="count">00</span>Days</div></div> <div class="counter-column"><div class="inner"><span class="count">00</span>Hours</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Mins</div></div>  <div class="counter-column"><div class="inner"><span class="count">00</span>Secs</div></div></div></div>
                 	<a href="cart.php" class="cart-btn mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                 </div>
             </div>
@@ -328,7 +386,7 @@ if ($login == false) {
 			<div class="row">
 				<div class="col-lg-6 col-md-12">
 					<div class="abt-bg">
-						<a href="https://www.youtube.com/watch?v=wKdaX-mj1Qw" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
+						<a href="https://www.youtube.com/watch?v=DBLlFWYcIGQ" class="video-play-btn popup-youtube"><i class="fas fa-play"></i></a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-12">
@@ -348,7 +406,7 @@ if ($login == false) {
 	<!-- shop banner -->
 	<section class="shop-banner">
     	<div class="container">
-        	<h3>January Sale is Here! <br> with big <span class="orange-text">Discounts!</span></h3>
+        	<h3>January sale is on! <br> with big <span class="orange-text">Discounts!</span></h3>
             <div class="sale-percent"><span>Sale! <br> Up to</span>25% <span>off</span></div>
             <a href="shop.php" class="cart-btn btn-lg">Shop Now</a>
         </div>
@@ -373,7 +431,7 @@ if ($login == false) {
 					<div class="single-latest-news">
 						<a href="single-news.php"><div class="latest-news-bg news-bg-1"></div></a>
 						<div class="news-text-box">
-							<h3><a href="single-news.php">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio</a></h3>
+							<h3><a href="single-news.php">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</a></h3>
 							<p class="blog-meta">
 								<span class="author"><i class="fas fa-user"></i> Admin</span>
 								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
@@ -387,7 +445,7 @@ if ($login == false) {
 					<div class="single-latest-news">
 						<a href="single-news.php"><div class="latest-news-bg news-bg-2"></div></a>
 						<div class="news-text-box">
-							<h3><a href="single-news.php">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio</a></h3>
+							<h3><a href="single-news.php">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</a></h3>
 							<p class="blog-meta">
 								<span class="author"><i class="fas fa-user"></i> Admin</span>
 								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
@@ -401,7 +459,7 @@ if ($login == false) {
 					<div class="single-latest-news">
 						<a href="single-news.php"><div class="latest-news-bg news-bg-3"></div></a>
 						<div class="news-text-box">
-							<h3><a href="single-news.php">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio</a></h3>
+							<h3><a href="single-news.php">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</a></h3>
 							<p class="blog-meta">
 								<span class="author"><i class="fas fa-user"></i> Admin</span>
 								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>

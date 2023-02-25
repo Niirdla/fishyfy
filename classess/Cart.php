@@ -19,7 +19,7 @@ private $fm;
 		$this->db = new Database();
 		$this->fm = new Format();
 	}
-public function addToCart($quantity,$stocks, $id){
+public function addToCart($quantity,$stocks, $id, $cmrId){
 
 	$quantity = $this->fm->validation($quantity);
 	$stocks = $this->fm->validation($stocks);
@@ -322,10 +322,20 @@ if ( $paymentMethod == "") {
 	return $result;
 	}
 
-	public function getOrderedProduct($cmrId){
+	public function getOrderedProduct($cmrId, $status = ''){
+		if($status == "5"){
     $query = "SELECT tbl_order.*, payment.paymentMethod FROM tbl_order, payment WHERE tbl_order.cmrId = payment.cmrId and tbl_order.id = payment.orderId ORDER BY date DESC";
 	$result = $this->db->select($query);
 	return $result;
+}elseif (!empty($status)) {
+		$query = "SELECT tbl_order.*, payment.paymentMethod FROM tbl_order, payment WHERE tbl_order.cmrId = payment.cmrId and tbl_order.id = payment.orderId AND tbl_order.status = '$status' ORDER BY date DESC"; 
+		$result = $this->db->select($query);
+		return $result;
+	}elseif (empty($status)) {
+		$query = "SELECT tbl_order.*, payment.paymentMethod FROM tbl_order, payment WHERE tbl_order.cmrId = payment.cmrId and tbl_order.id = payment.orderId AND tbl_order.status = '$status' ORDER BY date DESC"; 
+		$result = $this->db->select($query);
+		return $result;
+	}
 
 	}
 	public function checkOrder($cmrId){
@@ -334,11 +344,16 @@ if ( $paymentMethod == "") {
 		return $result;
 	}
 	public function getAllOrderProduct(){
-		$query = "SELECT tbl_order.*, payment.* FROM tbl_order, payment WHERE tbl_order.cmrId = payment.cmrId and tbl_order.id = payment.orderId ORDER BY date DESC";
+		$query = "SELECT tbl_order.*,tbl_order.id as orderId, payment.*,payment.id as paymentId FROM tbl_order, payment WHERE tbl_order.cmrId = payment.cmrId and tbl_order.id = payment.orderId ORDER BY date DESC";
+	
 		$result = $this->db->select($query);
 		return $result;
 	}
-
+	public function getOrderData($id){
+		$query = "SELECT tbl_order.*, payment.* FROM tbl_order, payment WHERE tbl_order.id = '$id' AND payment.orderId = '$id'";
+			$result = $this->db->select($query);
+			return $result;
+	}
 	public function productShifted($id){
 		$id = mysqli_real_escape_string($this->db->link, $id);
 
@@ -350,6 +365,26 @@ if ( $paymentMethod == "") {
 	if ($updated_row) {
 		$msg = "<span class='success'>Updated Successfully.</span>";
 				return $msg;
+	} else{
+			$msg = "<span class='error'>Not Updated !</span>";
+				return $msg;
+	}
+
+	}
+
+	public function productDeliver($id){
+		$id = mysqli_real_escape_string($this->db->link, $id);
+
+	$query = "UPDATE tbl_order
+	SET status ='2'
+	WHERE id = '$id' ";
+
+	$updated_row = $this->db->update($query);
+	if ($updated_row) {
+		$msg = "<span class='success'>Updated Successfully.</span>";
+				return $msg;
+
+				
 	} else{
 			$msg = "<span class='error'>Not Updated !</span>";
 				return $msg;
@@ -376,13 +411,14 @@ $msg = "<span class='error'>Data Not Deleted !</span>";
 	$id = mysqli_real_escape_string($this->db->link, $id);
 
 	$query = "UPDATE tbl_order
-	SET status ='2'
+	SET status ='3'
 	WHERE id = '$id' ";
 
 	$updated_row = $this->db->update($query);
 	if ($updated_row) {
 		$msg = "<span class='success'>Updated Successfully.</span>";
 				return $msg;
+				header("Location:orderdetails.php?status=3");
 	} else{
 			$msg = "<span class='error'>Not Updated !</span>";
 				return $msg;

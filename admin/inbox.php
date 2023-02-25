@@ -13,6 +13,12 @@ if (isset($_GET['shiftid'])) {
 	$shift = $ct->productShifted($id);
 
 }
+if (isset($_GET['deliverid'])) {
+	$id = $_GET['deliverid'];
+	$shift = $ct->productDeliver($id);
+
+}
+
 
 if (isset($_GET['delproid'])) {
 	$id = $_GET['delproid'];
@@ -20,8 +26,8 @@ if (isset($_GET['delproid'])) {
 
 }
  ?>
-<!DOCTYPE php>
-<php lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <!-- include Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -30,9 +36,13 @@ if (isset($_GET['delproid'])) {
 	<!-- include Bootstrap JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-
-
-	
+<style>
+.modal-open{
+        overflow: auto;
+        padding-right:0 !important;
+    }
+    </style>
+</style>	
 </head>	
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -49,7 +59,7 @@ if (isset($_GET['delproid'])) {
       </h1>
       <ol class="breadcrumb">
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Orders</li>
+        <li class="active"><strong>Orders</strong></li>
       </ol>
     </section>
                 <?php 
@@ -69,11 +79,7 @@ if (isset($_GET['delproid'])) {
 						<tr>
 							<th>ID</th>
 							<th>Order Time</th>
-							<th>Product</th>
-							<th>Quantity</th>
-							<th>Price</th>
 							<th>Cust. ID</th>
-							<th>Address</th>
 							<th>Payment Method</th>
 							<th>Proof of Payment</th>
 							<th>Action</th>
@@ -89,76 +95,81 @@ if (isset($_GET['delproid'])) {
 						
 						  ?>
 						<tr class="odd gradeX">
-							<td><?php echo $result['id']; ?></td>
+							<td><?php echo $result['orderId']; ?></td>
 							<td><?php echo $fm->formatDate($result['date']); ?></td>
-							<td><?php echo $result['productName']; ?></td>
-							<td><?php echo $result['quantity']; ?></td>
-							<td>₱ <?php echo $result['price']; ?></td>
 							<td><?php echo $result['cmrId']; ?></td>
-							<td><a href="customer.php?custId=<?php echo $result['cmrId']; ?>">View Customer Details</a></td>
+						
 							<td><?php echo $result['paymentMethod']; ?></td>
-							<td><a href="#" data-toggle="modal" data-target="#myModal" data-cmrid="<?php echo $result['cmrId']; ?>">View Proof of payment</a></td>
+							<!-- Update the view-proof link to pass the orderId as a data attribute -->
+							<td><a href="#" class="view-order-details" data-order-id="<?php echo $result['paymentId']; ?>" data-toggle="modal" data-target="#orderModal" data-backdrop="static">View Proof of payment</a></td>
 							<?php 
 
 							if ($result['status'] == '0') { ?>
-							<td><a href="?shiftid=<?php echo $result['id']; ?>">Shifted</a></td>	
+							<td><a href="?shiftid=<?php echo $result['orderId']; ?>">Shift Product</a></td>	
 							<?php }elseif($result['status'] == '1'){?>
+								<td><a href="?deliverid=<?php echo $result['orderId']; ?>">Deliver</td>
+							<?php }elseif($result['status'] == '2'){?>
 								<td>Pending</td>
-							<?php } else{ ?>
-								<td><a href="?delproid=<?php echo $result['id']; ?>">Remove</a></td>
+							<?php } elseif($result['status'] == '3'){ ?>
+								<td style= "Color: green;">Order Complete</td>
 						<?php } ?>
 						</tr>
 					<?php }} ?>
+
+			
 					</tbody>
 				</table>
-				<!-- modal window -->
-<div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog">
-		<!-- modal content -->
-		<div class="modal-content">
-			<!-- modal header -->
-			<div class="modal-header">
-				<h4 class="modal-title">Upload your proof of payment</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-			<!-- modal body -->
-			<div class="modal-body">
-				<!-- image at the top of the modal -->
-				<img src="assets/img/gcash-scan.jpg" alt="Image" style="width:100%;">
-				
-				<?php
-        if (isset($uploadPayment)) {
-            echo $uploadPayment;
-        }
-
-        ?>    
-				<!-- form to upload image -->
-				<form method="post" enctype="multipart/form-data">
-					<div class="form-group">
-						<label for="file">Upload your proof of payment after scanning here:</label>
-						 <input type="hidden" name="paymentMethod" value="Gcash">
-						<input type="file" class="form-control" id="file" name="proofOfPayment" required>
-					</div>
-					<button type="submit" name = "submit" value ="Save"class="btn btn-primary">Upload</button>
-				</form>
-			</div>
-			<!-- modal footer -->
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
+				<div id="orderModal" class="modal fade" role="dialog" style = "">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Order Details</h4>
+      </div>
+      <div class="modal-body">
+        <!-- Order details will be displayed here -->
+      </div>
+    </div>
+  </div>
 </div>
                </div>
-           
-<script type="text/javascript">
-    $(document).ready(function () {
-        setupLeftMenu();
 
-        $('.datatable').dataTable();
-        setSidebarHeight();
-    });
-</script>
+							</body>
+
+
+
 <?php include 'inc/footer.php';?>
 
 <?php include 'includes/scripts.php'; ?>
+
+<script>
+$(document).ready(function() {
+    // When the user clicks on the "View Proof of payment" link
+    $(".view-order-details").click(function() {
+        // Get the orderId from the data attribute
+        var orderId = $(this).data("order-id");
+
+        // Send an AJAX request to the server to retrieve the order details
+        $.ajax({
+            url: "get_order_details.php",
+            type: "POST",
+            data: {orderId: orderId},
+            success: function(response) {
+
+				console.log(orderId);
+                // Display the order details in the modal body
+                $("#orderModal .modal-body").html(response);
+            }
+        });
+    });
+});
+
+$(document).on('show.bs.modal', '.modal', function () {
+     $("body").css("padding-right","0");
+});
+
+$(document).on('hide.bs.modal', '.modal', function () {
+     $("body").css("padding-right","0");
+});
+</script>

@@ -210,7 +210,12 @@ if ($result) {
         Session::set("cuslogin", true);
         Session::set("cmrId", $value['id']);
         Session::set("cmrName", $value['first_name']);
+		$profileLogin = Session::get("profileLogin");
+		if($profileLogin == true){
+			header("Location:profile.php");
+		}else{
         header("Location:cart.php");
+		}
         exit;
     } elseif ($role === 'Database Admin') {
         Session::set("databaseAdminLogin", true);

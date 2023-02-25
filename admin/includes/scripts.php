@@ -92,3 +92,14 @@ $(function(){
     this.value = this.value.replace(/(\d{4})(\d{3})(\d{4})/, "$1-$2-$3");
   });
 </script>
+
+
+           
+<script type="text/javascript">
+    $(document).ready(function () {
+        setupLeftMenu();
+
+        $('.datatable').dataTable();
+        setSidebarHeight();
+    });
+</script>

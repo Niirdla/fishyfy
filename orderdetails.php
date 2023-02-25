@@ -17,6 +17,12 @@ if (isset($_GET['customerId'])) {
 
 }
 
+if (isset($_GET['delproid'])) {
+	$id = $_GET['delproid'];
+	$delOrder = $ct->delProductShifted($id);
+
+}
+
 ?>
 
 
@@ -54,6 +60,24 @@ if (isset($_GET['customerId'])) {
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
+	<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+
+
+
+	<style>
+		.nav-link.active {
+  background-color: #EFF2F8;
+  color: black;
+  font-weight:bold;
+}
+
+.nav-link.active,
+.nav-link.active > * {
+  color: black !important;
+}
+		</style>
+
 </head>
 <body>
 	
@@ -75,11 +99,7 @@ if (isset($_GET['customerId'])) {
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="#">Home</a>
-									<ul class="sub-menu">
-										<li><a href="index.php">Static Home</a></li>
-										<li style = "text-align: center;"><a href="index_2.php">Slider Home</a></li>
-									</ul>
+							<li class="current-list-item"><a href="index.php">Home</a>
 								</li>
 								<li><a href="about.php">About</a></li>
 								<li><a href="news.php">News</a></li>
@@ -149,19 +169,32 @@ if (isset($_GET['customerId'])) {
 		</div>
 	</div>
 	<!-- end breadcrumb section -->
-	<div class="search_box">
-				    <form action="search_order.php" method="get">
-				    	<input type="text" value="Search for Order ID, Product Name." name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search for Order ID, Product Name.';}">
-				    	<input type="submit" name="submit" value="SEARCH">
-				    </form>
-			    </div>
+
 
 <div class="checkout-section mt-150 mb-150">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8">
+			
+			
+			<table  class="cart-table" style="width: 155%;">
+				<thead class="cart-table-head">
+				
+                            <tr class="table-head-row">
+                                <th ><a class="nav-link" style = "color:white;" href="?status=5">All Orders</a></th>
+                                <th><a class="nav-link" style = "color:white;" href="?status=0">To pay</a></th>
+								<th><a class="nav-link" style = "color:white;" href="?status=1">To ship</a></th>
+                                <th><a class="nav-link" style = "color:white;" href="?status=2">To receive</a></th>
+                                <th><a class="nav-link" style = "color:white;" href="?status=3">Received</a></th>
+                            </tr>
+                </thead>
+</table>
+
+
+
     	
-            <table class="cart-table" style = "width: 155%;">
+<div class="container">
+            <table id="order-table" class="cart-table" style = "width: 155%;">
 				<thead class="cart-table-head">
 				<tr class="table-head-row">
                             <th colspan="9">
@@ -185,8 +218,9 @@ if (isset($_GET['customerId'])) {
                         <tr class="table-body-row">
 
                             <?php 
+							$status = isset($_GET['status']) ? $_GET['status'] : '';
                             $cmrId = Session::get("cmrId");
-                            $getOrder = $ct->getOrderedProduct($cmrId);
+                            $getOrder = $ct->getOrderedProduct($cmrId, $status);
                             if ($getOrder) {
                                
                                 while ($result = $getOrder->fetch_assoc()) {
@@ -213,26 +247,30 @@ if (isset($_GET['customerId'])) {
                          <td><?php
 
                          if ($result['status'] == '0') {
-                             echo "Pending";
+                             echo "To pay";
                          }elseif($result['status'] == '1'){
-                            echo "Shifted";
-                       } else{ 
-                            echo "Order received";
+                            echo "To ship";
+                       }elseif($result['status'] == '2'){
+						echo "To receive";
+				   	}elseif($result['status'] == '3'){
+						echo "Order received";
+				   } else{ 
+                            echo "All orders";
                          }
 
 
            ?></td>
-                    </td>
+    
 
                 
                     <?php 
-                    if ($result['status'] == '1') { ?>
-                     <td> <a href="?customerId=<?php echo $result['id']; ?>">Confirm</a><td>
-                   <?php } elseif($result['status'] == '2'){?>
-                    <td>Order Received</td>
+                    if ($result['status'] == '2') { ?>
+                     <td> <a href="?customerId=<?php echo $result['id']; ?>">Confirm order</a></td>
+                   <?php } elseif($result['status'] == '3'){?>
+                    <td></td>
 
                   <?php }elseif ($result['status'] == '0') {?>
-                      <td>N/A</td>
+                      <td><a href="?delproid=<?php echo $result['id']; ?>">Cancel Order</a></td>
                  <?php  }  ?>
                    
             </tr>
@@ -243,6 +281,7 @@ if (isset($_GET['customerId'])) {
                   </tbody>
                 </table>
                 </div>
+				  </div>
     	</div>
     </div>
  </div>
@@ -366,6 +405,48 @@ if (isset($_GET['customerId'])) {
 	<script src="assets/js/sticker.js"></script>
 	<!-- main js -->
 	<script src="assets/js/main.js"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+<!-- DataTables JS -->
+<script type="text/javascript" src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 </body>
 </php>
+<script>
+// Get all anchor elements with class "nav-link"
+const navLinks = document.querySelectorAll('.nav-link');
+
+// Add click event listener to each anchor element
+navLinks.forEach(function(navLink) {
+  navLink.addEventListener('click', function(event) {
+    // Add "active" class to clicked anchor element
+    this.classList.add('active');
+
+    // Store the clicked link's href value in localStorage
+    localStorage.setItem('activeLink', this.getAttribute('href'));
+  });
+});
+
+// Check for an active link on page load
+const activeLink = localStorage.getItem('activeLink');
+if (activeLink) {
+  // Find the link with the stored href value and add the "active" class
+  const activeNavLink = document.querySelector(`.nav-link[href="${activeLink}"]`);
+  if (activeNavLink) {
+    activeNavLink.classList.add('active');
+  }
+}
+	</script>
+
+<script>
+$(document).ready(function() {
+  $('#order-table').DataTable({
+    "paging": true, // enable pagination
+    "pageLength": 10, // number of rows per page
+    "lengthChange": true, // enable length change dropdown
+    "searching": true, // enable search box
+    "ordering": true, // enable column sorting
+    "info": true // enable showing current page info
+  });
+});
+</script>

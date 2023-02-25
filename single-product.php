@@ -18,28 +18,16 @@ if (isset($_GET['proid'])) {
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+	$cmrId = Session::get("cmrId");
 	$quantity = $_POST['quantity'];
 	$stocks = $_POST['stocks'];
 	$stocks = intval($stocks) - intval($quantity);
-    $addCart = $ct->addToCart($quantity,$stocks,$id);
+    $addCart = $ct->addToCart($quantity,$stocks,$id,$cmrId);
 	
 }
 ?>
 
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['compare'])) {
-	$productId = $_POST['productId'];
-    $insertCom = $pd->insertCompareData($productId,$cmrId);
-}
 
-?> 
-
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['wlist'])) {
-    $saveWlist = $pd->saveWishListData($id,$cmrId);
-}
-
-?> 
 <style>
 	.mybutton{width: 100px;float: left;margin-right: 50px;}
 
@@ -104,11 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['wlist'])) {
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="#">Home</a>
-									<ul class="sub-menu">
-										<li><a href="index.php">Static Home</a></li>
-										<li style = "text-align: center;"><a href="index_2.php">Slider Home</a></li>
-									</ul>
+							<li class="current-list-item"><a href="index.php">Home</a>
 								</li>
 								<li><a href="about.php">About</a></li>
 								<li><a href="news.php">News</a></li>

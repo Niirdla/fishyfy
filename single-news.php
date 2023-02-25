@@ -65,11 +65,7 @@ if ($login == false) {
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="#">Home</a>
-									<ul class="sub-menu">
-										<li><a href="index.php">Static Home</a></li>
-										<li style = "text-align: center;"><a href="index_2.php">Slider Home</a></li>
-									</ul>
+							<li class="current-list-item"><a href="index.php">Home</a>
 								</li>
 								<li><a href="about.php">About</a></li>
 								<li><a href="news.php">News</a></li>

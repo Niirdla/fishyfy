@@ -79,6 +79,9 @@ if (!isset($_GET['id'])) {
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
 
+	<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+
 </head>
 <body>
 	
@@ -99,11 +102,7 @@ if (!isset($_GET['id'])) {
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="#">Home</a>
-									<ul class="sub-menu">
-										<li><a href="index.php">Static Home</a></li>
-										<li style = "text-align: center;"><a href="index_2.php">Slider Home</a></li>
-									</ul>
+							<li class="current-list-item"><a href="index.php">Home</a>
 								</li>
 								<li><a href="about.php">About</a></li>
 								<li><a href="news.php">News</a></li>
@@ -191,7 +190,7 @@ if (!isset($_GET['id'])) {
 							echo $delProduct;
 						}
 						?>
-							<table class="cart-table">
+							<table id = "cart-table" class="cart-table">
 								<thead class="cart-table-head" >
 									<tr class="table-head-row">
 										<th class ="product-price">SL</th>
@@ -283,20 +282,7 @@ if (!isset($_GET['id'])) {
 									<td><strong>Subtotal: </strong></td>
 									<td >₱ <?php echo $sum; ?></td>
 								</tr>
-								<tr class="total-data">
-									<td><strong>VAT :Shipping: </strong></td>
-									<td>10%</td>
-								</tr>
-								<tr class="total-data">
-									<td><strong>Grand Total : </strong></td>
-									<td>₱
-										<?php 
-										$vat = $sum * 0.1;
-										$gtotal = $sum + $vat;
-										echo $gtotal;
-										?>
-									</td>
-								</tr>
+							
 							</tbody>
 						</table>
 
@@ -314,16 +300,7 @@ if (!isset($_GET['id'])) {
 					</div>
 					
 
-					<div class="coupon-section">
-						<h3>Apply Coupon</h3>
-						<div class="coupon-form-wrap">
-							<form action="index.php">
-								<p><input type="text" placeholder="Coupon"></p>
-								<p><input type="submit" value="Apply"></p>
-							</form>
-						</div>
-					</div>
-					<div class="clear"></div>
+				
 				</div>
 			</div>
 		</div>
@@ -448,6 +425,23 @@ if (!isset($_GET['id'])) {
 	<script src="assets/js/sticker.js"></script>
 	<!-- main js -->
 	<script src="assets/js/main.js"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+<!-- DataTables JS -->
+<script type="text/javascript" src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 </body>
 </php>
+
+<script>
+$(document).ready(function() {
+  $('#cart-table').DataTable({
+    "paging": true, // enable pagination
+    "pageLength": 10, // number of rows per page
+    "lengthChange": true, // enable length change dropdown
+    "searching": true, // enable search box
+    "ordering": true, // enable column sorting
+    "info": true // enable showing current page info
+  });
+});
+</script>

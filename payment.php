@@ -8,51 +8,6 @@ if ($login == false) {
 }
  ?>
 
- 
-
- <?php 
-if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
-
-	
- $cmrId = Session::get("cmrId");
- $insertOrder = $ct->orderProduct($cmrId);
- $delData = $ct->delCustomerCart();
- header("Location:orderdetails.php");
-
- $con = mysqli_connect("localhost","root","","db_shop");
- $sql = "SELECT tbl_customer.*,tbl_order.* from tbl_customer, tbl_order where tbl_customer.id = tbl_order.cmrId ORDER BY tbl_order.id DESC LIMIT 1";
- $result = mysqli_query($con, $sql);
- if (mysqli_num_rows($result) > 0) {
-	 $row = mysqli_fetch_assoc($result);
-	 $to = $row['email'];
-    $subject = "Order Details";
-
-	$message = "Order ID: " . $row['id'] . "\n" .
-					"Order Date: " . $row['date'] . "\n" .
-
-                         "Customer Name: " . $row['name'] . "\n" .
-                         "Email: " . $row['email'] . "\n" .
-                         "Item: " . $row['productName'] . "\n" .
-                         "Quantity: " . $row['quantity'] . "\n" .
-                         "Total Cost: ₱" . $row['price'] . "\n";
-
-
-  $headers = "From: amberspirit16@gmail.com";
-   
-
-  if (mail($to, $subject, $message, $headers)) {
-	echo "<script>
-	alert('Check Your Email Inbox for the details');		
-</script>";
-   
-  } else {
-    echo "Failed to send email. Please try again later.";
-  }
-} else {
-	echo "No recent order found.";
-}
-}
-  ?>
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
@@ -65,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     } elseif($paymentMethod === "Cash on Delivery"){
         $insertOrder2 = $ct->orderProductCOD($_POST,$paymentMethod, $cmrId);
 		$delData = $ct->delCustomerCart();
-    header("Location:orderdetails.php");
+    header("Location:orderdetails.php?status=0");
     }
 	$con = mysqli_connect("localhost","root","","db_shop");
 	$sql = "SELECT tbl_customer.*,tbl_order.* from tbl_customer, tbl_order where tbl_customer.id = tbl_order.cmrId ORDER BY tbl_order.id DESC LIMIT 1";
@@ -173,11 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="#">Home</a>
-									<ul class="sub-menu">
-										<li><a href="index.php">Static Home</a></li>
-										<li style = "text-align: center;"><a href="index_2.php">Slider Home</a></li>
-									</ul>
+							<li class="current-list-item"><a href="index.php">Home</a>
 								</li>
 								<li><a href="about.php">About</a></li>
 								<li><a href="news.php">News</a></li>
@@ -279,9 +230,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 												<td colspan="3"><h2>Your Profile Details</h2></td>
 											</tr>
 											<tr>
-												<td width="20%">Name</td>
+												<td width="20%">First Name</td>
 												<td width="5%">:</td>
-												<td><?php echo $result['name'];?></td>
+												<td><?php echo $result['first_name'];?></td>
+											</tr>
+											<tr>
+												<td width="20%">Last Name</td>
+												<td width="5%">:</td>
+												<td><?php echo $result['last_name'];?></td>
 											</tr>
 											<tr>
 												<td>Phone</td>
@@ -308,11 +264,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 												<td>:</td>
 												<td><?php echo $result['zip'];?></td>
 											</tr>
-											<tr>
-												<td>Country</td>
-												<td>:</td>
-												<td><?php echo $result['country'];?></td>
-											</tr>
 
 											<tr>
 												<td></td>
@@ -338,8 +289,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 						    <div id="collapseThree" class="collapse in" aria-labelledby="headingThree" data-parent="#accordionExample">
 						      <div class="card-body">
 						        <div class="card-details">
-
+								<h2 style = "margin-right:450px; margin-bottom: 20px;"> Payment option </h2>
 						        <div style="display: flex;">
+								
   <div style="flex: 1;">
     <img id="image" src="assets/img/COD.png" alt="Image" style="max-width: 100%;">
   </div>
@@ -352,8 +304,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     </select>
   </div>
 </div>
+<h2 style = "margin-right:455px; margin-top:50px;"> Delivery option </h2>
 
-
+<select  name="delivery method" style= "background-color: white;
+  font-weight: bold; margin-top:20px; height:40px; width:650px; margin-right:0px;">
+  	
+      <option value="Standard Local">Standard Local</option>
+     
+    </select>
 
 						        </div>
 						      </div>

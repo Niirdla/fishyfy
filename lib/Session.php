@@ -56,11 +56,11 @@ public static function checkLogin2(){
 }
  public static function destroy(){
   session_destroy();
-  header("Location:../login.php");
+  header("Location:../index.php");
  }
  public static function destroy2(){
   session_destroy();
-  header("Location:login.php");
+  header("Location:index.php");
  }
 }
 ?>

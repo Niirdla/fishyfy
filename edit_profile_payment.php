@@ -1,40 +1,65 @@
-<?php include 'inc/header_2.php';?>
+<?php include 'inc/header_3.php';?>
 
 <?php 
 $login = Session::get("cuslogin");
 if ($login == false) {
-    header("Location:login.php");
 	echo '<style>.header-icons {visibility: hidden;}</style>';
-}
- ?>
-
- <?php 
-if (isset($_GET['orderid']) && $_GET['orderid'] == 'Order') {
- $cmrId = Session::get("cmrId");
- $insertOrder = $ct->orderProduct($cmrId);
- $delData = $ct->delCustomerCart();
- header("Location:success.php");
-}
-  ?>
-
-<?php 
-$login = Session::get("cuslogin");
-if ($login == false) {
     header("Location:login.php");
 }
  ?>
+
 
 <?php
-$cmrId = Session::get("cmrId");
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-    $updateCmr = $cmr->customerUpdate($_POST,$cmrId);
-	header("Location: payment.php");
+    $paymentMethod = $_POST['paymentMethod'];
+    $cmrId = Session::get("cmrId");
+    if($paymentMethod === "Gcash"){
+        $insertOrder = $ct->orderProduct($_POST,$_FILES,$paymentMethod, $cmrId);
+		$delData = $ct->delCustomerCart();
+    header("Location:orderdetails.php");
+    } elseif($paymentMethod === "Cash on Delivery"){
+        $insertOrder2 = $ct->orderProductCOD($_POST,$paymentMethod, $cmrId);
+		$delData = $ct->delCustomerCart();
+    header("Location:orderdetails.php");
+    }
+	$con = mysqli_connect("localhost","root","","db_shop");
+	$sql = "SELECT tbl_customer.*,tbl_order.* from tbl_customer, tbl_order where tbl_customer.id = tbl_order.cmrId ORDER BY tbl_order.id DESC LIMIT 1";
+	$result = mysqli_query($con, $sql);
+	if (mysqli_num_rows($result) > 0) {
+		$row = mysqli_fetch_assoc($result);
+		$to = $row['email'];
+	   $subject = "Order Details";
+   
+	   $message = "Order ID: " . $row['id'] . "\n" .
+					   "Order Date: " . $row['date'] . "\n" .
+   
+							"Customer Name: " . $row['name'] . "\n" .
+							"Email: " . $row['email'] . "\n" .
+							"Item: " . $row['productName'] . "\n" .
+							"Quantity: " . $row['quantity'] . "\n" .
+							"Total Cost: ₱" . $row['price'] . "\n";
+   
+   
+	 $headers = "From: amberspirit16@gmail.com";
+	  
+   
+	 if (mail($to, $subject, $message, $headers)) {
+	   echo "<script>
+	   alert('Check Your Email Inbox for the details');		
+   </script>";
+	  
+	 } else {
+	   echo "Failed to send email. Please try again later.";
+	 }
+   } else {
+	   echo "No recent order found.";
+   }
+    
 }
+?>
 
-?> 
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE php>
+<php lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
 	<!-- favicon -->
 	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+	
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -65,11 +91,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 	<link rel="stylesheet" href="assets/css/main.css">
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
+	<!-- modal -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	<!-- include Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<!-- include jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- include Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 	<script src = "https://www.paypal.com/sdk/js?client-id=AcTYM_vIcI8ruRN3yyXlp2PO02Ke58qj8xxBP_LGjimI9W9TMeVdtve_LMzRyDb86lLDY11tpbTUNXRE"></script>
 
+
+	
 </head>
-<body>
+<body  onload="changeImage()">
 	
 
 		<!-- header -->
@@ -89,11 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item"><a href="#">Home</a>
-									<ul class="sub-menu">
-										<li><a href="index.php">Static Home</a></li>
-										<li style = "text-align: center;"><a href="index_2.php">Slider Home</a></li>
-									</ul>
+							<li class="current-list-item"><a href="index.php">Home</a>
 								</li>
 								<li><a href="about.php">About</a></li>
 								<li><a href="news.php">News</a></li>
@@ -249,40 +282,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 						    </div>
 						  </div>
 						  <div class="card single-accordion">
-						    <div class="card-header" id="headingTwo">
-						      <h5 class="mb-0">
-						        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-						          Shipping Address
-						        </button>
-						      </h5>
-						    </div>
-						    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-						      <div class="card-body">
-						        <div class="shipping-address-form">
-						        	<p>Your shipping address form is here.</p>
-						        </div>
-						      </div>
-						    </div>
-						  </div>
-						  <div class="card single-accordion">
 						    <div class="card-header" id="headingThree">
 						      <h5 class="mb-0">
-						        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-						          Card Details
+						        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" >
+						         Payment method
 						        </button>
 						      </h5>
 						    </div>
-						    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+						    <div id="collapseThree" class="collapse in" aria-labelledby="headingThree" data-parent="#accordionExample">
 						      <div class="card-body">
 						        <div class="card-details">
+								<h2 style = "margin-right:450px; margin-bottom: 20px;"> Payment option </h2>
+						        <div style="display: flex;">
+								
+  <div style="flex: 1;">
+    <img id="image" src="assets/img/COD.png" alt="Image" style="max-width: 100%;">
+  </div>
+  <div style="flex: 1;">
+    <select id="imageSelector" onchange="changeImage()" name="paymentMethod" style= "background-color: white;
+  font-weight: bold; margin-top:30px; height:40px; width:300px;">
+  	
+      <option value="Cash on Delivery">Cash on Delivery</option>
+      <option value="Gcash">Gcash </option>
+    </select>
+  </div>
+</div>
+<h2 style = "margin-right:455px; margin-top:50px;"> Delivery option </h2>
 
-						        	<div id = "paypal-button-container"> </div>
+<select  name="delivery method" style= "background-color: white;
+  font-weight: bold; margin-top:20px; height:40px; width:650px; margin-right:0px;">
+  	
+      <option value="Standard Local">Standard Local</option>
+     
+    </select>
 
-									<script>
-
-										paypal.Buttons().render('#paypal-button-container');
-
-									</script>
 						        </div>
 						      </div>
 						    </div>
@@ -362,7 +395,102 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 								</tr>
 							</tbody>
 						</table>
-						<a href="?orderid=Order" class="boxed-btn">Place Order</a>
+					
+						<form method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						
+					<input type="hidden" name="paymentMethod" value="Cash on Delivery">
+					
+					</div>
+					<button type="button" class="btn btn-primary" id="modal_button" style="display: none; background-color: #0a537a;" data-toggle="modal" data-target="#myModal">Place order</button>
+
+<button type="submit"  name = "submit" class="btn btn-primary" value ="Save" id="submit_button" style="display: none; background-color: #0a537a;">Place order</button>
+</form>
+		
+
+	
+<!-- modal window -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- modal content -->
+		<div class="modal-content">
+			<!-- modal header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Upload your proof of payment</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<!-- modal body -->
+			<div class="modal-body">
+				<!-- image at the top of the modal -->
+				<img src="assets/img/gcash-scan.jpg" alt="Image" style="width:100%;">
+				
+				<?php
+        if (isset($uploadPayment)) {
+            echo $uploadPayment;
+        }
+
+        ?>    
+				<!-- form to upload image -->
+				<form method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="file">Upload your proof of payment after scanning here:</label>
+						 <input type="hidden" name="paymentMethod" value="Gcash">
+						<input type="file" class="form-control" id="file" name="proofOfPayment" required>
+					</div>
+					<button type="submit" name = "submit" value ="Save"class="btn btn-primary">Upload</button>
+				</form>
+			</div>
+			<!-- modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+				<script>
+       document.getElementById("submit_button").addEventListener("click", function() {
+  var inputFieldValue = document.getElementById("myInput").value;
+  var selectValue = document.getElementById("imageSelector").value;
+  
+});
+    </script>
+	<script>
+// JavaScript code
+
+  
+function changeImage() {
+  var selector = document.getElementById("imageSelector");
+  var selectedValue = selector.value;
+  var image = document.getElementById("image");
+  var button = document.getElementById("uploadButton");
+  var modalButton = document.getElementById("modal_button");
+  var submitButton = document.getElementById("submit_button");
+  switch(selectedValue) {
+    case "Cash on Delivery":
+      image.src = "assets/img/COD.png";
+	  modalButton.style.display = "none";
+      submitButton.style.display = "block";
+	  submitButton.style.width = "35rem";
+      break;
+    case "Gcash":
+      image.src = "assets/img/gcash.png";
+	  modalButton.style.display = "block";
+	  modalButton.style.width = "35rem";
+      submitButton.style.display = "none";
+	  
+      break;
+    default:
+      image.src = "assets/img/COD.png";
+	  modalButton.style.display = "none";
+      submitButton.style.display = "block";
+	  submitButton.style.width = "35rem";
+      break;
+  }
+}
+changeImage();
+
+</script>	
 					</div>
 				</div>
 			</div>
@@ -377,19 +505,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 				<div class="col-lg-12">
 					<div class="logo-carousel-inner">
 						<div class="single-logo-item">
-							<img src="assets/img/company-logos/1.png" alt="">
+							<img src="assets/img/aacaquaticslogo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/company-logos/2.png" alt="">
+							<img src="assets/img/aacaquaticslogo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/company-logos/3.png" alt="">
+							<img src="assets/img/aacaquaticslogo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/company-logos/4.png" alt="">
+							<img src="assets/img/aacaquaticslogo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/company-logos/5.png" alt="">
+							<img src="assets/img/aacaquaticslogo.png" alt="">
 						</div>
 					</div>
 				</div>
@@ -412,9 +540,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 					<div class="footer-box get-in-touch">
 						<h2 class="widget-title">Get in Touch</h2>
 						<ul>
-							<li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-							<li>support@fruitkha.com</li>
-							<li>+00 111 222 3333</li>
+							<li>280 Gov Fortunato Halili Ave, Santa Maria, Bulacan</li>
+							<li>support@fishyfy.com</li>
+							<li>+63 90 0000 0000</li>
 						</ul>
 					</div>
 				</div>
@@ -422,11 +550,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 					<div class="footer-box pages">
 						<h2 class="widget-title">Pages</h2>
 						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="services.html">Shop</a></li>
-							<li><a href="news.html">News</a></li>
-							<li><a href="contact.html">Contact</a></li>
+							<li><a href="index.php">Home</a></li>
+							<li><a href="about.php">About</a></li>
+							<li><a href="services.php">Shop</a></li>
+							<li><a href="news.php">News</a></li>
+							<li><a href="contact.php">Contact</a></li>
 						</ul>
 					</div>
 				</div>
@@ -434,7 +562,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 					<div class="footer-box subscribe">
 						<h2 class="widget-title">Subscribe</h2>
 						<p>Subscribe to our mailing list to get the latest updates.</p>
-						<form action="index.html">
+						<form action="index.php">
 							<input type="email" placeholder="Email">
 							<button type="submit"><i class="fas fa-paper-plane"></i></button>
 						</form>
@@ -450,7 +578,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 col-md-12">
-					<p>Copyrights &copy; 2019 - <a href="https://imransdesign.com/">Imran Hossain</a>,  All Rights Reserved.</p>
+					<p>Copyrights &copy; 2022 - <a href="https://www.facebook.com/lorenzbrad">Lorenz Angeles</a>,  All Rights Reserved.</p>
 				</div>
 				<div class="col-lg-6 text-right col-md-12">
 					<div class="social-icons">
@@ -490,4 +618,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 	<script src="assets/js/main.js"></script>
 
 </body>
-</html>
+</php>
