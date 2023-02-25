@@ -324,15 +324,15 @@ if ( $paymentMethod == "") {
 
 	public function getOrderedProduct($cmrId, $status = ''){
 		if($status == "5"){
-    $query = "SELECT tbl_order.*, payment.paymentMethod FROM tbl_order, payment WHERE tbl_order.cmrId = payment.cmrId and tbl_order.id = payment.orderId ORDER BY date DESC";
+    $query = "SELECT tbl_order.*, payment.paymentMethod FROM tbl_order, payment WHERE tbl_order.cmrId = '$cmrId'  and tbl_order.id = payment.orderId ORDER BY date DESC";
 	$result = $this->db->select($query);
 	return $result;
 }elseif (!empty($status)) {
-		$query = "SELECT tbl_order.*, payment.paymentMethod FROM tbl_order, payment WHERE tbl_order.cmrId = payment.cmrId and tbl_order.id = payment.orderId AND tbl_order.status = '$status' ORDER BY date DESC"; 
+		$query = "SELECT tbl_order.*, payment.paymentMethod FROM tbl_order, payment WHERE tbl_order.cmrId = '$cmrId' and tbl_order.id = payment.orderId AND tbl_order.status = '$status' ORDER BY date DESC"; 
 		$result = $this->db->select($query);
 		return $result;
 	}elseif (empty($status)) {
-		$query = "SELECT tbl_order.*, payment.paymentMethod FROM tbl_order, payment WHERE tbl_order.cmrId = payment.cmrId and tbl_order.id = payment.orderId AND tbl_order.status = '$status' ORDER BY date DESC"; 
+		$query = "SELECT tbl_order.*, payment.paymentMethod FROM tbl_order, payment WHERE tbl_order.cmrId = '$cmrId' and tbl_order.id = payment.orderId AND tbl_order.status = '$status' ORDER BY date DESC"; 
 		$result = $this->db->select($query);
 		return $result;
 	}
