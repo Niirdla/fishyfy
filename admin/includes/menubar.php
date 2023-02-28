@@ -4,13 +4,14 @@
     <!-- Sidebar user panel -->
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+      <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
       <li class="header">REPORTS</li>
       <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
     <!-- /.reports -->
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-barcode"></i>
+        <i class="material-icons" color= "#FFFFF" style="font-size:15px">library_books</i>
           <span>Reports</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -28,7 +29,7 @@
        <!-- /.Orders -->
        <li class="treeview">
         <a href="#">
-          <i class="fa fa-barcode"></i>
+        <i class='fa fa-dropbox' style='font-size:15px' color= "#FFFFF"></i>
           <span>Orders</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -41,7 +42,7 @@
        <!-- /.Brands -->
        <li class="treeview">
         <a href="#">
-          <i class="fa fa-barcode"></i>
+        <i class='fa fa-handshake-o' style='font-size:15px' color= "#FFFFF"></i>
           <span>Brands</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -55,7 +56,7 @@
       <!-- /.Category -->
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-barcode"></i>
+          <i class="fa fa-align-justify"></i>
           <span>Category</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -69,7 +70,7 @@
       <!-- /.Products -->
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-barcode"></i>
+          <i class="fa fa-server"></i>
           <span>Products</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -83,21 +84,22 @@
       <!-- /.users -->
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-barcode"></i>
+          <i class="fa fa-user"></i>
           <span>Users</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="useradd.php"><i class="fa fa-circle-o"></i> Add users</a></li>
-          <li><a href="userlist.php"><i class="fa fa-circle-o"></i> Users list</a></li>
+          <a href="#">
+          <li><a href="useradd.php"><i class='fa fa-user' style='font-size:15px' color="#FFFFF"></i>Add users</a></li>
+          <li><a href="userlist.php"><i class='fa fa-user' style='font-size:15px' color="#FFFFF"></i>Users list</a></li>
         </ul>
       </li>
       <!-- /.catalogue -->
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-barcode"></i>
+        <i class="material-icons" style='font-size:15px'>shopping_cart</i>
           <span>Catalogue</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -112,7 +114,7 @@
        <!-- /.Chat bot -->
        <li class="treeview">
         <a href="#">
-          <i class="fa fa-barcode"></i>
+        <i class="material-icons" style='font-size:15px' color= "#FFFFF">chat</i>
           <span>AI Chatbot</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
