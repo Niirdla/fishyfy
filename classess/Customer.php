@@ -200,12 +200,48 @@ if ($result) {
     $role = $value['role'];
 
     if ($role === 'Admin') {
-        Session::set("adminlogin", true);
-        Session::set("adminId", $value['id']);
-        Session::set("adminUser", $value['email']);
-        Session::set("adminName", $value['first_name']);
-        header("Location: admin/dashboard.php");
-        exit;
+		$errors = array();	
+		$code = rand(999999, 111111);
+    	$status = "notverified";
+		$cmrId = $value['id'];
+		
+//update customer table
+		$queryUpdate = "UPDATE tbl_customer
+
+		SET
+		code = '$code',
+		status = '$status'
+	
+		WHERE id = '$cmrId'";
+		$data_check = $this->db->update($queryUpdate);
+		//check if the update proceed
+	if($data_check){
+		$subject = "Email Verification Code";
+        $message = "Your verification code is $code";
+        $sender = "From: amberspirit16@gmail.com";
+		if(mail($email, $subject, $message, $sender)){
+			$info = "We've sent a verification code to your email - $email";
+			$_SESSION['info'] = $info;
+			$_SESSION['email'] = $email;
+			$_SESSION['pass'] = $pass;
+			
+
+			Session::set("adminlogin", true);
+			Session::set("adminId", $value['id']);
+			Session::set("adminUser", $value['email']);
+			Session::set("adminName", $value['first_name']);
+			header('location: system_admin_otp.php');
+			exit();
+		}else{
+			$errors['otp-error'] = "Failed while sending code!";
+		}
+	}else{
+		$errors['db-error'] = "Failed while inserting data into database!";
+	}
+
+       
+     
+ 
     } elseif ($role === 'Customer') {
         Session::set("cuslogin", true);
         Session::set("cmrId", $value['id']);
@@ -218,11 +254,46 @@ if ($result) {
 		}
         exit;
     } elseif ($role === 'Database Admin') {
-        Session::set("databaseAdminLogin", true);
-        Session::set("databaseAdminId", $value['id']);
-        Session::set("databaseAdminUser", $value['email']);
-        Session::set("databaseAdminName", $value['first_name']);
-        header("Location: vendor/dashboard.php");
+
+		$errors = array();	
+		$code = rand(999999, 111111);
+    	$status = "notverified";
+		$cmrId = $value['id'];
+		
+//update customer table
+		$queryUpdate = "UPDATE tbl_customer
+
+		SET
+		code = '$code',
+		status = '$status'
+	
+		WHERE id = '$cmrId'";
+		$data_check = $this->db->update($queryUpdate);
+		//check if the update proceed
+	if($data_check){
+		$subject = "Email Verification Code";
+        $message = "Your verification code is $code";
+        $sender = "From: amberspirit16@gmail.com";
+		if(mail($email, $subject, $message, $sender)){
+			$info = "We've sent a verification code to your email - $email";
+			$_SESSION['info'] = $info;
+			$_SESSION['email'] = $email;
+			$_SESSION['pass'] = $pass;
+			
+
+			Session::set("databaseAdminLogin", true);
+			Session::set("databaseAdminId", $value['id']);
+			Session::set("databaseAdminUser", $value['email']);
+			Session::set("databaseAdminName", $value['first_name']);
+			header("Location: otp_admin_vendor.php");
+			exit();
+		}else{
+			$errors['otp-error'] = "Failed while sending code!";
+		}
+	}else{
+		$errors['db-error'] = "Failed while inserting data into database!";
+	}
+       
         exit;
     }
 }

@@ -75,6 +75,61 @@ $errors = array();
         }
     }
 
+
+    //Check System Admin identity
+    if(isset($_POST['check_system_admin_identity'])){
+        $_SESSION['info'] = "";
+        $otp_code = mysqli_real_escape_string($con, $_POST['otp']);
+        $check_code = "SELECT * FROM tbl_customer WHERE code = $otp_code";
+        $code_res = mysqli_query($con, $check_code);
+        if(mysqli_num_rows($code_res) > 0){
+            $fetch_data = mysqli_fetch_assoc($code_res);
+            $fetch_code = $fetch_data['code'];
+            $email = $fetch_data['email'];
+            $code = 0;
+            $status = 'verified';
+            $update_otp = "UPDATE tbl_customer SET code = $code, status = '$status' WHERE code = $fetch_code";
+            $update_res = mysqli_query($con, $update_otp);
+            if($update_res){
+                $_SESSION['first_name'] = $first_name;
+                $_SESSION['last_name'] = $last_name;
+                $_SESSION['email'] = $email;
+                header('location: admin/dashboard.php');
+                exit();
+            }else{
+                $errors['otp-error'] = "Failed while updating code!";
+            }
+        }else{
+            $errors['otp-error'] = "You've entered incorrect code!";
+        }
+    }
+    if(isset($_POST['check_admin_vendor_identity'])){
+        $_SESSION['info'] = "";
+        $otp_code = mysqli_real_escape_string($con, $_POST['otp']);
+        $check_code = "SELECT * FROM tbl_customer WHERE code = $otp_code";
+        $code_res = mysqli_query($con, $check_code);
+        if(mysqli_num_rows($code_res) > 0){
+            $fetch_data = mysqli_fetch_assoc($code_res);
+            $fetch_code = $fetch_data['code'];
+            $email = $fetch_data['email'];
+            $code = 0;
+            $status = 'verified';
+            $update_otp = "UPDATE tbl_customer SET code = $code, status = '$status' WHERE code = $fetch_code";
+            $update_res = mysqli_query($con, $update_otp);
+            if($update_res){
+                $_SESSION['first_name'] = $first_name;
+                $_SESSION['last_name'] = $last_name;
+                $_SESSION['email'] = $email;
+                header('location: vendor/dashboard.php');
+                exit();
+            }else{
+                $errors['otp-error'] = "Failed while updating code!";
+            }
+        }else{
+            $errors['otp-error'] = "You've entered incorrect code!";
+        }
+    }
+
      //if user click login button
      /*if(isset($_POST['login'])){
         $email = mysqli_real_escape_string($con, $_POST['email']);
