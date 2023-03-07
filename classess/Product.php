@@ -67,7 +67,7 @@ if ($productName == "" || $catId == "" || $brandId == "" || $body == "" || $pric
 
 	 $inserted_row = $this->db->insert($query);
 			if ($inserted_row) {
-				$msg = "<span class='success'>Product inserted Successfully.</span>";
+				$msg = "<span class='success' style = 'color:green;'>Product inserted Successfully.</span>";
 				return $msg;
 			} else{
 				$msg = "<span class='error'>Product Not inserted.</span>";
@@ -99,6 +99,28 @@ ORDER BY tbl_product.productId DESC";
 	$result = $this->db->select($query);
 	return $result;
 }
+public function getProductLessThan50Stocks(){
+
+	$query = "SELECT p.*,c.catName,b.brandName
+	FROM tbl_product as p,tbl_category as c, tbl_brand as b
+	WHERE p.catId = c.catId AND p.brandId = b.brandId AND p.stocks < 50
+	ORDER BY p.productId DESC";
+	
+	/*
+	$query = "SELECT tbl_product.*, tbl_category.catName,tbl_brand.brandName
+	FROM tbl_product
+	
+	INNER JOIN tbl_category
+	ON tbl_product.catId = tbl_category.catId
+	
+	INNER JOIN tbl_brand
+	ON tbl_product.brandId = tbl_brand.brandId
+	ORDER BY tbl_product.productId DESC";
+	*/
+	
+		$result = $this->db->select($query);
+		return $result;
+	}
 
 public function getProById($id){
 
@@ -176,7 +198,7 @@ if ($file_size >8388608) {
 
 	 $updatedted_row = $this->db->update($query);
 			if ($updatedted_row) {
-				$msg = "<span class='success'>Product Updated Successfully.</span>";
+				$msg = "<span class='success' style = 'color:green;'>Product Updated Successfully.</span>";
 				return $msg;
 			} else{
 				$msg = "<span class='error'>Product Not Updated.</span>";
@@ -198,7 +220,7 @@ if ($file_size >8388608) {
 
 	 $updatedted_row = $this->db->update($query);
 			if ($updatedted_row) {
-				$msg = "<span class='success'>Product Updated Successfully.</span>";
+				$msg = "<span class='success' style = 'color:green;'>Product Updated Successfully.</span>";
 				return $msg;
 			} else{
 				$msg = "<span class='error'>Product Not Updated.</span>";
@@ -224,7 +246,7 @@ unlink($dellink);
 $delquery = "DELETE FROM tbl_product where productId = '$id'";
 $deldata = $this->db->delete($delquery);
 	if ($deldata) {
-		$msg = "<span class='success'>Product Deleted Successfully.</span>";
+		$msg = "<span class='success' style = 'color:green;'>Product Deleted Successfully.</span>";
 				return $msg;
 	}else{
 $msg = "<span class='error'>Product Not Deleted !</span>";
@@ -318,7 +340,7 @@ public function insertCompareData($cmprid,$cmrId){
 
 			if ($inserted_row) {
 				
-	$msg = "<span class='success'>Added ! Check Compare Page</span>";
+	$msg = "<span class='success' style = 'color:green;'>Added ! Check Compare Page</span>";
 				return $msg;
 	}else{
 $msg = "<span class='error'>Not Added !</span>";
@@ -383,7 +405,7 @@ public function catalogueInsert($data,$file){
 	
 		 $inserted_row = $this->db->insert($query);
 				if ($inserted_row) {
-					$msg = "<span class='success'>Product inserted Successfully.</span>";
+					$msg = "<span class='success' style = 'color:green;'>Product inserted Successfully.</span>";
 					return $msg;
 				} else{
 					$msg = "<span class='error'>Product Not inserted.</span>";
@@ -469,7 +491,7 @@ public function catalogueInsert($data,$file){
 				
 					 $updatedted_row = $this->db->update($query);
 							if ($updatedted_row) {
-								$msg = "<span class='success'>Catalogue Updated Successfully.</span>";
+								$msg = "<span class='success' style = 'color:green;'>Catalogue Updated Successfully.</span>";
 								return $msg;
 							} else{
 								$msg = "<span class='error'>Catalogue Not Updated.</span>";
@@ -493,7 +515,7 @@ public function catalogueInsert($data,$file){
 				
 					 $updatedted_row = $this->db->update($query);
 							if ($updatedted_row) {
-								$msg = "<span class='success'>Catalogue Updated Successfully.</span>";
+								$msg = "<span class='success' style = 'color:green;'>Catalogue Updated Successfully.</span>";
 								return $msg;
 							} else{
 								$msg = "<span class='error'>Catalogue Not Updated.</span>";
@@ -519,7 +541,7 @@ public function catalogueInsert($data,$file){
 					$delquery = "DELETE FROM tbl_catalogue where id = '$id'";
 					$deldata = $this->db->delete($delquery);
 						if ($deldata) {
-							$msg = "<span class='success'>Product Deleted Successfully.</span>";
+							$msg = "<span class='success' style = 'color:green;'>Product Deleted Successfully.</span>";
 									return $msg;
 						}else{
 					$msg = "<span class='error'>Product Not Deleted !</span>";

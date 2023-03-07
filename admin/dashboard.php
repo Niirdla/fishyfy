@@ -32,7 +32,73 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <title>Document</title>
+  <title>Admin dashboard</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <!-- Bargraph style -->
+    <style type="text/css">
+	.chart {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-end;
+		justify-content: space-between;
+		height: 400px;
+		padding: 10px;
+		box-sizing: border-box;
+		background-color: #f1f1f1;
+		font-family: sans-serif;
+		font-size: 14px;
+	}
+
+	.bar {
+		flex: 1;
+		margin: 0 10px;
+		background-color: #0a537a;
+		color: white;
+		text-align: center;
+		position: relative;
+		transition: height 0.5s ease;
+	}
+
+	.bar:hover {
+		background-color: #3e8e41;
+	}
+
+	.bar .value {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		text-align: center;
+		color: #fff;
+		font-size: 14px;
+		padding: 5px 0;
+		box-sizing: border-box;
+	}
+
+	.month {
+		flex: 1;
+		text-align: center;
+		margin-top: 10px;
+		font-weight: bold;
+	}
+
+	.chart-title {
+		text-align: center;
+		font-size: 24px;
+		font-weight: bold;
+		margin-bottom: 20px;
+	}
+  .table-container {
+        max-width: 70%;
+        width: 50%;
+    }
+    #stocks-table-container {
+        margin-left: 50px;
+        width: 40%;
+    }
+</style>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -139,70 +205,136 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
           </div>
         </div>
       </div>
-      <?php 
-  $query = mysqli_query($con, "SELECT MONTHNAME(date) as monthname, sum(price) as amount FROM tbl_order GROUP BY monthname") or die(mysqli_error());
-  
-  foreach($query as $data)
-  {
-    $month[] = $data['monthname'];
-    $amount[] = $data['amount'];
-  }
 
-?>
-<div style="width: 1200px;">
-  <canvas id="myChart"></canvas>
+      <div style="display:flex">
+    <div class="table-container">
+        <h2 style="text-align:center">Number of orders in each product</h2>
+        <table id="orders-table">
+            <thead >
+                <tr>
+                    <th style= "	background-color: #607d8b;" >Product Name</th>
+                    <th style= "	background-color: #607d8b;">Number of Orders</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    // Connect to database
+                    
+                    if (!$con) {
+                        die("Connection failed: " . mysqli_connect_error());
+                    }
+
+                    // Query to get number of orders for each product
+                    $sql = "SELECT tbl_product.productName, COUNT(tbl_order.id) as num_orders FROM tbl_order, tbl_product WHERE tbl_order.productId = tbl_product.productId GROUP BY productName ORDER BY num_orders DESC";
+                    $result = mysqli_query($con, $sql);
+
+                    // Loop through results and display in table
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td>" . $row['productName'] . "</td>";
+                        echo "<td>" . $row['num_orders'] . "</td>";
+                        echo "</tr>";
+                    }
+
+                    // Close database connection
+                    
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <div id="stocks-table-container">
+        <h2 style="text-align:center">Products with stocks less than 50</h2>
+        <table id="stocks-table">
+            <thead>
+                <tr>
+                    <th style= "	background-color: #607d8b;">Product Name</th>
+                    <th style= "	background-color: #607d8b;">Stocks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    
+                    if (!$con) {
+                        die("Connection failed: " . mysqli_connect_error());
+                    }
+
+                    // Query to get products with stocks less than 50
+                    $sql = "SELECT productName, stocks FROM tbl_product WHERE stocks < 50";
+                    $result = mysqli_query($con, $sql);
+
+                    // Loop through results and display in table
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td>" . $row['productName'] . "</td>";
+                        echo "<td>" . $row['stocks'] . "</td>";
+                        echo "</tr>";
+                    }
+
+                 
+                ?>
+            </tbody>
+        </table>
+    </div>
 </div>
-      </section>
-      <!-- right col -->
-     
 
-        <script>
-  // === include 'setup' then 'config' above ===
-  const labels = <?php echo json_encode($month) ?>;
-  const data = {
-    labels: labels,
-    datasets: [{
-      label: 'Monthly Sales Report',
-      data: <?php echo json_encode($amount) ?>,
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 205, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(201, 203, 207, 0.2)'
-      ],
-      borderColor: [
-        'rgb(255, 99, 132)',
-        'rgb(255, 159, 64)',
-        'rgb(255, 205, 86)',
-        'rgb(75, 192, 192)',
-        'rgb(54, 162, 235)',
-        'rgb(153, 102, 255)',
-        'rgb(201, 203, 207)'
-      ],
-      borderWidth: 1
-    }]
-  };
+  <!-- Monthly sales report bar graph -->
+  <div class="chart-container">
+	<div class="chart-title">Monthly Sales Report</div>
+	<div class="chart">
+		<?php
+			// Check connection
+			if (!$con) {
+			    die("Connection failed: " . mysqli_connect_error());
+			}
 
-  const config = {
-    type: 'bar',
-    data: data,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    },
-  };
+			$months = array(
+				"January", "February", "March", "April", "May", "June",
+				"July", "August", "September", "October", "November", "December"
+			);
+			$data = array_fill_keys($months, 0);
 
-  var myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
+			// Fetch the sales data from the database
+			$sql = "SELECT MONTHNAME(date) as month, sum(price) as sales FROM tbl_order GROUP BY MONTH(date)";
+			$result = mysqli_query($con, $sql);
+
+			while ($row = mysqli_fetch_assoc($result)) {
+				$data[$row["month"]] = $row["sales"];
+			}
+
+			// Loop through the data and output each bar
+			$max_value = max($data);
+			$year = date("Y");
+			foreach ($months as $month) {
+				$value = $data[$month];
+				$height = ($value / $max_value) * 100;
+				echo '<div class="bar" style="height:'.$height.'%;">
+					<div class="value">&#8369; '.number_format($value).'</div>
+					<div class="label">'.$month.'</div>
+				</div>';
+				// Reset the data array and year at the end of each year
+				if ($month == "December") {
+					$data = array_fill_keys($months, 0);
+					$year++;
+				}
+			}
+
+			   // Close database connection
+         mysqli_close($con);
+
+		?>
+	</div>
+</div>
+
+
+
+<script>
+    // Initialize DataTables for both tables
+    $(document).ready(function() {
+        $('#orders-table').DataTable();
+        $('#stocks-table').DataTable();
+    });
 </script>
+
 </body>
 </html>
 <?php include 'includes/scripts.php'; ?>

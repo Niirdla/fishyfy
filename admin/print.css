@@ -1,0 +1,29 @@
+@media print {
+    .print-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 60px;
+    }
+    .print-table th, .print-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    .print-container {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .no-print {
+        display: none;
+      }
+      #adminName {
+        page-break-before: always;
+        }
+        
+      
+  }
+  

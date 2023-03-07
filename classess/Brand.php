@@ -35,7 +35,7 @@ if (empty($brandName) ) {
 			$query = "INSERT INTO tbl_brand(brandName) VALUES('$brandName') ";
 			$brandinsert = $this->db->insert($query);
 			if ($brandinsert) {
-				$msg = "<span class='success'>Brand inserted Successfully.</span>";
+				$msg = "<span class='success' style = 'color:green;'>Brand inserted Successfully.</span>";
 				return $msg;
 			} else{
 				$msg = "<span class='error'>Brand Not inserted.</span>";
@@ -80,7 +80,7 @@ if (empty($brandName) ) {
 
 	$updated_row = $this->db->update($query);
 	if ($updated_row) {
-		$msg = "<span class='success'>Brand Updated Successfully.</span>";
+		$msg = "<span class='success' style = 'color:green;'>Brand Updated Successfully.</span>";
 				return $msg;
 	} else{
 			$msg = "<span class='error'>Brand Not Updated !</span>";
@@ -93,7 +93,7 @@ if (empty($brandName) ) {
  	$query = "DELETE FROM tbl_brand WHERE brandId = '$id'";
 	$deldata = $this->db->delete($query);
 	if ($deldata) {
-		$msg = "<span class='success'>Brand Deleted Successfully.</span>";
+		$msg = "<span class='success' style = 'color:green;'>Brand Deleted Successfully.</span>";
 				return $msg;
 	}else{
 $msg = "<span class='error'>Brand Not Deleted !</span>";

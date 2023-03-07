@@ -32,6 +32,42 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Document</title>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+  <style> 
+  
+  #stocks-table-container {
+  width: 80%;
+  margin: auto;
+}
+
+#stocks-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#stocks-table th, #stocks-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+#stocks-table th {
+  background-color: #607d8b;
+  color: #fff;
+}
+
+#stocks-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+#stocks-table tbody td {
+  font-size: 16px;
+}
+  </style>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -152,7 +188,48 @@ $con = mysqli_connect('localhost', 'root', '', 'db_shop');
             <a href="brandlist.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
+        <div id="stocks-table-container">
+        <h2 style="text-align:center">Products with stocks less than 50</h2>
+        <table id="stocks-table">
+            <thead>
+                <tr>
+                    <th style= "	background-color: #607d8b;">Product Name</th>
+                    <th style= "	background-color: #607d8b;">Stocks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    
+                    if (!$con) {
+                        die("Connection failed: " . mysqli_connect_error());
+                    }
+
+                    // Query to get products with stocks less than 50
+                    $sql = "SELECT productName, stocks FROM tbl_product WHERE stocks < 50";
+                    $result = mysqli_query($con, $sql);
+
+                    // Loop through results and display in table
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td>" . $row['productName'] . "</td>";
+                        echo "<td>" . $row['stocks'] . "</td>";
+                        echo "</tr>";
+                    }
+
+                 
+                ?>
+            </tbody>
+        </table>
+    </div>
       </div>
+
+      <script>
+    // Initialize DataTables for both tables
+    $(document).ready(function() {
+      
+        $('#stocks-table').DataTable();
+    });
+</script>
    
 </body>
 </html>

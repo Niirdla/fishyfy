@@ -27,7 +27,7 @@ $con = mysqli_connect("localhost","root","","db_shop");
 
 <html>
   <head>
-
+  <link rel="stylesheet" type="text/css" href="print.css" media="print" />
 </head>
 <body>
                 <div class="block">               
@@ -130,25 +130,27 @@ $con = mysqli_connect("localhost","root","","db_shop");
                                     {
                                         echo "No Record Found";
                                     }
-                                     $results = mysqli_query($con, "SELECT sum(price) FROM tbl_order where id AND date BETWEEN '$from_date' AND '$to_date' ") or die(mysqli_error());
-                                    while($rows = mysqli_fetch_array($results)){?>
-                                    <?php echo "<h2>Total Sales between this date = ₱".number_format_short($rows['sum(price)'],2). "</h2>" ?>
-                          <?php
-                                    }
+                                  
                                 }
                             ?>
                             </tbody>
                         </table>
-                       <div id = "container" style = "     float: left;
+                        <div class = "total sales">
+                        <?php
+                        $results = mysqli_query($con, "SELECT sum(price) FROM tbl_order where id AND date BETWEEN '$from_date' AND '$to_date' ") or die(mysqli_error());
+                                    while($rows = mysqli_fetch_array($results)){?>
+                                    <?php echo "<h2>Total Sales between this date = ₱".number_format_short($rows['sum(price)'],2). "</h2>" ?>
+                          <?php
+                                    }
+?>
+</div>
 
-    position: absolute;
-    width: 30%;
-    right: 5px;
-    margin-top: 60px;">
-                       <p style = "text-align: center;"> <?php echo Session::get('adminName'); ?> </p>
-                       <p style = "text-align: center;"> Prepared by </p>
-                            </div>
-
+<?php 
+$results = mysqli_query($con, "SELECT sum(price) FROM tbl_order where id AND date BETWEEN '$from_date' AND '$to_date' ") or die(mysqli_error());
+while($rows = mysqli_fetch_array($results)){
+    $total_sales = $rows['sum(price)'];
+}
+?>
                         </span>
                       <div class="text-center">
                 <button onclick="tablePrint();" class="btn btn-primary">Print</button>
@@ -160,25 +162,82 @@ $con = mysqli_connect("localhost","root","","db_shop");
                </div>
    
         <script>
-function tablePrint(){  
-    var display_setting="toolbar=no,location=no,directories=no,menubar=no,";  
-    display_setting+="scrollbars=no,width=1000, height=800, left=100, top=25";  
-    var content_innerhtml = document.getElementById("printout").innerHTML;  
-    var document_print=window.open("","",display_setting);  
-    document_print.document.open();  
-    document_print.document.write('<body style="font-family:Calibri(body);  font-size:16px;" onLoad="self.print();self.close();" >');  
-    document_print.document.write(content_innerhtml);  
-    document_print.document.write('</body></html>');  
-    document_print.print();  
-    document_print.document.close();  
-    return false;  
-    } 
-	$(document).ready(function() {
-		oTable = jQuery('#list').dataTable({
-		"bJQueryUI": true,
-		"sPaginationType": "full_numbers"
-		} );
-	});	
+function tablePrint() {
+    var display_setting = "toolbar=no,location=no,directories=no,menubar=no,";
+display_setting += "scrollbars=no,width=1000,height=800,left=100,top=25";
+display_setting += ",chrome://flags/#enable-modern-print-preview";
+  // create the image element
+  var img = document.createElement("img");
+  img.src = "assets/img/aacaquaticslogo.png"; // replace image_url with the URL of your image
+
+  // get the h1 element and insert the image at the top
+  var h1 = document.querySelector("h1");
+  h1.insertBefore(img, h1.firstChild);
+
+  // add a listener to update the position of the admin name and prepared by before printing
+  window.addEventListener("beforeprint", function () {
+    // set the position of the admin name and prepared by to fixed at the bottom of the page
+    var adminNameContainer = document.getElementById("adminNameContainer");
+    adminNameContainer.style.position = "fixed";
+    adminNameContainer.style.bottom = "0";
+    var preparedByContainer = document.getElementById("preparedByContainer");
+    preparedByContainer.style.position = "fixed";
+    preparedByContainer.style.bottom = "40px";
+
+    // check if the admin name and prepared by are below the current page
+    var adminNamePosition = adminNameContainer.offsetTop;
+    var preparedByPosition = preparedByContainer.offsetTop;
+
+    if (
+      adminNamePosition > window.innerHeight ||
+      preparedByPosition > window.innerHeight
+    ) {
+      // move the admin name and prepared by to the next page
+      var nextPageDiv = document.createElement("div");
+      nextPageDiv.style.pageBreakBefore = "always";
+      nextPageDiv.appendChild(adminNameContainer);
+      nextPageDiv.appendChild(preparedByContainer);
+      document.body.appendChild(nextPageDiv);
+    }
+  });
+
+  // remove the about section and create the table HTML content
+  var content_innerhtml =
+    '<div class="col-md-12">' +
+    '<div class="page-header" style="text-align:center;">' +
+    "<h1>Order Reports</h1>" +
+    "</div>" +
+    '<table id="myTable"class="data display datatable print-table" style="text-align:center;">' +
+    document.querySelector("#printout table").innerHTML +
+    "</table>" +
+    '<div id="adminNameContainer">' +
+    '<div id="adminName" style="text-align:right; margin-bottom: 100px;">' +
+    "</div>" +
+    "</div>" +
+    
+    '<div class="total_sales">Total Sales: ' + <?php echo $total_sales; ?> + '</div>' +
+  
+    '<div id="preparedByContainer">' +
+    '<div id="preparedBy" style="text-align:right; margin-bottom: 20px;">' +
+    '<?php echo Session::get("adminName"); ?>' +
+    "<br>Prepared By " +
+    "</div>" +
+    "</div>" +
+    "</div>";
+
+  // create the print window and write the content to it
+  var document_print = window.open("", "", display_setting);
+  document_print.document.open();
+  document_print.document.write(
+    '<html><head><style>@media print {#about {display:none;}}</style></head><body style="font-family:Calibri(body);font-size:16px;" onLoad="self.print();self.close();" >'
+  );
+  document_print.document.write(content_innerhtml);
+  document_print.document.write("</body></html>");
+  document_print.document.close();
+
+  return false;
+}
+		
 
 		
 </script>

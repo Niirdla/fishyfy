@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                         <select id="select" name="role">
                             <option>Select role</option>
                             <option value="Admin">Admin</option>
-                            <option value="Database Admin">Database Admin</option>
+                            <option value="Vendor">Vendor</option>
                             <option value="Customer">Customer</option>
                         </select>
                     </td>

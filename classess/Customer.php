@@ -77,7 +77,7 @@ if ($first_name == "" || $last_name == "" ||$address == "" || $city == "" || $zi
 	$inserted_row = $this->db->insert($query);
 	if ($inserted_row) {
 		
-	$msg = "<span class='success'style = 'color:red;'>Customer Data inserted Successfully.</span>";
+	$msg = "<span class='success'style = 'color:green;'>Customer Data inserted Successfully.</span>";
 		return $msg;
 	
 		
@@ -122,7 +122,7 @@ public function AdmincustomerRegistration($data){
 	
 		 $inserted_row = $this->db->insert($query);
 				if ($inserted_row) {
-					$msg = "<span class='success'style = 'color:red;'>Customer Data inserted Successfully.</span>";
+					$msg = "<span class='success'style = 'color:green;'>Customer Data inserted Successfully.</span>";
 					return $msg;
 				} else{
 					$msg = "<span class='error'style = 'color:red;'>Customer Data Not inserted.</span>";
@@ -183,6 +183,67 @@ public function getAllCustomer(){
 	return $result;
 	}
 
+	public function getAllCustomerRole(){
+
+		$query = "SELECT u.*
+		FROM tbl_customer as u WHERE u.role = 'Customer'
+		ORDER BY u.id DESC";
+		
+		/*
+		$query = "SELECT tbl_product.*, tbl_category.catName,tbl_brand.brandName
+		FROM tbl_product
+		
+		INNER JOIN tbl_category
+		ON tbl_product.catId = tbl_category.catId
+		
+		INNER JOIN tbl_brand
+		ON tbl_product.brandId = tbl_brand.brandId
+		ORDER BY tbl_product.productId DESC";
+		*/
+		$result = $this->db->select($query);
+		return $result;
+		}
+		public function getAllSystemAdmin(){
+
+			$query = "SELECT u.*
+			FROM tbl_customer as u WHERE u.role = 'Admin'
+			ORDER BY u.id DESC";
+			
+			/*
+			$query = "SELECT tbl_product.*, tbl_category.catName,tbl_brand.brandName
+			FROM tbl_product
+			
+			INNER JOIN tbl_category
+			ON tbl_product.catId = tbl_category.catId
+			
+			INNER JOIN tbl_brand
+			ON tbl_product.brandId = tbl_brand.brandId
+			ORDER BY tbl_product.productId DESC";
+			*/
+			$result = $this->db->select($query);
+			return $result;
+			}
+			public function getAllAdminVendor(){
+
+				$query = "SELECT u.*
+				FROM tbl_customer as u WHERE u.role = 'Vendor'
+				ORDER BY u.id DESC";
+				
+				/*
+				$query = "SELECT tbl_product.*, tbl_category.catName,tbl_brand.brandName
+				FROM tbl_product
+				
+				INNER JOIN tbl_category
+				ON tbl_product.catId = tbl_category.catId
+				
+				INNER JOIN tbl_brand
+				ON tbl_product.brandId = tbl_brand.brandId
+				ORDER BY tbl_product.productId DESC";
+				*/
+				$result = $this->db->select($query);
+				return $result;
+				}
+
 public function customerLogin($data){
 
 $email = mysqli_real_escape_string($this->db->link, $data['email']);
@@ -218,7 +279,7 @@ if ($result) {
 	if($data_check){
 		$subject = "Email Verification Code";
         $message = "Your verification code is $code";
-        $sender = "From: amberspirit16@gmail.com";
+        $sender = "From: aacaquatics@gmail.com";
 		if(mail($email, $subject, $message, $sender)){
 			$info = "We've sent a verification code to your email - $email";
 			$_SESSION['info'] = $info;
@@ -253,7 +314,7 @@ if ($result) {
         header("Location:cart.php");
 		}
         exit;
-    } elseif ($role === 'Database Admin') {
+    } elseif ($role === 'Vendor') {
 
 		$errors = array();	
 		$code = rand(999999, 111111);
@@ -273,7 +334,7 @@ if ($result) {
 	if($data_check){
 		$subject = "Email Verification Code";
         $message = "Your verification code is $code";
-        $sender = "From: amberspirit16@gmail.com";
+        $sender = "From: aacaquatics@gmail.com";
 		if(mail($email, $subject, $message, $sender)){
 			$info = "We've sent a verification code to your email - $email";
 			$_SESSION['info'] = $info;
@@ -346,7 +407,7 @@ if ($first_name == "" || $last_name == "" || $address == "" || $city == "" || $z
 
 	$updated_row = $this->db->update($query);
 	if ($updated_row) {
-		$msg = "<span class='success'>Customer Data Updated Successfully.</span>";
+		$msg = "<span class='success' style = 'color:green;'>Customer Data Updated Successfully.</span>";
 				return $msg;
 	} else{
 			$msg = "<span class='error'>Customer Data Not Updated !</span>";
@@ -360,7 +421,7 @@ public function delUserById($id){
 	$delquery = "DELETE FROM tbl_customer where id = '$id'";
 	$deldata = $this->db->delete($delquery);
 		if ($deldata) {
-			$msg = "<span class='success'>Product Deleted Successfully.</span>";
+			$msg = "<span class='success' style = 'color:green;'>Product Deleted Successfully.</span>";
 					return $msg;
 		}else{
 	$msg = "<span class='error'>Product Not Deleted !</span>";

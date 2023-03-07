@@ -27,6 +27,48 @@ if (isset($_GET['delUser'])) {
 
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
+
+	<div class="block">               
+          <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card mt-5">
+              
+                    <div class="card-body">
+                    <form action="" method="GET">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <select name="role">
+  <?php
+    $selected = $_GET["role"];
+    $options = array("All","Admin", "Vendor", "Customer");
+    foreach ($options as $option) {
+      if ($option == $selected) {
+        echo "<option selected='selected' value='$option'>$option</option>";
+      } else {
+        echo "<option value='$option'>$option</option>";
+      }
+    }
+  ?>
+</select>
+                                      
+                          
+                                    
+                                    </div>
+                                </div>
+                               
+                      
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Click to Filter</label> <br>
+                                      <button type="submit" class="btn btn-primary">Filter</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -67,6 +109,9 @@ if (isset($delUser)) {
 			<tbody>
 
 				<?php
+				if(isset($_GET['role'])){
+					$role = $_GET['role'];
+					if($role == "All"){
 				$getPd = $pd->getAllCustomer();
 				if ($getPd) {
 					$i = 0;
@@ -88,7 +133,82 @@ if (isset($delUser)) {
 				</tr>
 
 
-			<?php } } ?>
+			<?php }} }elseif($role == "Admin"){
+
+$getPd = $pd->getAllSystemAdmin();
+if ($getPd) {
+	$i = 0;
+	while ($result = $getPd->fetch_assoc()) {
+		$i++;
+
+?>
+<tr class="odd gradeX">
+	<td><?php echo $i;?></td>
+	<td><?php echo $result['first_name'] ;?></td>
+	<td><?php echo $result['last_name'] ;?></td>
+	<td><?php echo $result['address'] ;?></td>
+	<td><?php echo $result['city'] ;?></td>
+	<td><?php echo $result['zip'] ;?></td>
+	  <td><?php echo $result['phone'] ;?></td>
+	  <td><?php echo $result['email'] ;?></td>
+	<td><?php echo $result['role'] ;?></td>
+	<td><a href="userEdit.php?userid=<?php echo $result['id'];?>">Edit</a> || <a onclick="return confirm('Are you sure to delete!')" href="?delUser=<?php echo $result['id'];?>">Delete</a></td>
+</tr>
+
+
+<?php }}
+			}elseif($role == "Vendor"){
+
+				$getPd = $pd->getAllAdminVendor();
+				if ($getPd) {
+					$i = 0;
+					while ($result = $getPd->fetch_assoc()) {
+						$i++;
+
+				?>
+				<tr class="odd gradeX">
+					<td><?php echo $i;?></td>
+					<td><?php echo $result['first_name'] ;?></td>
+					<td><?php echo $result['last_name'] ;?></td>
+					<td><?php echo $result['address'] ;?></td>
+					<td><?php echo $result['city'] ;?></td>
+					<td><?php echo $result['zip'] ;?></td>
+          			<td><?php echo $result['phone'] ;?></td>
+          			<td><?php echo $result['email'] ;?></td>
+					<td><?php echo $result['role'] ;?></td>
+					<td><a href="userEdit.php?userid=<?php echo $result['id'];?>">Edit</a> || <a onclick="return confirm('Are you sure to delete!')" href="?delUser=<?php echo $result['id'];?>">Delete</a></td>
+				</tr>
+
+
+			<?php }}
+			}elseif($role == "Customer"){
+
+				$getPd = $pd->getAllCustomerRole();
+				if ($getPd) {
+					$i = 0;
+					while ($result = $getPd->fetch_assoc()) {
+						$i++;
+
+				?>
+				<tr class="odd gradeX">
+					<td><?php echo $i;?></td>
+					<td><?php echo $result['first_name'] ;?></td>
+					<td><?php echo $result['last_name'] ;?></td>
+					<td><?php echo $result['address'] ;?></td>
+					<td><?php echo $result['city'] ;?></td>
+					<td><?php echo $result['zip'] ;?></td>
+          			<td><?php echo $result['phone'] ;?></td>
+          			<td><?php echo $result['email'] ;?></td>
+					<td><?php echo $result['role'] ;?></td>
+					<td><a href="userEdit.php?userid=<?php echo $result['id'];?>">Edit</a> || <a onclick="return confirm('Are you sure to delete!')" href="?delUser=<?php echo $result['id'];?>">Delete</a></td>
+				</tr>
+
+
+			<?php }}
+			}
+			}
+			
+			?>
 				
 			</tbody>
 		</table>

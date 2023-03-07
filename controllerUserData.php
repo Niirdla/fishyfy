@@ -72,6 +72,8 @@ $errors = array();
             }
         }else{
             $errors['otp-error'] = "You've entered incorrect code!";
+           
+
         }
     }
 
@@ -94,6 +96,7 @@ $errors = array();
                 $_SESSION['first_name'] = $first_name;
                 $_SESSION['last_name'] = $last_name;
                 $_SESSION['email'] = $email;
+                $_SESSION['otp_status'] = 'verified';
                 header('location: admin/dashboard.php');
                 exit();
             }else{
@@ -101,6 +104,9 @@ $errors = array();
             }
         }else{
             $errors['otp-error'] = "You've entered incorrect code!";
+            header('Location: system_admin_otp_error.php');
+exit();
+
         }
     }
     if(isset($_POST['check_admin_vendor_identity'])){
@@ -127,6 +133,8 @@ $errors = array();
             }
         }else{
             $errors['otp-error'] = "You've entered incorrect code!";
+            header('Location: otp_admin_vendor_error.php');
+            exit();
         }
     }
 

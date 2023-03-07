@@ -146,10 +146,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                             if ($value['role'] == 'Admin') { ?>
                             <option selected = "selected" value="Admin">Admin</option>
                             <option value="Admin">General</option>
-                         <?php } elseif ($value['role'] == 'Database Admin') { ?>
+                         <?php } elseif ($value['role'] == 'Vendor') { ?>
 
-                            <option selected = "selected" value="Database Admin">Database Admin</option>
-                            <option value="Database Admin">Featured</option>
+                            <option selected = "selected" value="Vendor">Vendor </option>
+                            <option value="Vendor">Featured</option>
                       <?php  } else { ?>
 
                         <option selected = "selected" value="Customer">Customer</option>

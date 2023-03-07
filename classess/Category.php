@@ -33,7 +33,7 @@ if (empty($catName) ) {
 			$query = "INSERT INTO tbl_category(catName) VALUES('$catName') ";
 			$catinsert = $this->db->insert($query);
 			if ($catinsert) {
-				$msg = "<span class='success'>Category inserted Successfully.</span>";
+				$msg = "<span class='success' style = 'color:green;'>Category inserted Successfully.</span>";
 				return $msg;
 			} else{
 				$msg = "<span class='error'>Category Not inserted.</span>";
@@ -78,7 +78,7 @@ if (empty($catName) ) {
 
 	$updated_row = $this->db->update($query);
 	if ($updated_row) {
-		$msg = "<span class='success'>Category Updated Successfully.</span>";
+		$msg = "<span class='success' style = 'color:green;'>Category Updated Successfully.</span>";
 				return $msg;
 	} else{
 			$msg = "<span class='error'>Category Not Updated !</span>";
@@ -92,7 +92,7 @@ public function delcatById($id){
 	$query = "DELETE FROM tbl_category WHERE catId = '$id'";
 	$deldata = $this->db->delete($query);
 	if ($deldata) {
-		$msg = "<span class='success'>Category Deleted Successfully.</span>";
+		$msg = "<span class='success' style = 'color:green;'>Category Deleted Successfully.</span>";
 				return $msg;
 	}else{
 $msg = "<span class='error'>Category Not Deleted !</span>";

@@ -15,7 +15,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Message
+        Messages
       </h1>
       <ol class="breadcrumb">
         <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -49,7 +49,7 @@ if ($updated_row) {
 }
 
 ?>
-                <div class="block">        
+                      <div class="block">        
                     <table class="data display datatable" id="example">
 					<thead>
 						<tr>
@@ -95,92 +95,89 @@ if ($updated_row) {
 					</tbody>
 				</table>
                </div>
-            </div>
-
-             <div class="box round first grid">
-                <h2>Seen Message</h2>
+			   <h2>Seen Messages</h2>
 
 
- <?php  
+<?php  
 if (isset($_GET['delid'])) {
-   $delid = $_GET['delid'];
-   $delquery = "delete from tbl_contact where id = '$delid'";
-   $deldata = $db->delete($delquery);
-   if ($deldata) {
-      echo "<span class='success'>Message Deleted successfully.</span>";
-   } else {
+  $delid = $_GET['delid'];
+  $delquery = "delete from tbl_contact where id = '$delid'";
+  $deldata = $db->delete($delquery);
+  if ($deldata) {
+	 echo "<span class='success'>Message Deleted successfully.</span>";
+  } else {
 
-     echo "<span class='error'>Message not Deleted.</span>";
-   }
+	echo "<span class='error'>Message not Deleted.</span>";
+  }
 
 }
 
 ?>
-                <div class="block">        
-                    <table class="data display datatable" id="example">
-					<thead>
-						<tr>
-							<th>Serial No.</th>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Phone</th>
-							<th>Message</th>
-							<th>Date</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
+			   <div class="block">        
+				   <table class="data display seen-datatable" id="seen-example">
+				   <thead>
+					   <tr>
+						   <th>Serial No.</th>
+						   <th>Name</th>
+						   <th>Email</th>
+						   <th>Phone</th>
+						   <th>Message</th>
+						   <th>Date</th>
+						   <th>Action</th>
+					   </tr>
+				   </thead>
+				   <tbody>
 
-			<?php
+		   <?php
 
-			$query = "select * from tbl_contact where status='1' order by id desc";
-			$msg = $db->select($query);
-			if ($msg) {
+		   $query = "select * from tbl_contact where status='1' order by id desc";
+		   $msg = $db->select($query);
+		   if ($msg) {
 
-			$i=0;
-			while ($result = $msg->fetch_assoc()) {
-			   $i++;
+		   $i=0;
+		   while ($result = $msg->fetch_assoc()) {
+			  $i++;
 
-           ?>	
+		  ?>	
 
 
-		<tr class="odd gradeX">
-			<td><?php echo $i;?></td>
-			<td><?php echo $result['name'];?></td>
-			<td><?php echo $result['email'];?></td>
-			<td><?php echo $result['contact'];?></td>
-			<td><?php echo $fm->textShorten($result['message'],30);?></td>
-			<td><?php echo $fm->formatDate($result['date']);?></td>
-			<td>
+	   <tr class="odd gradeX">
+		   <td><?php echo $i;?></td>
+		   <td><?php echo $result['name'];?></td>
+		   <td><?php echo $result['email'];?></td>
+		   <td><?php echo $result['contact'];?></td>
+		   <td><?php echo $fm->textShorten($result['message'],30);?></td>
+		   <td><?php echo $fm->formatDate($result['date']);?></td>
+		   <td>
 
-				<a href="viewmsg.php?msgid=<?php echo $result['id'];?>">View</a> || 
-				<a onclick="return confirm('Are you sure to Delete!');" href="?delid=<?php echo $result['id'];?>">Delete</a> 
-				
-			</td>
-		</tr>
-						
-						<?php } } ?>
-					</tbody>
-				</table>
-               </div>
+			   <a href="viewmsg.php?msgid=<?php echo $result['id'];?>">View</a> || 
+			   <a onclick="return confirm('Are you sure to Delete!');" href="?delid=<?php echo $result['id'];?>">Delete</a> 
+			   
+		   </td>
+	   </tr>
+					   
+					   <?php } } ?>
+				   </tbody>
+			   </table>
+			  </div>
+		   </div>
+
+
             </div>
 
 
+			<script type="text/javascript">
 
-        </div>
+$(document).ready(function () {
+	setupLeftMenu();
 
-
-    <script type="text/javascript">
-
-    $(document).ready(function () {
-        setupLeftMenu();
-
-        $('.datatable').dataTable();
-        setSidebarHeight();
+	$('.datatable').dataTable(); // for the first table
+$('#seen-example').dataTable(); // for the second table
+	setSidebarHeight();
 
 
-    });
-  </script>
+});
+</script>
 
   
 

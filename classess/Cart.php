@@ -255,7 +255,7 @@ if ( $file_name == "") {
 
 	 $inserted_row = $this->db->insert($query);
 			if ($inserted_row) {
-				$msg = "<span class='success'>Product inserted Successfully.</span>";
+				$msg = "<span class='success' style = 'color:green;'>Product inserted Successfully.</span>";
 				return $msg;
 			} else{
 				$msg = "<span class='error'>Product Not inserted.</span>";
@@ -307,7 +307,7 @@ if ( $paymentMethod == "") {
 
 			$inserted_row = $this->db->insert($query);
 				   if ($inserted_row) {
-					   $msg = "<span class='success'>Product inserted Successfully.</span>";
+					   $msg = "<span class='success' style = 'color:green;'>Product inserted Successfully.</span>";
 					   return $msg;
 				   } else{
 					   $msg = "<span class='error'>Product Not inserted.</span>";
@@ -363,7 +363,7 @@ if ( $paymentMethod == "") {
 
 	$updated_row = $this->db->update($query);
 	if ($updated_row) {
-		$msg = "<span class='success'>Updated Successfully.</span>";
+		$msg = "<span class='success' style = 'color:green;'>Updated Successfully.</span>";
 				return $msg;
 	} else{
 			$msg = "<span class='error'>Not Updated !</span>";
@@ -381,7 +381,7 @@ if ( $paymentMethod == "") {
 
 	$updated_row = $this->db->update($query);
 	if ($updated_row) {
-		$msg = "<span class='success'>Updated Successfully.</span>";
+		$msg = "<span class='success' style = 'color:green;'>Updated Successfully.</span>";
 				return $msg;
 
 				
@@ -416,7 +416,7 @@ $msg = "<span class='error'>Data Not Deleted !</span>";
 
 	$updated_row = $this->db->update($query);
 	if ($updated_row) {
-		$msg = "<span class='success'>Updated Successfully.</span>";
+		$msg = "<span class='success' style = 'color:green;'>Updated Successfully.</span>";
 				return $msg;
 				header("Location:orderdetails.php?status=3");
 	} else{
