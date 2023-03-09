@@ -60,7 +60,7 @@ if ($login == false) {
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="index.php">
-								<img src="assets/img/aacaquaticslogo.png" alt="">
+								<img src="assets/img/aacbluelogo.png" alt="">
 							</a>
 						</div>
 						<!-- logo -->
