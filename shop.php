@@ -126,7 +126,7 @@ if ($login == false) {
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<h1>Shop</h1>
+						<p style = "font-size: 90px; color: white;">SHOP NOW!</p>
 					</div>
 				</div>
 			</div>

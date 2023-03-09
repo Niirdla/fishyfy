@@ -129,7 +129,7 @@ if ($login == false) {
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>We sell quality aquatic needs</p>
+						<p style = "font-size: 70px; color: white; font-family: calibri;">We sell quality aquatic needs</p>
 						<h1>About Us</h1>
 					</div>
 				</div>
