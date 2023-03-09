@@ -13,7 +13,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: -webkit-linear-gradient(left, #0a537a, #5ad8eb);
+  background: -webkit-linear-gradient(left, #0a537a, #23395d);
   font-family: "Nunito", sans-serif;
 }
 
@@ -110,7 +110,7 @@ button {
 }
 
 .forgot-pass:hover {
-  color: #5ad8eb;
+  color: #23395d;
 }
 
 .social-media {
@@ -142,7 +142,7 @@ button {
   width: 900px;
   height: 100%;
   padding-left: 260px;
-  background: #5ad8eb;
+  background: #23395d;
   -webkit-transition: -webkit-transform 1.2s ease-in-out;
   transition: -webkit-transform 1.2s ease-in-out;
   transition: transform 1.2s ease-in-out;

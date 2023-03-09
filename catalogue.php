@@ -247,7 +247,7 @@ if ($login == false) {
 				<div class="col-lg-3 col-md-6">
 					<div class="footer-box about-widget">
 						<h2 class="widget-title">About us</h2>
-						<p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+						<p>Fishyfy is a dedicated online store for aac aquatics to showcase their live ornamental fish and sell their ornamental fish accessories</p>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">

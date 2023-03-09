@@ -257,34 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 	</div>
 	<!-- end single product -->
 
-	
-	<<!-- logo carousel -->
-	<div class="logo-carousel-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="logo-carousel-inner">
-						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
-						</div>
-						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end logo carousel -->
+
 
 	<!-- footer -->
 	<div class="footer-area">
