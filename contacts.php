@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 	</style>
 	<!-- favicon -->
-	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+	<link rel="shortcut icon" type="image/png" href="assets/img/aacbluelogo.png">
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -338,7 +338,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="clear"></div>
 					<div class="popup-box chat-wrapper">
 								<div class="title bg-light text-dark px-2" style="display:flex;align-items:center;justify-content:space-between;">
-									<img src="https://i.ibb.co/CbRdz54/favicon.png" width="50" alt="">
+									<img src="https://i.ibb.co/CbRdz54/aacbluelogo.png" width="50" alt="">
 									 FishyBOT
 									<a class="text-danger" id="closechat"><span class="fas fa-times px-3"></span></a>
 								</div>
