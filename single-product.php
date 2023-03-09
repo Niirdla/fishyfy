@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="index.php">
-								<img src="assets/img/aacaquaticslogo.png" alt="">
+								<img src="assets/img/aacbluelogo.png" alt="">
 							</a>
 						</div>
 						<!-- logo -->
@@ -95,7 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 							<li class="current-list-item"><a href="index.php">Home</a>
 								</li>
 								<li><a href="about.php">About</a></li>
-								<li><a href="news.php">News</a></li>
 								
 								<li><a href="catalogue.php">Catalogue</a></li>
 								
@@ -286,7 +285,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 							<li><a href="index.php">Home</a></li>
 							<li><a href="about.php">About</a></li>
 							<li><a href="services.php">Shop</a></li>
-							<li><a href="news.php">News</a></li>
 							<li><a href="contact.php">Contact</a></li>
 						</ul>
 					</div>

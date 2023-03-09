@@ -105,7 +105,6 @@ if (!isset($_GET['id'])) {
 							<li class="current-list-item"><a href="index.php">Home</a>
 								</li>
 								<li><a href="about.php">About</a></li>
-								<li><a href="news.php">News</a></li>
 								
 								<li><a href="catalogue.php">Catalogue</a></li>
 								
@@ -314,19 +313,19 @@ if (!isset($_GET['id'])) {
 				<div class="col-lg-12">
 					<div class="logo-carousel-inner">
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/aacbluelogo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/aacbluelogo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/aacbluelogo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/aacbluelogo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/aacbluelogo.png" alt="">
 						</div>
 					</div>
 				</div>
@@ -362,7 +361,6 @@ if (!isset($_GET['id'])) {
 							<li><a href="index.php">Home</a></li>
 							<li><a href="about.php">About</a></li>
 							<li><a href="services.php">Shop</a></li>
-							<li><a href="news.php">News</a></li>
 							<li><a href="contact.php">Contact</a></li>
 						</ul>
 					</div>

@@ -272,7 +272,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 							<li class="current-list-item"><a href="index.php">Home</a>
 								</li>
 								<li><a href="about.php">About</a></li>
-								<li><a href="news.php">News</a></li>
 								
 								<li><a href="catalogue.php">Catalogue</a></li>
 								
@@ -323,13 +322,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	</div>
 	<!-- end search arewa -->
 
-	
-	
-	<!-- breadcrumb-section -->
-	<div class="breadcrumb-section breadcrumb-bg">
+	<div class="hero-area hero-bg">
 		<div class="container">
 			<div class="row">
-                    <div class="support_desc">
+				<div class="col-lg-9 offset-lg-2 text-center">
+					<div class="hero-text">
+						<div class="hero-text-tablecell">
+						<div class="support_desc">
                         <h3>Live Support</h3>
                         <p><span>24 hours | 7 days a week | 365 days a year &nbsp;&nbsp; Live Technical Support</span></p>
 						<button id="chat" class="btn btn-danger">Click to Chat <i class="fas fa-headset"></i></button>
@@ -360,9 +359,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 									</div>
 								</div>
 							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+	
+	<!-- breadcrumb-section -->
+	
 	<!-- end breadcrumb section -->
 
 <!-- check out section -->

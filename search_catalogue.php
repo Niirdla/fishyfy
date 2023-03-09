@@ -82,7 +82,6 @@ $search = $search;
 							<li class="current-list-item"><a href="index.php">Home</a>
 								</li>
 								<li><a href="about.php">About</a></li>
-								<li><a href="news.php">News</a></li>
 								
 								<li><a href="catalogue.php">Catalogue</a></li>
 								
@@ -249,7 +248,6 @@ $search = $search;
 							<li><a href="index.html">Home</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="services.html">Shop</a></li>
-							<li><a href="news.html">News</a></li>
 							<li><a href="contact.html">Contact</a></li>
 						</ul>
 					</div>

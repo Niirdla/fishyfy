@@ -129,7 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 							<li class="current-list-item"><a href="index.php">Home</a>
 								</li>
 								<li><a href="about.php">About</a></li>
-								<li><a href="news.php">News</a></li>
 								
 								<li><a href="catalogue.php">Catalogue</a></li>
 								
@@ -553,7 +552,6 @@ changeImage();
 							<li><a href="index.php">Home</a></li>
 							<li><a href="about.php">About</a></li>
 							<li><a href="services.php">Shop</a></li>
-							<li><a href="news.php">News</a></li>
 							<li><a href="contact.php">Contact</a></li>
 						</ul>
 					</div>

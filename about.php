@@ -69,9 +69,7 @@ if ($login == false) {
 								<li class="current-list-item"><a href="index.php">Home</a>
 								
 								</li>
-								<li><a href="about.php">About</a></li>
-								<li><a href="news.php">News</a></li>
-								
+								<li><a href="about.php">About</a></li>								
 								<li><a href="catalogue.php">Catalogue</a></li>
 								
 								<li><a href="contacts.php">Contact</a></li>
@@ -122,15 +120,15 @@ if ($login == false) {
 	</div>
 	<!-- end search arewa -->
 	
-	
 	<!-- breadcrumb-section -->
-	<div class="breadcrumb-section breadcrumb-bg">
+	<div class="hero-area hero-bg">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="breadcrumb-text">
-						<p style = "font-size: 70px; color: white; font-family: calibri;">We sell quality aquatic needs</p>
-						<h1>About Us</h1>
+				<div class="col-lg-9 offset-lg-2 text-center">
+					<div class="hero-text">
+						<div class="hero-text-tablecell">
+							<h1 style = "font-size: 90px; color: white; font-family: calibri;">We sell Quality Aquatic Needs!</h1>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -414,7 +412,6 @@ if ($login == false) {
 							<li><a href="index.html">Home</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="services.html">Shop</a></li>
-							<li><a href="news.html">News</a></li>
 							<li><a href="contact.html">Contact</a></li>
 						</ul>
 					</div>

@@ -95,7 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 							<li class="current-list-item"><a href="index.php">Home</a>
 								</li>
 								<li><a href="about.php">About</a></li>
-								<li><a href="news.php">News</a></li>
 								
 								<li><a href="catalogue.php">Catalogue</a></li>
 								
@@ -155,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
-						<p>Fresh and Organic</p>
+					<p style = "font-size: 50px; color: white; font-family: calibri;">Fresh and Organic</p>
 						<h1>Check Out Product</h1>
 					</div>
 				</div>
@@ -239,19 +238,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 				<div class="col-lg-12">
 					<div class="logo-carousel-inner">
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/aacbluelogo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/aacbluelogo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/aacbluelogo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/aacbluelogo.png" alt="">
 						</div>
 						<div class="single-logo-item">
-							<img src="assets/img/aacaquaticslogo.png" alt="">
+							<img src="assets/img/aacbluelogo.png" alt="">
 						</div>
 					</div>
 				</div>
@@ -267,7 +266,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 				<div class="col-lg-3 col-md-6">
 					<div class="footer-box about-widget">
 						<h2 class="widget-title">About us</h2>
-						<p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+						<p>Fishyfy is a dedicated online store for aac aquatics to showcase their live ornamental fish and sell their ornamental fish accessories</p>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
@@ -287,7 +286,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 							<li><a href="index.php">Home</a></li>
 							<li><a href="about.php">About</a></li>
 							<li><a href="services.php">Shop</a></li>
-							<li><a href="news.php">News</a></li>
 							<li><a href="contact.php">Contact</a></li>
 						</ul>
 					</div>

@@ -76,16 +76,10 @@ if ($login == false) {
 										<li><a href="cart.php">Cart</a></li>
 										<li><a href="payment.php">Check Out</a></li>
 										<li><a href="contacts.php">Contact</a></li>
-										<li><a href="news.php">News</a></li>
 										<li><a href="shop.php">Shop</a></li>
 									</ul>
 								</li>
-								<li><a href="news.php">News</a>
-									<ul class="sub-menu">
-										<li><a href="news.php">News</a></li>
-										<li><a href="single-news.php">Single News</a></li>
-									</ul>
-								</li>
+								
 								<li><a href="contacts.php">Contact</a></li>
 								<li><a href="shop.php">Shop</a>
 									<ul class="sub-menu">
@@ -247,7 +241,6 @@ if ($login == false) {
 							<li><a href="index.php">Home</a></li>
 							<li><a href="about.php">About</a></li>
 							<li><a href="services.php">Shop</a></li>
-							<li><a href="news.php">News</a></li>
 							<li><a href="contact.php">Contact</a></li>
 						</ul>
 					</div>
