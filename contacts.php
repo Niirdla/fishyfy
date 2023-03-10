@@ -22,13 +22,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$last_name = $fm->validation($_POST['last_name']);
 	$email = $fm->validation($_POST['email']);
 	$contact = $fm->validation($_POST['contact']);
+	$subject = $fm->validation($_POST['subject']);
 	$message = $fm->validation($_POST['message']);
+	$cmrId = Session::get("cmrId");
 	
 
 	$first_name = mysqli_real_escape_string($db->link, $first_name);
-	$last_name = $fm->validation($_POST['last_name']);
+	$last_name = mysqli_real_escape_string($db->link, $last_name);
 	$email = mysqli_real_escape_string($db->link, $email);
 	$contact = mysqli_real_escape_string($db->link, $contact);
+	$subject = mysqli_real_escape_string($db->link, $subject);
 	$message = mysqli_real_escape_string($db->link, $message);
 
 	$error = "";
@@ -42,13 +45,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	} elseif (empty($contact)) {
 		$error = "Contact field must not be empty !";
 
+	}elseif (empty($subject)) {
+		$error = "Subject field must not be empty !";
+
 	} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 		$error = "Invalid Email Address !";
 	} elseif (empty($message)) {
 		$error = "Subject field not be empty !";
 
 	} else {
- $query = "INSERT INTO tbl_contact(first_name,last_name,email,contact,message) VALUES('$first_name','$last_name','$email','$contact','$message')";
+ $query = "INSERT INTO tbl_contact(first_name,last_name,frm_cmrId,email,contact,subject,message) VALUES('$first_name','$last_name','$cmrId','$email','$contact','$subject','$message')";
 
     $inserted_rows = $db->insert($query);
 
@@ -72,9 +78,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+	<!-- DataTables CSS -->
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
 	<!-- title -->
-	<title>Check Out</title>
+	<title>Contact page</title>
 
 	<style>
 		
@@ -261,7 +269,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="index.php">
+<<<<<<< HEAD
 								<img src="assets/img/aacbluelogo.png" alt="">
+=======
+							<img src="img/aacbluelogo.png" alt="">
+>>>>>>> fa9b5c8 (13th commit)
 							</a>
 						</div>
 						<!-- logo -->
@@ -322,7 +334,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	</div>
 	<!-- end search arewa -->
 
+<<<<<<< HEAD
 	<div class="hero-area hero-bg">
+=======
+		<!-- breadcrumb-section -->
+		<div class="hero-area hero-bg">
+>>>>>>> fa9b5c8 (13th commit)
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-9 offset-lg-2 text-center">
@@ -339,56 +356,71 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 								<div class="title bg-light text-dark px-2" style="display:flex;align-items:center;justify-content:space-between;">
 									<img src="https://i.ibb.co/CbRdz54/aacbluelogo.png" width="50" alt="">
 									 FishyBOT
-									<a class="text-danger" id="closechat"><span class="fas fa-times px-3"></span></a>
+									<a class="text-danger" id="closechat"><span class="fas fa-minus px-3"></span></a>
 								</div>
 								<div class="chat-box">
 									<div class="bot-inbox inbox">
 										<div id="wlcm" class="message-content">
-											<p>Welcome to Fishyfy!</p>
+											<p>Welcome to Fishyfy</p>
 										</div>
 									</div>
 								</div>
 								<div id="botresponse">
 									<small><i><i class="fas fa-robot text-danger"></i> FishyBOT <span class="spinner-grow spinner-grow-sm text-danger"></span><span class="spinner-grow spinner-grow-sm text-danger"></span><span class="spinner-grow spinner-grow-sm text-danger"></span></small>
 								</div>
-								<div class="typing-field">
-									<div class="input-data m-1">
-										<input id="customer_message" maxlength="32" type="text" placeholder="Type a message.." required>
-										<button id="send"><i class="fas fa-paper-plane"></i></button>
-									
+								<form id="sendMsg">
+									<input type="text" id="senderMsg" class="form-control" placeholder="Type here... (Press ENTER to send)">
+								</form>
+								<div class="choices d-flex flex-column justify-content-center" style="gap:5px;overflow: scroll;max-height:100px; min-height:100px;">
+									<button data-id="1" class="choicebtn btn btn-sm btn-light">What types of tools and materials do you sell for freshwater fish breeding?</button>
+									<button data-id="2" class="choicebtn btn btn-sm btn-light">What brands do you carry for your tools and materials?</button>
+									<button data-id="3" class="choicebtn btn btn-sm btn-light">Can you recommend the best equipment for my specific needs?</button>
+									<button data-id="4" class="choicebtn btn btn-sm btn-light">What is your return policy for tools and materials?</button>
+									<button data-id="5" class="choicebtn btn btn-sm btn-light">What is your shipping policy?</button>
+									<button data-id="6" class="choicebtn btn btn-sm btn-light">How can I track my order?</button>
+									<button data-id="7" class="choicebtn btn btn-sm btn-light">What payment methods do you accept?</button>
 									</div>
 								</div>
 							</div>
+<<<<<<< HEAD
+=======
+					
+>>>>>>> fa9b5c8 (13th commit)
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
 	
 	<!-- breadcrumb-section -->
 	
+=======
+    
+>>>>>>> fa9b5c8 (13th commit)
 	<!-- end breadcrumb section -->
-
+	
 <!-- check out section -->
 <div class="checkout-section mt-150 mb-150">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
-
+				
                     <div class="col span_2_of_3">
                     <div class="contact-form">
-
+					
 					<?php 
         $id = Session::get("cmrId");
 		$getdata = $cmr->getCustomerData($id);
 		if ($getdata) {
+			
 			while ($result = $getdata->fetch_assoc()) {
 		
 
 		?>
                         
-
+						<h2> Send message to us! </h2>
                     <?php 
                     if (isset($error)) {
                         echo "<span style = 'color:red'>$error</span>";
@@ -401,43 +433,106 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     ?>
                             <form action="" method="post">
-                                <div>
-                                    <span>First name<span style="color: red;">*</span><span>
-                                    <span><input style= "text-align:center;" type="text" name="first_name" value="<?php echo $result['first_name'];?>"></span>
-                                </div>
+                               
+							<input type="hidden" name="first_name" value="<?php echo $result['first_name'];?>">
+                    
+					<input type="hidden" name="last_name" value="<?php echo $result['last_name'];?>">
+				
+					<input type="hidden"  name="email" value="<?php echo $result['email'];?>">
+				
+					<input type="hidden" name="contact" value="<?php echo $result['phone'];?>">
+
 								<div>
-                                    <span>Last name<span style="color: red;">*</span><span>
-                                    <span><input style= "text-align:center;" type="text" name="last_name" value="<?php echo $result['last_name'];?>"></span>
-                                </div>
-                                <div>
-                                    <span><label>Email</label><span style="color: red;">*</span></span>
-                                    <span><input style= "text-align:center;" type="text"  name="email" value="<?php echo $result['email'];?>"></span>
-                                </div>
-                                <div>
-                                    <span><label>Mobile no.</label><span style="color: red;">*</span></span>
-                                    <span><input style= "text-align:center;" type="text" name="contact" value="<?php echo $result['phone'];?>"></span>
+                                    <span><label>Subject.</label><span style="color: red;">*</span></span>
+                                    <span><input style= "text-align:center;" type="text" name="subject"></span>
                                 </div>
                                 <div>
                                     <span><label>Message</label><span style="color: red;">*</span></span>
                                     <span><textarea name="message"> </textarea></span>
                                 </div>
+								
                             <div>
                                     <span><input type="submit" name="submit" value="SUBMIT"></span>
                             </div>
                             </form>     
-							<?php } } ?>
+							
                     </div> 
                     </div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 	<!-- end check out section -->
 
-	
+	<div class="cart-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-12">
+						<div class="cart-table-wrap">
+						<h2>Inbox</h2>
 
-	
+            
+		   <table id = "cart-table" class="cart-table" >
+								<thead class="cart-table-head" >
+						<tr>
+							<th class="product-name" style = "color:white;">Message from</th>
+							<th class="product-name" style = "color:white;">Subject</th>
+							<th class="product-name" style = "color:white;">Date</th>
+							<th class="product-name" style = "color:white;">Action</th>
+						</tr>
+					</thead>
+					<tbody>
 
+					<?php
+$id = Session::get("cmrId");
+            $query = "select * from tbl_contact where to_cmrId = $id";
+            $msg = $db->select($query);
+            if ($msg) {
+            
+            while ($result = $msg->fetch_assoc()) {
+
+           ?>
+
+		<tr class="odd gradeX">
+			<td>Admin <br><?php echo $result['email'];?></td>
+			<td><?php echo $result['subject'];?></td>
+			<td><?php echo $fm->formatDate($result['date']);?></td>
+			<td>
+				<a href="replymsg.php?msgid=<?php echo $result['id'];?>">View & Reply</a>||
+				<a onclick="return confirm('Are you sure to Delete!');" href="?delid=<?php echo $result['id'];?>">Delete</a> 
+			</td>
+		</tr>
+						
+					
+					</tbody>
+				</table>
+
+                    <?php } } ?>
+
+               
+                </div>
+				</div>
+				</div>
+				</div>
+				</div>
+				<?php } } ?>
+
+				<?php  
+if (isset($_GET['delid'])) {
+   $delid = $_GET['delid'];
+   $delquery = "delete from tbl_contact where id = '$delid'";
+   $deldata = $db->delete($delquery);
+   if ($deldata) {
+      echo "<span class='success'>Message Deleted successfully.</span>";
+   } else {
+
+     echo "<span class='error'>Message not Deleted.</span>";
+   }
+
+}
+
+?>
 	
 	<!-- jquery -->
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
@@ -462,44 +557,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	<script>
 		$(document).ready(function(){
-			$('#wlcm').hide();
-			$('#botresponse').hide();
-			$('#chat').click(function()
+
+			$('#wlcm').hide(); //Pag open ng browser i-hide yung "Welcome to Fishyfy" sa CHATBOT.
+			$('#botresponse').hide(); //i-hide din yung Fishybot Response.
+			
+			$('#chat').click(function() //Function sa button na "CLICK TO CHAT"
     			{
-    			    $('#wlcm').fadeIn(2500);
-    			    $('.popup-box').slideDown();
-    			    $('#customer_message').focus();
+    			    $('#wlcm').fadeIn(2500); //i-show yung "Welcome to Fishyfy" pag click ng button na CLICK TO CHAT.
+    			    $('.popup-box').slideDown(); //i-slide yung CHATBOX para lumabas
+					$(".chat-box").scrollTop($(".chat-box")[0].scrollHeight); //i-scroll down yung chatbox.
     			});
 
-    		$("#closechat").click(function ()
+    		$("#closechat").click(function () //Function sa button na "-"
     		{
-    		    $('.popup-box').slideUp();
+    		    $('.popup-box').slideUp(); //Kapag cnlick yung - na button, i tatago niya yung chatbox na may slide animation.
     		});
 		
-
-			$("#send").click(message)
-
-			$(document).keypress(function(e) {
-  				if(e.which == 13) {
-				message();
-  			}
-			});
-
-			function message(){
-				let user_message = $("#customer_message").val();
-				$(".chat-box").append("<div class='customer-inbox inbox'><div class='message-content'><p>"+user_message+"</p></div></div>");
-				$("#customer_message").val("");
-				$(".chat-box").scrollTop($(".chat-box")[0].scrollHeight);
-				send_chat(user_message);
-			}
-
-			function send_chat(msg){
+			function send_chat(msg) //function para makapagsend at retrieve ng data sa database.
+			{
 					$.ajax({
-					url:'chatresponse.php',
+					url:'chatresponse.php', //dito isesend yung data
 					type:'post',
-					data:{'user_message' : msg},
+					data:{'user_message' : msg}, //eto yung data
 					success:function(response){
-						$('#botresponse').fadeIn();
+						$('#botresponse').fadeIn(); 
 						setTimeout(function(){
 							$(".chat-box").append("<div id='new' class='bot-inbox inbox'><div class='message-content'><p>"+response+"</p></div></div>");
 							$("#new").fadeIn(1000);
@@ -508,9 +589,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						},1000);
 					}
 				});
+			}
+
+			$(".choicebtn").click(function(){ //Click function sa mga question button sa CHATBOT.
+				let textchoice = $(this).text(); //Kunin yung question sa button.
+				let id = $(this).attr("data-id"); //Kunin yung id # ng button at ibabato sa database.
+				$(".chat-box").append("<div class='customer-inbox inbox'><div class='message-content'><p>"+textchoice+"</p></div></div>");
+				$(".chat-box").scrollTop($(".chat-box")[0].scrollHeight);
+				send_chat(id); //Send id using send_chat function to the database.
+			});
+
+			jQuery("#sendMsg").submit(function(e){
+				e.preventDefault();
+				var msg = jQuery("#senderMsg").val();
+				if (msg == '') {
+					jQuery("#sendMsg").focus();
+				}else{
+					$(".chat-box").append("<div class='customer-inbox inbox'><div class='message-content'><p>"+msg+"</p></div></div>");
+					$(".chat-box").scrollTop($(".chat-box")[0].scrollHeight);
+					jQuery("#senderMsg").val("");
+					send_chat(msg);
 				}
+				
+			});
+
 		});
 	</script>
+	<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+<!-- DataTables JS -->
+<script type="text/javascript" src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+  $('#cart-table').DataTable({
+    "paging": true, // enable pagination
+    "pageLength": 10, // number of rows per page
+    "lengthChange": true, // enable length change dropdown
+    "searching": true, // enable search box
+    "ordering": true, // enable column sorting
+    "info": true // enable showing current page info
+  });
+});
+</script>
 </body>
 </php>

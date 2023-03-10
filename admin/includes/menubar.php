@@ -37,6 +37,7 @@
         </a>
         <ul class="treeview-menu">
           <li><a href="inbox.php"><i class="fa fa-circle-o"></i>Manage orders</a></li>
+          <li><a href="manage_delivery_fee.php"><i class="fa fa-circle-o"></i>Manage delivery fee</a></li>
         </ul>
       </li>
        <!-- /.Brands -->

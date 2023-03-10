@@ -88,8 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                         <label>Description<span style="color: red;"> *</span></label>
                     </td>
                     <td>
-                        <textarea style = "width: 449px; height: 227px;" class="tinymce" name="Description">
-                            
+                    <textarea name="Description" style="width: 857px; height: 215px;">
+                            Description
                             <?php echo $value['Description'];?>
 
                         </textarea>

@@ -3,9 +3,9 @@
   <!-- Logo -->
   <a href="#" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini"><b>A</b>V</span>
+    <span class="logo-mini"><b>A</b></span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>Admin</b> Vendor</span>
+    <span class="logo-lg"><b>Admin</b></span>
   </a>
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top">
@@ -23,7 +23,7 @@
 
 
        <?php 
-        $query = "select * from tbl_contact where status='0' order by id desc";
+       $query = "select * from tbl_contact where status='0' AND to_cmrId = 0 order by id desc";
          $msg = $db->select($query);
 
          if ($msg) {

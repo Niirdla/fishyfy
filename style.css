@@ -142,7 +142,11 @@ button {
   width: 900px;
   height: 100%;
   padding-left: 260px;
+<<<<<<< HEAD
   background: #23395d;
+=======
+  background: rgb(122, 206, 227);
+>>>>>>> fa9b5c8 (13th commit)
   -webkit-transition: -webkit-transform 1.2s ease-in-out;
   transition: -webkit-transform 1.2s ease-in-out;
   transition: transform 1.2s ease-in-out;

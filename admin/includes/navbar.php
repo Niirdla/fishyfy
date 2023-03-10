@@ -23,7 +23,7 @@
 
 
        <?php 
-        $query = "select * from tbl_contact where status='0' order by id desc";
+       $query = "select * from tbl_contact where status='0' AND to_cmrId = 0 order by id desc";
          $msg = $db->select($query);
 
          if ($msg) {

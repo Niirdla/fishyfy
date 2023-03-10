@@ -36,7 +36,7 @@ if ($keywords == "" || $bot_reply == "") {
 
 }else{
 
-	 $query = "INSERT INTO tbl_bot(keywords,bot_reply) VALUES('$keywords','$bot_reply') ";
+	 $query = "INSERT INTO tbl_bots(keywords,bot_reply) VALUES('$keywords','$bot_reply') ";
 
 	 $inserted_row = $this->db->insert($query);
 			if ($inserted_row) {
@@ -53,7 +53,7 @@ if ($keywords == "" || $bot_reply == "") {
 public function getAllChat(){
 
 $query = "SELECT b.*
-FROM tbl_bot as b
+FROM tbl_bots as b
 ORDER BY b.chat_id DESC";
 
 /*
@@ -74,7 +74,7 @@ ORDER BY tbl_product.productId DESC";
 
 public function getChatById($id){
 
-	$query = "SELECT * FROM tbl_bot WHERE chat_id = '$id'";
+	$query = "SELECT * FROM tbl_bots WHERE chat_id = '$id'";
 	$result = $this->db->select($query);
 	return $result;
 
@@ -98,7 +98,7 @@ if ($keywords == "" || $bot_reply == "") {
 
 }else{
 
-	 $query = "UPDATE tbl_bot 
+	 $query = "UPDATE tbl_bots 
 	 SET
 	 keywords = '$keywords',
 	 bot_reply       = '$bot_reply',
@@ -119,7 +119,7 @@ if ($keywords == "" || $bot_reply == "") {
 
 public function delChatById($id){
 
-$delquery = "DELETE FROM tbl_bot where chat_id = '$id'";
+$delquery = "DELETE FROM tbl_bots where chat_id = '$id'";
 $deldata = $this->db->delete($delquery);
 	if ($deldata) {
 		$msg = "<span class='success' style = 'color:green;'>Product Deleted Successfully.</span>";

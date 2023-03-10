@@ -59,7 +59,11 @@ if ($login == false) {
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="index.php">
+<<<<<<< HEAD
 								<img src="assets/img/aacbluelogo.png" alt="">
+=======
+								<img src="img/aacbluelogo.png" alt="">
+>>>>>>> fa9b5c8 (13th commit)
 							</a>
 						</div>
 						<!-- logo -->

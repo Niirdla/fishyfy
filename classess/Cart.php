@@ -95,7 +95,7 @@ public function addToCart($quantity,$stocks, $id, $cmrId){
 public function getCartProduct(){
 
 	$sId  = session_id();
-	$query = "SELECT * FROM tbl_cart WHERE sId = '$sId'";
+	$query = "SELECT tbl_cart.*,tbl_delivery.delivery_fee FROM tbl_cart,tbl_delivery WHERE tbl_cart.sId = '$sId'";
 	$result = $this->db->select($query);
 	return $result;
 	
@@ -202,15 +202,16 @@ $msg = "<span class='error'>Product Not Deleted !</span>";
 
 	public function orderProduct($data,$file,$paymentMethod, $cmrId){
 		$sId  = session_id();
-	    $query = "SELECT * FROM tbl_cart WHERE sId = '$sId'";
+	    $query = "SELECT tbl_cart.*, tbl_delivery.delivery_fee FROM tbl_cart, tbl_delivery WHERE tbl_cart.sId = '$sId'";
 		$getPro = $this->db->select($query);
 		if ($getPro) {
 			while ($result = $getPro->fetch_assoc()) {
 				$productId = $result['productId'];
 				$productName = $result['productName'];
 				$quantity = $result['quantity'];
-				$price = $result['price'] * $quantity;
+				$price = ($result['price'] * $quantity) + $result['delivery_fee'];
 				$image = $result['image'];
+
 
 				$query = "INSERT INTO tbl_order(cmrId,productId,productName,quantity,price,image) VALUES('$cmrId','$productId','$productName','$quantity','$price','$image') ";
 			$inserted_row = $this->db->insert($query);
@@ -269,14 +270,14 @@ if ( $file_name == "") {
 
 	public function orderProductCOD($data,$paymentMethod, $cmrId){
 		$sId  = session_id();
-	    $query = "SELECT * FROM tbl_cart WHERE sId = '$sId'";
+	    $query = "SELECT tbl_cart.*, tbl_delivery.delivery_fee FROM tbl_cart, tbl_delivery WHERE tbl_cart.sId = '$sId'";
 		$getPro = $this->db->select($query);
 		if ($getPro) {
 			while ($result = $getPro->fetch_assoc()) {
 				$productId = $result['productId'];
 				$productName = $result['productName'];
 				$quantity = $result['quantity'];
-				$price = $result['price'] * $quantity;
+				$price = ($result['price'] * $quantity) + $result['delivery_fee'];
 				$image = $result['image'];
 
 				$query = "INSERT INTO tbl_order(cmrId,productId,productName,quantity,price,image) VALUES('$cmrId','$productId','$productName','$quantity','$price','$image') ";
@@ -398,8 +399,7 @@ if ( $paymentMethod == "") {
 		$query = "DELETE FROM tbl_order WHERE id = '$id' ";
 	    $deldata = $this->db->delete($query);
 	    if ($deldata) {
-		$msg = "<span class='success'>Data Deleted Successfully.</span>";
-				return $msg;
+			header("Location: orderdetails.php?status=0");
 	}else{
 $msg = "<span class='error'>Data Not Deleted !</span>";
 				return $msg;
@@ -416,9 +416,10 @@ $msg = "<span class='error'>Data Not Deleted !</span>";
 
 	$updated_row = $this->db->update($query);
 	if ($updated_row) {
-		$msg = "<span class='success' style = 'color:green;'>Updated Successfully.</span>";
-				return $msg;
-				header("Location:orderdetails.php?status=3");
+		
+		header("Location: orderdetails.php?status=3");
+				
+				
 	} else{
 			$msg = "<span class='error'>Not Updated !</span>";
 				return $msg;

@@ -137,19 +137,21 @@ $con = mysqli_connect("localhost","root","","db_shop");
                         </table>
                         <div class = "total sales">
                         <?php
+                        if(isset($from_date)&& isset($to_date)){
                         $results = mysqli_query($con, "SELECT sum(price) FROM tbl_order where id AND date BETWEEN '$from_date' AND '$to_date' ") or die(mysqli_error());
                                     while($rows = mysqli_fetch_array($results)){?>
                                     <?php echo "<h2>Total Sales between this date = ₱".number_format_short($rows['sum(price)'],2). "</h2>" ?>
                           <?php
-                                    }
+                                    }}
 ?>
 </div>
 
 <?php 
+ if(isset($from_date)&& isset($to_date)){
 $results = mysqli_query($con, "SELECT sum(price) FROM tbl_order where id AND date BETWEEN '$from_date' AND '$to_date' ") or die(mysqli_error());
 while($rows = mysqli_fetch_array($results)){
     $total_sales = $rows['sum(price)'];
-}
+}}
 ?>
                         </span>
                       <div class="text-center">

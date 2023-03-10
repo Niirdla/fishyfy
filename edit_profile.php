@@ -154,13 +154,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 	
 	
 	<!-- breadcrumb-section -->
-	<div class="breadcrumb-section breadcrumb-bg">
+	<div class="hero-area hero-bg">
 		<div class="container">
 			<div class="row">
+<<<<<<< HEAD
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="breadcrumb-text">
 						<p style = "font-size: 50px; color: white; font-family: calibri;">Fresh and Organic</p>
 						<h1>Check Out Product</h1>
+=======
+				<div class="col-lg-9 offset-lg-2 text-center">
+					<div class="hero-text">
+						<div class="hero-text-tablecell">
+							<h1 style = "font-size: 90px; color: white; font-family: calibri;">Edit Profile</h1>
+						</div>
+>>>>>>> fa9b5c8 (13th commit)
 					</div>
 				</div>
 			</div>

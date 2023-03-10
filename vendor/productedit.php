@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                         <label>Description<span style="color: red;"> *</span></label>
                     </td>
                     <td>
-                        <textarea class="tinymce" name="body">
+                    <textarea name="body" style="width: 857px; height: 215px;">
                             
                             <?php echo $value['body'];?>
 

@@ -11,8 +11,8 @@ if ($login == false) {
 
 
 <?php 
-if (isset($_GET['customerId'])) {
-    $id = $_GET['customerId'];
+if (isset($_GET['productId'])) {
+    $id = $_GET['productId'];
     $confirm = $ct->productShiftConfirm($id);
 
 }
@@ -155,13 +155,14 @@ if (isset($_GET['delproid'])) {
 	
 
     <!-- breadcrumb-section -->
-	<div class="breadcrumb-section breadcrumb-bg">
+	<div class="hero-area hero-bg">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="breadcrumb-text">
-						<p>Fresh and Organic</p>
-						<h1>Check Out Product</h1>
+				<div class="col-lg-9 offset-lg-2 text-center">
+					<div class="hero-text">
+						<div class="hero-text-tablecell">
+							<h1 style = "font-size: 90px; color: white; font-family: calibri;">Order details</h1>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -264,7 +265,7 @@ if (isset($_GET['delproid'])) {
                 
                     <?php 
                     if ($result['status'] == '2') { ?>
-                     <td> <a href="?customerId=<?php echo $result['id']; ?>">Confirm order</a></td>
+                     <td> <a href="?productId=<?php echo $result['id']; ?>">Confirm order</a></td>
                    <?php } elseif($result['status'] == '3'){?>
                     <td></td>
 

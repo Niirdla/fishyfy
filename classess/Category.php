@@ -56,7 +56,42 @@ $query = "SELECT * FROM tbl_category WHERE catId = '$id'";
 	return $result;
 
 }
+public function getDeliveryFeeById(){
+	$query = "SELECT * FROM tbl_delivery WHERE id = '1'";
+		$result = $this->db->select($query);
+		return $result;
+	
+	}
+public function deliveryFeeUpdate ($deliveryFee){
 
+	$deliveryFee = $this->fm->validation($deliveryFee);
+    $deliveryFee = mysqli_real_escape_string($this->db->link, $deliveryFee);
+    
+
+
+if (empty($deliveryFee) ) {
+	
+	$msg = "<span class='error'>Delivery fee field must not be empty !</span>";
+	return $msg;
+} else{
+
+	$query = "UPDATE tbl_delivery
+
+	SET
+	delivery_fee = '$deliveryFee' 
+	WHERE id = '1'";
+
+	$updated_row = $this->db->update($query);
+	if ($updated_row) {
+		$msg = "<span class='success' style = 'color:green;'>Delivery fee Updated Successfully.</span>";
+				return $msg;
+	} else{
+			$msg = "<span class='error'>Delivery fee not updated !</span>";
+				return $msg;
+	}
+}
+
+}
 public function catUpdate($catName,$id){
 
 	$catName = $this->fm->validation($catName);
@@ -85,7 +120,6 @@ if (empty($catName) ) {
 				return $msg;
 	}
 }
-
 }
 public function delcatById($id){
 

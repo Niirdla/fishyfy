@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                         <label>Keywords/ questions<span style="color: red;"> *</span></label>
                     </td>
                     <td>
-                        <textarea class="tinymce" name="keywords"></textarea>
+                    <textarea name="keywords" style="width: 857px; height: 215px;"></textarea>
                     </td>
                 </tr>
               
@@ -55,7 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                         <label>Chatbot reply<span style="color: red;"> *</span></label>
                     </td>
                     <td>
-                        <textarea class="tinymce" name="bot_reply"></textarea>
+            
+                        <textarea name="bot_reply" style="width: 857px; height: 215px;"></textarea>
                     </td>
                 </tr>
 
@@ -72,17 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 </div>
     </div>
     </div>
-<!-- Load TinyMCE -->
-<script src="js/tiny-mce/jquery.tinymce.js" type="text/javascript"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        setupTinyMCE();
-        setDatePicker('date-picker');
-        $('input[type="checkbox"]').fancybutton();
-        $('input[type="radio"]').fancybutton();
-    });
-</script>
-<!-- Load TinyMCE -->
+
 <?php include 'inc/footer.php';?>
 
 <?php include 'includes/scripts.php'; ?>

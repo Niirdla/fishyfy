@@ -148,20 +148,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 	
 
 	<!-- breadcrumb-section -->
-	<div class="breadcrumb-section breadcrumb-bg">
+	<div class="hero-area hero-bg">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="breadcrumb-text">
-						<p>See more Details</p>
-						<h1>Single Product</h1>
+				<div class="col-lg-9 offset-lg-2 text-center">
+					<div class="hero-text">
+						<div class="hero-text-tablecell">
+							<h1 style = "font-size: 100px;">Single product</h1>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- end breadcrumb section -->
-
+	
 	<!-- single product -->
 	<div class="single-product mt-150 mb-150">
 		<div class="container">

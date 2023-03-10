@@ -2,29 +2,7 @@
 <?php include 'inc/header_2.php';?>
 <?php include 'includes/format.php'; ?>
 
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
 
-  <?php include 'includes/navbar.php'; ?>
-  <?php include 'includes/menubar.php'; ?>
-
-
-
- <!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Messages
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Message</li>
-      </ol>
-    </section>
-
-
-       
 
 <?php 
 if (isset($_GET['seenid'])) {
@@ -49,15 +27,37 @@ if ($updated_row) {
 }
 
 ?>
-                      <div class="block">        
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <?php include 'includes/navbar.php'; ?>
+  <?php include 'includes/menubar.php'; ?>
+
+
+
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Dashboard
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+                <div class="block">        
                     <table class="data display datatable" id="example">
 					<thead>
 						<tr>
 							<th>Serial No.</th>
-							<th>Name</th>
+							<th>First Name</th>
+							<th>Last Name</th>
 							<th>Email</th>
 							<th>Phone</th>
-							<th>Message</th>
+							<th>Subject</th>
 							<th>Date</th>
 							<th>Action</th>
 						</tr>
@@ -66,7 +66,7 @@ if ($updated_row) {
 
 			<?php
 
-			$query = "select * from tbl_contact where status='0' order by id desc";
+			$query = "select * from tbl_contact where status='0' AND to_cmrId = 0 order by id desc";
 			$msg = $db->select($query);
 			if ($msg) {
 
@@ -79,10 +79,11 @@ if ($updated_row) {
 
 		<tr class="odd gradeX">
 			<td><?php echo $i;?></td>
-			<td><?php echo $result['name'];?></td>
+			<td><?php echo $result['first_name'];?></td>
+			<td><?php echo $result['last_name'];?></td>
 			<td><?php echo $result['email'];?></td>
 			<td><?php echo $result['contact'];?></td>
-			<td><?php echo $fm->textShorten($result['message'],30);?></td>
+			<td><?php echo $result['subject'];?></td>
 			<td><?php echo $fm->formatDate($result['date']);?></td>
 			<td>
 				<a href="viewmsg.php?msgid=<?php echo $result['id'];?>">View</a> || 
@@ -94,7 +95,7 @@ if ($updated_row) {
 						<?php } } ?>
 					</tbody>
 				</table>
-               </div>
+				</div>
 			   <h2>Seen Messages</h2>
 
 
@@ -118,7 +119,8 @@ if (isset($_GET['delid'])) {
 				   <thead>
 					   <tr>
 						   <th>Serial No.</th>
-						   <th>Name</th>
+						   <th>First Name</th>
+							<th>Last Name</th>
 						   <th>Email</th>
 						   <th>Phone</th>
 						   <th>Message</th>
@@ -143,7 +145,8 @@ if (isset($_GET['delid'])) {
 
 	   <tr class="odd gradeX">
 		   <td><?php echo $i;?></td>
-		   <td><?php echo $result['name'];?></td>
+		   <td><?php echo $result['first_name'];?></td>
+			<td><?php echo $result['last_name'];?></td>
 		   <td><?php echo $result['email'];?></td>
 		   <td><?php echo $result['contact'];?></td>
 		   <td><?php echo $fm->textShorten($result['message'],30);?></td>
@@ -165,19 +168,20 @@ if (isset($_GET['delid'])) {
 
             </div>
 
+         
 
-			<script type="text/javascript">
+    <script type="text/javascript">
 
-$(document).ready(function () {
-	setupLeftMenu();
+    $(document).ready(function () {
+        setupLeftMenu();
 
-	$('.datatable').dataTable(); // for the first table
+		$('.datatable').dataTable(); // for the first table
 $('#seen-example').dataTable(); // for the second table
-	setSidebarHeight();
+        setSidebarHeight();
 
 
-});
-</script>
+    });
+  </script>
 
   
 

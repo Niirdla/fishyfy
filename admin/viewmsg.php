@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <label>Name</label>
                     </td>
                     <td>
-                        <input type="text" readonly value="<?php echo $result['name'];?>" class="medium" />
+                        <input type="text" readonly value="<?php echo $result['first_name'];?>" class="medium" />
                     </td>
                 </tr>
 
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <label>Message</label>
                             </td>
                             <td>
-                                <textarea class="tinymce" name="message">
+                                <textarea class="tinymce" name="message" >
                                     <?php echo $result['message'];?>
 
                                 </textarea>

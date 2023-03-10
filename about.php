@@ -317,24 +317,6 @@ if ($login == false) {
 		</div>
 	</div>
 	<!-- end pixxx -section -->
-<!-- find our location -->
-<div class="find-location blue-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<p> <i class="fas fa-map-marker-alt"></i> Find Our Location</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end find our location -->
-
-	<!-- google map section -->
-	<div class="embed-responsive embed-responsive-21by9">
-		<iframe src="https://maps.google.com/maps?q=aac%20aquatics&t=&z=13&ie=UTF8&iwloc=&output=embed" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" class="embed-responsive-item"></iframe>
-	</div>
-	<!-- end google map section -->
-
 
 	<!-- logo carousel -->
 	<div class="logo-carousel-section">

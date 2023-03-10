@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     if($paymentMethod === "Gcash"){
         $insertOrder = $ct->orderProduct($_POST,$_FILES,$paymentMethod, $cmrId);
 		$delData = $ct->delCustomerCart();
-    header("Location:orderdetails.php");
+		header("Location:orderdetails.php?status=0");
     } elseif($paymentMethod === "Cash on Delivery"){
         $insertOrder2 = $ct->orderProductCOD($_POST,$paymentMethod, $cmrId);
 		$delData = $ct->delCustomerCart();
@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 	
 
 	
-		<!-- header -->
+	<!-- header -->
 <div class="top-header-area" id="sticker">
 		<div class="container">
 			<div class="row">
@@ -120,7 +120,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="index.php">
+<<<<<<< HEAD
 								<img src="assets/img/aacbluelogo.png" alt="">
+=======
+								<img src="img/aacbluelogo.png" alt="">
+>>>>>>> fa9b5c8 (13th commit)
 							</a>
 						</div>
 						<!-- logo -->
@@ -128,10 +132,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-							<li class="current-list-item"><a href="index.php">Home</a>
+								<li class="current-list-item"><a href="#">Home</a>
 								</li>
+<<<<<<< HEAD
 								<li><a href="about.php">About</a></li>
 								
+=======
+								<li><a href="about.php">About</a></li>								
+>>>>>>> fa9b5c8 (13th commit)
 								<li><a href="catalogue.php">Catalogue</a></li>
 								
 								<li><a href="contacts.php">Contact</a></li>
@@ -140,6 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 									<div class="header-icons">
 										<a class="shopping-cart" href="cart.php"><i class="fas fa-shopping-cart"></i></a>
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+										
 										<a class="user-profile" href="profile.php"><i class='far fa-user-circle' style='font-size:1.7rem'></i></a>
 										<ul class="sub-menu">
 											<li><a href="profile.php">My Account</a></li>
@@ -158,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 			</div>
 		</div>
 	</div>
-	<!-- end header -->		   
+	<!-- end header -->			   
 <!-- search area -->
 <div class="search-area">
 		<div class="container">
@@ -182,14 +191,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 	<!-- end search arewa -->
 
 	
-	<!-- breadcrumb-section -->
-	<div class="breadcrumb-section breadcrumb-bg">
+	    <!-- breadcrumb-section -->
+		<div class="hero-area hero-bg">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="breadcrumb-text">
-						<p>Fresh and Organic</p>
-						<h1>Check Out Product</h1>
+				<div class="col-lg-9 offset-lg-2 text-center">
+					<div class="hero-text">
+						<div class="hero-text-tablecell">
+							<h1 style = "font-size: 90px; color: white; font-family: calibri;">Check out Order</h1>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -359,11 +369,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 										</tr>
 										
 										<?php
-												$total = $result['price'] * $result['quantity'];
+												$total = ($result['price'] * $result['quantity']) ;
 												?>
 										<?php 
 										$qty = $qty + $result['quantity'];
 										$sum = $sum + $total;
+										$deliveryFee = $result['delivery_fee'];
 										?>
 
 
@@ -377,14 +388,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 								</tr>
 								<tr>
 									<td>VAT: Shipping</td>
-									<td>10%(₱<?php echo $vat = $sum * 0.1; ?>)</td>
+									<td>10%(₱<?php echo $deliveryFee; ?>)</td>
 								</tr>
 								<tr>
 									<td>Total</td>
 									<td>₱ 
                                     <?php 
-                                    $vat = $sum * 0.1;
-                                    $gtotal = $sum + $vat;
+                                    
+                                    $gtotal = $sum + $deliveryFee;
                                     echo $gtotal;
                                      ?>
                                 	</td>
