@@ -269,11 +269,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="index.php">
-<<<<<<< HEAD
+
 								<img src="assets/img/aacbluelogo.png" alt="">
-=======
-							<img src="img/aacbluelogo.png" alt="">
->>>>>>> fa9b5c8 (13th commit)
+
+
 							</a>
 						</div>
 						<!-- logo -->
@@ -334,12 +333,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	</div>
 	<!-- end search arewa -->
 
-<<<<<<< HEAD
-	<div class="hero-area hero-bg">
-=======
+
+
+
 		<!-- breadcrumb-section -->
 		<div class="hero-area hero-bg">
->>>>>>> fa9b5c8 (13th commit)
+
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-9 offset-lg-2 text-center">
@@ -382,23 +381,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 									</div>
 								</div>
 							</div>
-<<<<<<< HEAD
-=======
-					
->>>>>>> fa9b5c8 (13th commit)
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
-	
-	<!-- breadcrumb-section -->
-	
-=======
-    
->>>>>>> fa9b5c8 (13th commit)
+
 	<!-- end breadcrumb section -->
 	
 <!-- check out section -->

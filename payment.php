@@ -120,11 +120,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 						<!-- logo -->
 						<div class="site-logo">
 							<a href="index.php">
-<<<<<<< HEAD
+
 								<img src="assets/img/aacbluelogo.png" alt="">
-=======
-								<img src="img/aacbluelogo.png" alt="">
->>>>>>> fa9b5c8 (13th commit)
+
 							</a>
 						</div>
 						<!-- logo -->
@@ -134,12 +132,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 							<ul>
 								<li class="current-list-item"><a href="#">Home</a>
 								</li>
-<<<<<<< HEAD
+
 								<li><a href="about.php">About</a></li>
 								
-=======
-								<li><a href="about.php">About</a></li>								
->>>>>>> fa9b5c8 (13th commit)
+
+
 								<li><a href="catalogue.php">Catalogue</a></li>
 								
 								<li><a href="contacts.php">Contact</a></li>

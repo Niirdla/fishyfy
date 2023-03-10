@@ -62,7 +62,7 @@ if ($login == false) {
 					
 								<img src="assets/img/aacbluelogo.png" alt="">
 
-								<img src="img/aacbluelogo.png" alt="">
+								
 
 							</a>
 						</div>
