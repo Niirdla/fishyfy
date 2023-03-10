@@ -401,7 +401,7 @@ public function catalogueInsert($data,$file){
 	}else{
 	
 		 move_uploaded_file($file_temp, $uploaded_image);
-		 $query = "INSERT INTO tbl_catalogue(fishName,images,family,diet,care,breed,life,tank,Description,type) VALUES('$fishName','$uploaded_image,'$family','$diet','$care','$breed','$life','$tank','$description'','$type') ";
+		 $query = "INSERT INTO tbl_catalogue(fishName,images,family,diet,care,breed,life,tank,Description,type) VALUES('$fishName','$uploaded_image','$family','$diet','$care','$breed','$life','$tank','$description','$type') ";
 	
 		 $inserted_row = $this->db->insert($query);
 				if ($inserted_row) {
