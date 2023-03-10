@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2023 at 06:02 AM
+-- Generation Time: Mar 10, 2023 at 03:33 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -67,7 +67,12 @@ INSERT INTO `payment` (`id`, `orderId`, `cmrId`, `amount`, `paymentMethod`, `pro
 (34, 0, 77, 0, 'Cash on Delivery', '', '2023-03-01 04:38:18'),
 (37, 0, 77, 0, 'Cash on Delivery', '', '2023-03-02 02:29:45'),
 (38, 0, 77, 0, 'Cash on Delivery', '', '2023-03-02 02:31:03'),
-(42, 0, 77, 0, 'Cash on Delivery', '', '2023-03-02 03:15:32');
+(42, 0, 77, 0, 'Cash on Delivery', '', '2023-03-02 03:15:32'),
+(43, 139, 74, 0, 'Gcash', 'images/474d4df4fa.jpg', '2023-03-10 20:04:10'),
+(44, 140, 74, 0, 'Cash on Delivery', '', '2023-03-10 21:32:21'),
+(45, 141, 74, 0, 'Cash on Delivery', '', '2023-03-10 21:55:28'),
+(46, 142, 74, 0, 'Cash on Delivery', '', '2023-03-10 22:07:34'),
+(47, 143, 74, 0, 'Gcash', 'images/27b128b2ed.jpg', '2023-03-10 22:08:33');
 
 -- --------------------------------------------------------
 
@@ -93,24 +98,29 @@ INSERT INTO `tbl_admin` (`adminId`, `adminName`, `adminUser`, `adminEmail`, `adm
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_bot`
+-- Table structure for table `tbl_bots`
 --
 
-CREATE TABLE `tbl_bot` (
+CREATE TABLE `tbl_bots` (
   `chat_id` int(11) NOT NULL,
   `keywords` varchar(255) NOT NULL,
   `bot_reply` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `tbl_bot`
+-- Dumping data for table `tbl_bots`
 --
 
-INSERT INTO `tbl_bot` (`chat_id`, `keywords`, `bot_reply`) VALUES
-(1, 'Hi', 'Hello, Welcome to FISHYFY'),
-(2, 'Where is your location', '280 Gov Fortunato Halili Ave, Santa Maria, Bulacan'),
-(3, 'Where is your store', '280 Gov Fortunato Halili Ave, Santa Maria, Bulacan'),
-(4, 'How are you?', 'I\'m fine *blush*');
+INSERT INTO `tbl_bots` (`chat_id`, `keywords`, `bot_reply`) VALUES
+(1, '1', 'Our store offers a wide range of tools and materials for freshwater fish breeding, including aquariums, filters, heaters, air pumps, substrate, and more.'),
+(2, '2', 'We carry high-quality products from popular brands in the fishkeeping industry.'),
+(3, '3', 'Yes, our knowledgeable staff can assist you in choosing the right equipment for your freshwater fish breeding setup.'),
+(4, '4', 'We have a 30-day return policy for most of our products, subject to terms and conditions.'),
+(5, '5', 'We ship via reliable carriers, and delivery times and fees depend on your location. We offer express shipping options at an additional cost.'),
+(6, '6', 'You will receive a tracking number via email after your order has been shipped, and you can track the status of your delivery online.'),
+(7, '7', 'We only have cash on delivery and Gcash as a form of payment.'),
+(8, 'Hello', 'Hi welcome to Fishyfy'),
+(10, 'Hi pwede mag hello', 'Hello');
 
 -- --------------------------------------------------------
 
@@ -169,10 +179,10 @@ CREATE TABLE `tbl_cart` (
 
 INSERT INTO `tbl_cart` (`cartId`, `cmrId`, `sId`, `productId`, `productName`, `price`, `quantity`, `stocks`, `image`) VALUES
 (153, 0, '', 0, '', 0.00, 0, 0, ''),
-(154, 0, 'llo0r5g5v4g63uu774ac3k8vd3', 39, 'Live feeds', 69.00, 10, 985, 'uploads/efbbb518e8.jpg'),
+(154, 0, 'llo0r5g5v4g63uu774ac3k8vd3', 39, 'Live feeds', 69.00, 10, 950, 'uploads/efbbb518e8.jpg'),
 (225, 77, '', 37, 'Periha Aqua Heater', 450.00, 5, 895, 'uploads/41bbf8b7a5.jpg'),
-(226, 77, '', 39, 'Live feeds', 69.00, 5, 980, 'uploads/efbbb518e8.jpg'),
-(228, 77, '', 39, 'Live feeds', 69.00, 5, 965, 'uploads/efbbb518e8.jpg');
+(226, 77, '', 39, 'Live feeds', 69.00, 5, 950, 'uploads/efbbb518e8.jpg'),
+(228, 77, '', 39, 'Live feeds', 69.00, 5, 950, 'uploads/efbbb518e8.jpg');
 
 -- --------------------------------------------------------
 
@@ -252,8 +262,11 @@ CREATE TABLE `tbl_contact` (
   `id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
+  `frm_cmrId` int(11) NOT NULL,
+  `to_cmrId` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `contact` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
   `message` text NOT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
   `date` timestamp NOT NULL DEFAULT current_timestamp()
@@ -263,15 +276,15 @@ CREATE TABLE `tbl_contact` (
 -- Dumping data for table `tbl_contact`
 --
 
-INSERT INTO `tbl_contact` (`id`, `first_name`, `last_name`, `email`, `contact`, `message`, `status`, `date`) VALUES
-(3, '', '', 'fafadami@gmail.com', '09699669699', 'superb', 1, '2022-12-31 10:15:01'),
-(4, '', '', 'fafadami@gmail.com', '09699669699', 'superb', 1, '2022-12-31 10:25:58'),
-(5, '', '', 'amberspirit16@gmail.com', '09699669699', 'gagasdfgewgs', 1, '2023-01-06 22:41:15'),
-(6, '', '', 'amberspirit16@gmail.com', '09699669699', 'sfaetetsdgsdgafasf', 1, '2023-01-07 06:14:01'),
-(8, '', '', 'aw@gmail.com', '12313213211', 'aw', 0, '2023-01-20 02:54:42'),
-(9, '', '', 'amberspirit16@gmail.com', '09699669699', 'zzzzzzzzzzzzzzzzzzz', 1, '2023-01-20 20:41:05'),
-(10, '', '', 'amberspirit16@gmail.com', '0910-167-6224', 'Hi pwede mag hello?', 1, '2023-02-05 20:33:05'),
-(11, 'Aldrin James', 'Mendoza', 'aldrinlhabsyu@gmail.com', '0969-424-8893', 'Test', 0, '2023-03-06 19:33:15');
+INSERT INTO `tbl_contact` (`id`, `first_name`, `last_name`, `frm_cmrId`, `to_cmrId`, `email`, `contact`, `subject`, `message`, `status`, `date`) VALUES
+(12, 'Aldrin James', 'Mendoza', 74, 0, 'aldrinlhabsyu@gmail.com', '0969-424-8893', 'Test Reply', 'Test', 1, '2023-03-10 06:54:19'),
+(24, 'Aldrin James', 'Mendoza', 74, 0, 'aldrinlhabsyu@gmail.com', '0969-424-8893', 'Test Reply', 'Superb', 1, '2023-03-10 09:51:16'),
+(25, 'Aldrin James', 'Mendoza', 0, 0, 'aldrinlhabsyu@gmail.com', '0969-424-8893', 'Test Reply', 'ssss', 0, '2023-03-10 10:36:42'),
+(26, 'Aldrin James', 'Mendoza', 74, 0, 'aldrinlhabsyu@gmail.com', '0969-424-8893', 'Test Reply send', 'sss', 0, '2023-03-10 10:53:46'),
+(27, '', '', 1, 74, 'amberspirit16@gmail.com', '', 'Test Reply', 'Hey', 0, '2023-03-10 11:49:44'),
+(28, 'Aldrin James', 'Mendoza', 74, 0, 'aldrinlhabsyu@gmail.com', '0969-424-8893', 'Test Reply', 'Test test', 0, '2023-03-10 11:53:31'),
+(29, '', '', 79, 0, 'amberspirit16@gmail.com', '', 'Test', 'Hello', 1, '2023-03-10 12:43:27'),
+(30, '', '', 79, 0, 'amberspirit16@gmail.com', '', 'Test', 'Hello', 1, '2023-03-10 12:49:38');
 
 -- --------------------------------------------------------
 
@@ -317,6 +330,24 @@ INSERT INTO `tbl_customer` (`id`, `first_name`, `last_name`, `address`, `city`, 
 (79, 'Aldrin James', 'Mendoza', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '0969-966-9699', 'amberspirit16@gmail.com', '3d68333b47b4762fac37583cc91b6ad1', 0, 'verified', 'Admin'),
 (81, 'Aldrin James', 'Mendoza', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '0969-424-8893', 'mendozaar@student.apc.edu.ph', '3d68333b47b4762fac37583cc91b6ad1', 0, 'verified', 'Customer'),
 (85, 'Aldrin James', 'Mendoza', 'Block 29 Lot 1 Sampaguita street Evergreen SUBD. Brgy Gaya-gaya', 'San Jose del Monte City', '', '3023', '0969-966-9699', 'aacaquatics@gmail.com', '3d68333b47b4762fac37583cc91b6ad1', 0, 'verified', 'Customer');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_delivery`
+--
+
+CREATE TABLE `tbl_delivery` (
+  `id` int(11) NOT NULL,
+  `delivery_fee` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_delivery`
+--
+
+INSERT INTO `tbl_delivery` (`id`, `delivery_fee`) VALUES
+(1, 150);
 
 -- --------------------------------------------------------
 
@@ -415,14 +446,13 @@ INSERT INTO `tbl_order` (`id`, `cmrId`, `productId`, `productName`, `quantity`, 
 (119, 74, 37, 'Periha Aqua Heater', 5, 2250.00, 'uploads/41bbf8b7a5.jpg', '2023-02-19 16:38:21', 0),
 (121, 74, 39, 'Live feeds', 2, 138.00, 'uploads/efbbb518e8.jpg', '2023-02-19 16:42:27', 0),
 (122, 74, 37, 'Periha Aqua Heater', 5, 2250.00, 'uploads/41bbf8b7a5.jpg', '2023-02-19 16:51:30', 0),
-(123, 74, 39, 'Live feeds', 5, 345.00, 'uploads/efbbb518e8.jpg', '2023-02-19 16:52:58', 2),
+(123, 74, 39, 'Live feeds', 5, 345.00, 'uploads/efbbb518e8.jpg', '2023-02-19 16:52:58', 3),
 (124, 74, 34, 'Aquarium Filter Pad Filter Media Roll Biochemical Cotton Filter Foam Fish Tank Sponge (1m X 12cm)', 10, 8740.00, 'uploads/46c74ae395.jpg', '2023-02-19 17:07:54', 0),
-(125, 74, 37, 'Periha Aqua Heater', 5, 2250.00, 'uploads/41bbf8b7a5.jpg', '2023-02-19 18:09:07', 2),
-(126, 74, 32, 'Resun Ceramic Rings', 4, 800.00, 'uploads/aa3b192759.jpg', '2023-02-19 18:13:47', 2),
-(127, 74, 39, 'Live feeds', 5, 345.00, 'uploads/efbbb518e8.jpg', '2023-02-19 19:35:10', 2),
-(128, 74, 39, 'Live feeds', 5, 345.00, 'uploads/efbbb518e8.jpg', '2023-02-23 02:10:15', 2),
-(129, 74, 39, 'Live feeds', 5, 345.00, 'uploads/efbbb518e8.jpg', '2023-02-25 04:47:49', 2),
-(130, 74, 39, 'Live feeds', 10, 690.00, 'uploads/efbbb518e8.jpg', '2023-02-25 06:13:15', 0),
+(125, 74, 37, 'Periha Aqua Heater', 5, 2250.00, 'uploads/41bbf8b7a5.jpg', '2023-02-19 18:09:07', 3),
+(126, 74, 32, 'Resun Ceramic Rings', 4, 800.00, 'uploads/aa3b192759.jpg', '2023-02-19 18:13:47', 3),
+(127, 74, 39, 'Live feeds', 5, 345.00, 'uploads/efbbb518e8.jpg', '2023-02-19 19:35:10', 3),
+(128, 74, 39, 'Live feeds', 5, 345.00, 'uploads/efbbb518e8.jpg', '2023-02-23 02:10:15', 3),
+(129, 74, 39, 'Live feeds', 5, 345.00, 'uploads/efbbb518e8.jpg', '2023-02-25 04:47:49', 3),
 (131, 74, 39, 'Live feeds', 5, 345.00, 'uploads/efbbb518e8.jpg', '2023-02-25 07:54:01', 0),
 (132, 74, 32, 'Resun Ceramic Rings', 5, 1000.00, 'uploads/aa3b192759.jpg', '2023-02-25 07:55:31', 0),
 (133, 74, 39, 'Live feeds', 5, 345.00, 'uploads/efbbb518e8.jpg', '2023-02-25 08:03:51', 0),
@@ -430,7 +460,12 @@ INSERT INTO `tbl_order` (`id`, `cmrId`, `productId`, `productName`, `quantity`, 
 (135, 77, 32, 'Resun Ceramic Rings', 5, 1000.00, 'uploads/aa3b192759.jpg', '2023-02-25 08:29:50', 2),
 (136, 81, 32, 'Resun Ceramic Rings', 20, 4000.00, 'uploads/aa3b192759.jpg', '2023-02-28 12:04:07', 0),
 (137, 77, 39, 'Live feeds', 10, 690.00, 'uploads/efbbb518e8.jpg', '2023-03-01 02:36:49', 0),
-(138, 77, 34, 'Aquarium Filter Pad Filter Media Roll Biochemical Cotton Filter Foam Fish Tank Sponge (1m X 12cm)', 10, 8740.00, 'uploads/46c74ae395.jpg', '2023-03-01 02:57:17', 0);
+(138, 77, 34, 'Aquarium Filter Pad Filter Media Roll Biochemical Cotton Filter Foam Fish Tank Sponge (1m X 12cm)', 10, 8740.00, 'uploads/46c74ae395.jpg', '2023-03-01 02:57:17', 0),
+(139, 74, 39, 'Live feeds', 5, 345.00, 'uploads/efbbb518e8.jpg', '2023-03-10 20:04:10', 0),
+(140, 74, 37, 'Periha Aqua Heater', 5, 2250.00, 'uploads/41bbf8b7a5.jpg', '2023-03-10 21:32:21', 0),
+(141, 74, 39, 'Live feeds', 10, 840.00, 'uploads/efbbb518e8.jpg', '2023-03-10 21:55:28', 0),
+(142, 74, 39, 'Live feeds', 5, 495.00, 'uploads/efbbb518e8.jpg', '2023-03-10 22:07:34', 0),
+(143, 74, 39, 'Live feeds', 5, 495.00, 'uploads/efbbb518e8.jpg', '2023-03-10 22:08:33', 0);
 
 -- --------------------------------------------------------
 
@@ -463,9 +498,9 @@ INSERT INTO `tbl_product` (`productId`, `productName`, `catId`, `brandId`, `body
 (34, 'Aquarium Filter Pad Filter Media Roll Biochemical Cotton Filter Foam Fish Tank Sponge (1m X 12cm)', 13, 13, '<p><span>Size: About 100x12x2cm. </span></p>\r\n<p><span>Can be cut any size as your needed by yourself. </span></p>\r\n<p><span>Strong cotton and soft feel, can be repeated washing rather goes badly, durable to use.Strong filterability. It can be used repeatedly after cleaning. </span></p>\r\n<p><span>Filter media pad - Made of super dense thickened cotton with good water absorption and high permeability, filtering and decomposing dirt. </span></p>\r\n<p><span>Aquarium Filter Pad - Suitable for sea water tank, fresh water tank, aqua-plant tank. Description </span></p>\r\n<p><span>This filter pad is well made of premium material for durable and practical use. It has a good effect on filtering the leftover. And its strong filterability can stable water quality, remove small and large debris particles and decompose some ammonia nitrogen debris particles.</span></p>\r\n<p><span> Feature </span></p>\r\n<ul>\r\n<li>Color: White.&nbsp;</li>\r\n<li>Material: Cotton.&nbsp;&nbsp;</li>\r\n<li>Size: About 100x12x2cm.&nbsp;</li>\r\n<li>Made of super dense thickened cotton with good water absorption and high permeability, filtering and decomposing dirt.&nbsp;</li>\r\n<li>Strong filterability. It can be used repeatedly after cleaning.&nbsp;&nbsp;</li>\r\n<li>Strong cotton and soft feel, can be repeated washing rather goes badly, durable to use.&nbsp;&nbsp;</li>\r\n<li>Can be cut any size as your needed by yourself.&nbsp;&nbsp;</li>\r\n<li>Suitable for sea water tank, fresh water tank, aqua-plant tank.</li>\r\n</ul>', 874.00, '920', 'uploads/46c74ae395.jpg', 0),
 (35, 'Infinity Slim External Hang on Filter CS48', 13, 14, '<div class=\"pdp-product-detail\" data-spm=\"product_detail\">\r\n<div class=\"pdp-product-desc \" data-spm-anchor-id=\"a2o4l.pdp_revamp.product_detail.i0.c6e31e82pBboFk\">\r\n<div class=\"html-content pdp-product-highlights\">\r\n<ul>\r\n<li>Ideal for freshwater and marine aquarium</li>\r\n<li>quiet operation</li>\r\n<li>easy start without adding water</li>\r\n<li>adjustable flow value to adjust flow and dissolved oxygen for creature growing</li>\r\n<li>easy to install, only fill up water and plug in</li>\r\n<li>Specification:</li>\r\n<li>Power: 4.8 Watts</li>\r\n<li>Max Output: 290L/H</li>\r\n</ul>\r\n</div>\r\n</div>\r\n</div>', 581.00, '0', 'uploads/df74e847e5.jpg', 0),
 (36, 'Infinity Slim External Hang on Filter CS25', 13, 14, '<ul>\r\n<li><span>Ideal for freshwater and marine aquarium&nbsp;</span></li>\r\n<li><span>quiet operation&nbsp;</span></li>\r\n<li><span>easy start without adding water&nbsp;</span></li>\r\n<li><span>adjustable flow value to adjust flow and dissolved oxygen for creature growing&nbsp;</span></li>\r\n<li>easy to install, only fill up water and plug in Specification: Power: 2.5 Watts Max Output: 160L/H</li>\r\n</ul>', 400.00, '999', 'uploads/e677d66b1e.jpg', 1),
-(37, 'Periha Aqua Heater', 14, 15, '<p><span>? With a safety protection system, easy to operate, convenient and safe.&nbsp; </span></p>\r\n<p><span>?Using explosion-proof glass heating tube, it has double insulation function, fast heating speed, can withstand great temperature difference without bursting, so you can use it more securely.&nbsp; </span></p>\r\n<p><span>? Unique and humanized design, high-quality material production process, durable.&nbsp; </span></p>\r\n<p><span>?The use of fresh sea water is more complete.&nbsp; </span></p>\r\n<p><span><br /></span></p>\r\n<p><span>?Instructions? </span></p>\r\n<p><span>? Put the product into the aquarium for 15 minutes to ensure that the probe temperature is consistent with the actual water temperature. Turn on the power switch after 15 minutes, then turn the thermostat knob to adjust the temperature to 22-34 degrees. </span></p>\r\n<p><span>? Temperature control : Heating starts when the water temperature is lower than the set temperature by 0.5 degrees, and stops when the water temperature is higher than 0.5 degrees.&nbsp; </span></p>\r\n<p><span>? Power-off memory: Once the temperature controller is set, the temperature set even after the power-off will not change.&nbsp; </span></p>\r\n<p><span><br /></span></p>\r\n<p><span>?Precautions? </span></p>\r\n<p><span>1. The power must be turned off before using this product or before cleaning the product.&nbsp; </span></p>\r\n<p><span>2. When the product is heated, do not touch the heat part directly with your hand.&nbsp; </span></p>\r\n<p><span>3. This product is only suitable for indoor use.&nbsp; </span></p>\r\n<p><span>4. The indicator will light up when the product is heating.&nbsp; </span></p>\r\n<p><span>5, never allowed to use in the waterless state.&nbsp; </span></p>\r\n<div><span style=\"color: rgba(0, 0, 0, 0.8); font-family: Roboto, \'Helvetica Neue\', Helvetica, Arial, ?????, \'WenQuanYi Zen Hei\', \'Hiragino Sans GB\', \'?? Pro\', \'LiHei Pro\', \'Heiti TC\', ?????, \'Microsoft JhengHei UI\', \'Microsoft JhengHei\', sans-serif; font-size: 14px; white-space: pre-wrap;\"><br /></span></div>', 450.00, '895', 'uploads/41bbf8b7a5.jpg', 0),
+(37, 'Periha Aqua Heater', 14, 15, '<p><span>? With a safety protection system, easy to operate, convenient and safe.&nbsp; </span></p>\r\n<p><span>?Using explosion-proof glass heating tube, it has double insulation function, fast heating speed, can withstand great temperature difference without bursting, so you can use it more securely.&nbsp; </span></p>\r\n<p><span>? Unique and humanized design, high-quality material production process, durable.&nbsp; </span></p>\r\n<p><span>?The use of fresh sea water is more complete.&nbsp; </span></p>\r\n<p><span><br /></span></p>\r\n<p><span>?Instructions? </span></p>\r\n<p><span>? Put the product into the aquarium for 15 minutes to ensure that the probe temperature is consistent with the actual water temperature. Turn on the power switch after 15 minutes, then turn the thermostat knob to adjust the temperature to 22-34 degrees. </span></p>\r\n<p><span>? Temperature control : Heating starts when the water temperature is lower than the set temperature by 0.5 degrees, and stops when the water temperature is higher than 0.5 degrees.&nbsp; </span></p>\r\n<p><span>? Power-off memory: Once the temperature controller is set, the temperature set even after the power-off will not change.&nbsp; </span></p>\r\n<p><span><br /></span></p>\r\n<p><span>?Precautions? </span></p>\r\n<p><span>1. The power must be turned off before using this product or before cleaning the product.&nbsp; </span></p>\r\n<p><span>2. When the product is heated, do not touch the heat part directly with your hand.&nbsp; </span></p>\r\n<p><span>3. This product is only suitable for indoor use.&nbsp; </span></p>\r\n<p><span>4. The indicator will light up when the product is heating.&nbsp; </span></p>\r\n<p><span>5, never allowed to use in the waterless state.&nbsp; </span></p>\r\n<div><span style=\"color: rgba(0, 0, 0, 0.8); font-family: Roboto, \'Helvetica Neue\', Helvetica, Arial, ?????, \'WenQuanYi Zen Hei\', \'Hiragino Sans GB\', \'?? Pro\', \'LiHei Pro\', \'Heiti TC\', ?????, \'Microsoft JhengHei UI\', \'Microsoft JhengHei\', sans-serif; font-size: 14px; white-space: pre-wrap;\"><br /></span></div>', 450.00, '890', 'uploads/41bbf8b7a5.jpg', 0),
 (38, 'Huike AC/DC air pump', 11, 16, '<p><span>Huike H5 AC and DC air pump with Lithium battery </span></p>\r\n<p><span>Lithium battery up to 30h </span></p>\r\n<p><span>Voltage: DC5V </span></p>\r\n<p><span>Output: 3L/min </span></p>\r\n<p><span>Pressure: 0.01Mpa </span></p>\r\n<p><span>Power: 2.0W</span></p>', 850.00, '999', 'uploads/62777abf70.jpg', 1),
-(39, 'Live feeds', 15, 17, '<p>...</p>', 69.00, '965', 'uploads/efbbb518e8.jpg', 0),
+(39, 'Live feeds', 15, 17, '<p>...</p>', 69.00, '940', 'uploads/efbbb518e8.jpg', 0),
 (40, 'Net', 16, 17, '<p>...</p>', 69.00, '999', 'uploads/94d23a978e.jpg', 1),
 (41, 'GEBO 6D SERIES AQUARIUM EXTREME BRIGHT LED LIGHT', 17, 18, '<p>...</p>', 450.00, '999', 'uploads/5b68ae3cec.jpg', 1),
 (42, 'INFINITY LED AQUARIUM SUBMERSIBLE LIGHT (20 led lights)', 17, 14, '<p><span>??INFINITY LED AQUARIUM SUBMERSIBLE LIGHT </span></p>\r\n<p><span>??SECURITY, ENERGY SAVING, DURABLE </span></p>\r\n<p><span>??SAFE AND RELIABLE IN BOTH FRESH &amp; SALTWATER AQUARIUMS </span></p>\r\n<p><span>??TECHNICAL DATA</span></p>\r\n<div class=\"product-detail page-product__detail\">\r\n<div class=\"U9rGd1\">\r\n<div class=\"MCCLkq\">\r\n<div class=\"f7AU53\">\r\n<p class=\"irIKAp\">Model: 20</p>\r\n<p class=\"irIKAp\">Led Power: 3.5w</p>\r\n<p class=\"irIKAp\">Lamp Lenght: 18cm</p>\r\n<p class=\"irIKAp\">Voltage: 220 - 240V 50Hz</p>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n<div>\r\n<div class=\"product-ratings\" data-nosnippet=\"true\">&nbsp;</div>\r\n</div>\r\n<p><span><br /></span></p>', 220.00, '999', 'uploads/9639ac69bb.jpg', 1),
@@ -499,9 +534,9 @@ ALTER TABLE `tbl_admin`
   ADD PRIMARY KEY (`adminId`);
 
 --
--- Indexes for table `tbl_bot`
+-- Indexes for table `tbl_bots`
 --
-ALTER TABLE `tbl_bot`
+ALTER TABLE `tbl_bots`
   ADD PRIMARY KEY (`chat_id`);
 
 --
@@ -541,6 +576,12 @@ ALTER TABLE `tbl_customer`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_delivery`
+--
+ALTER TABLE `tbl_delivery`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
@@ -560,7 +601,7 @@ ALTER TABLE `tbl_product`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
@@ -569,10 +610,10 @@ ALTER TABLE `tbl_admin`
   MODIFY `adminId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `tbl_bot`
+-- AUTO_INCREMENT for table `tbl_bots`
 --
-ALTER TABLE `tbl_bot`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `tbl_bots`
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_brand`
@@ -584,7 +625,7 @@ ALTER TABLE `tbl_brand`
 -- AUTO_INCREMENT for table `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
 
 --
 -- AUTO_INCREMENT for table `tbl_catalogue`
@@ -602,7 +643,7 @@ ALTER TABLE `tbl_category`
 -- AUTO_INCREMENT for table `tbl_contact`
 --
 ALTER TABLE `tbl_contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `tbl_customer`
@@ -611,16 +652,22 @@ ALTER TABLE `tbl_customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
+-- AUTO_INCREMENT for table `tbl_delivery`
+--
+ALTER TABLE `tbl_delivery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `productId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
